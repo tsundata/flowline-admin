@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl } from '@umijs/max';
+import { FormattedMessage, useIntl, useModel } from '@umijs/max';
 import { Alert, Card, Typography } from 'antd';
 import React from 'react';
 import styles from './Welcome.less';
@@ -14,6 +14,7 @@ const CodePreview: React.FC = ({ children }) => (
 
 const Welcome: React.FC = () => {
   const intl = useIntl();
+  const message = useModel('demo');
 
   return (
     <PageContainer>
@@ -42,6 +43,11 @@ const Welcome: React.FC = () => {
         </Typography.Text>
         <CodePreview>yarn add @ant-design/pro-components</CodePreview>
       </Card>
+      <div>
+        {message.counter}
+        <button onClick={message.increment}>add by 1</button>
+        <button onClick={message.decrement}>minus by 1</button>
+      </div>
     </PageContainer>
   );
 };

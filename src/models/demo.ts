@@ -1,0 +1,9 @@
+// counter.ts
+import { useCallback, useState } from 'react';
+
+export default () => {
+  const [counter, setCounter] = useState(1000);
+  const increment = useCallback(() => setCounter((c) => c + 1), []);
+  const decrement = useCallback(() => setCounter((c) => c - 1), []);
+  return { counter, increment, decrement };
+};
