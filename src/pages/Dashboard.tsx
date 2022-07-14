@@ -4,7 +4,7 @@ import { useModel } from '@umijs/max';
 import { Col, Row } from 'antd';
 import React from 'react';
 
-const Welcome: React.FC = () => {
+const Dashboard: React.FC = () => {
   const { data, getData } = useModel('line');
   getData();
 
@@ -56,4 +56,4 @@ const Welcome: React.FC = () => {
   );
 };
 
-export default Welcome;
+export default Dashboard;

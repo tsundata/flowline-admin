@@ -17,7 +17,7 @@
     path: '/welcome',
     name: 'dashboard',
     icon: 'smile',
-    component: './Welcome',
+    component: './Dashboard',
   },
   {
     name: 'workflows',
