@@ -1,4 +1,3 @@
-// counter.ts
 import { useCallback, useState } from 'react';
 
 export default () => {

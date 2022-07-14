@@ -15,7 +15,7 @@
   },
   {
     path: '/welcome',
-    name: 'welcome',
+    name: 'dashboard',
     icon: 'smile',
     component: './Welcome',
   },

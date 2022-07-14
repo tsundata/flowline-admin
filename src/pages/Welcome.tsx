@@ -1,53 +1,57 @@
-import { PageContainer } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useModel } from '@umijs/max';
-import { Alert, Card, Typography } from 'antd';
+import { Line } from '@ant-design/plots';
+import { PageContainer, ProCard } from '@ant-design/pro-components';
+import { useModel } from '@umijs/max';
+import { Col, Row } from 'antd';
 import React from 'react';
-import styles from './Welcome.less';
-
-const CodePreview: React.FC = ({ children }) => (
-  <pre className={styles.pre}>
-    <code>
-      <Typography.Text copyable>{children}</Typography.Text>
-    </code>
-  </pre>
-);
 
 const Welcome: React.FC = () => {
-  const intl = useIntl();
-  const message = useModel('demo');
+  const { data, getData } = useModel('line');
+  getData();
+
+  const config = {
+    data,
+    xField: 'Date',
+    yField: 'scales',
+    xAxis: {
+      tickCount: 5,
+    },
+    smooth: true,
+  };
 
   return (
     <PageContainer>
-      <Card>
-        <Alert
-          message={intl.formatMessage({
-            id: 'pages.welcome.alertMessage',
-            defaultMessage: 'Faster and stronger heavy-duty components have been released.',
-          })}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 24,
-          }}
-        />
-        <Typography.Text strong>
-          <a
-            href="https://procomponents.ant.design/components/table"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="Welcome" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-components</CodePreview>
-      </Card>
-      <div>
-        {message.counter}
-        <button onClick={message.increment}>add by 1</button>
-        <button onClick={message.decrement}>minus by 1</button>
-      </div>
+      <Row style={{ marginBottom: 20 }}>
+        <Col span={6}>
+          <ProCard title="默认尺寸" extra="extra" tooltip="这是提示" style={{ width: '95%' }}>
+            <div>Card content</div>
+            <div>Card content</div>
+            <div>Card content</div>
+          </ProCard>
+        </Col>
+        <Col span={6}>
+          <ProCard title="默认尺寸" extra="extra" tooltip="这是提示" style={{ width: '95%' }}>
+            <div>Card content</div>
+            <div>Card content</div>
+            <div>Card content</div>
+          </ProCard>
+        </Col>
+        <Col span={6}>
+          <ProCard title="默认尺寸" extra="extra" tooltip="这是提示" style={{ width: '95%' }}>
+            <div>Card content</div>
+            <div>Card content</div>
+            <div>Card content</div>
+          </ProCard>
+        </Col>
+        <Col span={6}>
+          <ProCard title="默认尺寸" extra="extra" tooltip="这是提示" style={{ width: '95%' }}>
+            <div>Card content</div>
+            <div>Card content</div>
+            <div>Card content</div>
+          </ProCard>
+        </Col>
+      </Row>
+
+      <Line {...config} />
     </PageContainer>
   );
 };
