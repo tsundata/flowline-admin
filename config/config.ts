@@ -1,6 +1,5 @@
 // https://umijs.org/config/
 import { defineConfig } from '@umijs/max';
-import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
@@ -54,8 +53,10 @@ export default defineConfig({
       requestLibPath: "import { request } from '@umijs/max'",
       // 或者使用在线的版本
       // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
-      schemaPath: join(__dirname, 'oneapi.json'),
+      // schemaPath: join(__dirname, 'apidocs.json'),
+      schemaPath: 'http://127.0.0.1:5000/apidocs.json',
       mock: false,
+      projectName: 'flowline',
     },
     {
       requestLibPath: "import { request } from '@umijs/max'",
