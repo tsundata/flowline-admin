@@ -1,4 +1,19 @@
 declare namespace API {
+  type Binding = {
+    apiVersion?: string;
+    creationTimestamp?: string;
+    deletionGracePeriodSeconds?: number;
+    deletionTimestamp?: string;
+    finalizers?: string[];
+    generation?: number;
+    kind?: string;
+    labels?: Record<string, any>;
+    name?: string;
+    resourceVersion?: string;
+    target?: Worker;
+    uid?: string;
+  };
+
   type Code = {
     apiVersion?: string;
     code?: string;
@@ -436,6 +451,7 @@ declare namespace API {
   type User = {
     active?: boolean;
     apiVersion?: string;
+    avatar?: string;
     creationTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
@@ -445,12 +461,19 @@ declare namespace API {
     kind?: string;
     labels?: Record<string, any>;
     name?: string;
+    password?: string;
     resourceVersion?: string;
     uid?: string;
+    unreadCount?: number;
     username?: string;
   };
 
   type userDeleteParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
+  type userDeleteSessionParams = {
     /** uid of the resource */
     uid: string;
   };
@@ -467,6 +490,24 @@ declare namespace API {
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type UserSession = {
+    apiVersion?: string;
+    creationTimestamp?: string;
+    deletionGracePeriodSeconds?: number;
+    deletionTimestamp?: string;
+    finalizers?: string[];
+    generation?: number;
+    kind?: string;
+    labels?: Record<string, any>;
+    name?: string;
+    password?: string;
+    resourceVersion?: string;
+    token?: string;
+    uid?: string;
+    userUID?: string;
+    username?: string;
   };
 
   type userUpdateParams = {

@@ -61,6 +61,20 @@ export async function userDelete(
   });
 }
 
+/** Delete user resource to session subresource DELETE /api/apps/v1/user/${param0}/session */
+export async function userDeleteSession(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.userDeleteSessionParams,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.UserSession>(`/api/apps/v1/user/${param0}/session`, {
+    method: 'DELETE',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
 /** Watch user resource GET /api/apps/v1/user/${param0}/watch */
 export async function userWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
@@ -79,6 +93,18 @@ export async function userWatch(
 export async function userList(options?: { [key: string]: any }) {
   return request<API.UserList>('/api/apps/v1/user/list', {
     method: 'GET',
+    ...(options || {}),
+  });
+}
+
+/** Create user resource to session subresource POST /api/apps/v1/user/session */
+export async function userCreateSession(body: API.UserSession, options?: { [key: string]: any }) {
+  return request<API.UserSession>('/api/apps/v1/user/session', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
     ...(options || {}),
   });
 }

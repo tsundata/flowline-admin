@@ -75,6 +75,18 @@ export async function stageWatch(
   });
 }
 
+/** Create stage resource to binding subresource POST /api/apps/v1/stage/binding */
+export async function stageCreateBinding(body: API.Binding, options?: { [key: string]: any }) {
+  return request<API.Binding>('/api/apps/v1/stage/binding', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** List stage resource GET /api/apps/v1/stage/list */
 export async function stageList(options?: { [key: string]: any }) {
   return request<API.StageList>('/api/apps/v1/stage/list', {

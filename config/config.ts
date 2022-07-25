@@ -55,7 +55,7 @@ export default defineConfig({
       // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
       // schemaPath: join(__dirname, 'apidocs.json'),
       schemaPath: 'http://127.0.0.1:5000/apidocs.json',
-      mock: false,
+      mock: true,
       projectName: 'flowline',
     },
     {

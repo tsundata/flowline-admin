@@ -23,7 +23,7 @@
     name: 'workflows',
     icon: 'ShareAlt',
     path: '/workflows',
-    component: './TableList',
+    component: './WorkflowList',
   },
   {
     path: '/security',
