@@ -105,6 +105,7 @@ export const searchService: NsNodeCollapsePanel.ISearchService = async (
   nodes: NsNodeCollapsePanel.IPanelNode[] = [],
   keyword: string,
 ) => {
+  // @ts-ignore
   const list = nodes.filter((node) => node.label.includes(keyword));
   console.log(list, keyword, nodes);
   return list;

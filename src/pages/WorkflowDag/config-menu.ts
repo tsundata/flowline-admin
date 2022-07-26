@@ -36,6 +36,7 @@ export namespace NsMenuItemConfig {
     iconName: 'DeleteOutlined',
     onClick: async ({ target, commandService }) => {
       commandService.executeCommand<NsNodeCmd.DelNode.IArgs>(XFlowNodeCommands.DEL_NODE.id, {
+        // @ts-ignore
         nodeConfig: { id: target.data.id },
       });
     },
@@ -70,6 +71,7 @@ export namespace NsMenuItemConfig {
 
 export const useMenuConfig = createCtxMenuConfig((config) => {
   config.setMenuModelService(async (target, model, modelService, toDispose) => {
+    // @ts-ignore
     const { type, cell } = target;
     console.log(type);
     switch (type) {

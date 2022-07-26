@@ -15,6 +15,7 @@ export namespace MockApi {
   /** 查图的meta元信息 */
   export const queryGraphMeta: NsGraphCmd.GraphMeta.IArgs['graphMetaService'] = async (args) => {
     console.log('queryMeta', args);
+    // @ts-ignore
     return { ...args, flowId: args.meta.flowId };
   };
   /** 加载图数据的api */

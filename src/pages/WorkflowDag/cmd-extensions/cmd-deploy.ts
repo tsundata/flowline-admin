@@ -41,6 +41,7 @@ export namespace NsDeployDagCmd {
 /** 部署画布数据 */
 export class DeployDagCommand implements ICommand {
   /** api */
+  // @ts-ignore
   @ManaSyringe.inject(ICommandContextProvider) contextProvider: ICommand['contextProvider'];
 
   /** 执行Cmd */
@@ -52,6 +53,7 @@ export class DeployDagCommand implements ICommand {
     const result = await hooks.deployDag.call(args, async (handlerArgs) => {
       const { commandService, deployDagService } = handlerArgs;
       /** 执行Command */
+      // @ts-ignore
       await commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
         XFlowGraphCommands.SAVE_GRAPH_DATA.id,
         {
@@ -63,6 +65,7 @@ export class DeployDagCommand implements ICommand {
       return { success: true };
     });
 
+    // @ts-ignore
     ctx.setResult(result);
     return this;
   };

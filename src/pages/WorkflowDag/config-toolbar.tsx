@@ -83,6 +83,7 @@ export namespace NSToolbarConfig {
       onClick: async ({ commandService }) => {
         commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
           XFlowGraphCommands.SAVE_GRAPH_DATA.id,
+          // @ts-ignore
           { saveGraphDataService: (meta, graphData) => MockApi.saveGraphData(meta, graphData) },
         );
       },

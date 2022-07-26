@@ -29,6 +29,7 @@ export namespace NsTestCmd {
 /** 创建节点命令 */
 export class TestAsyncCommand implements ICommand {
   /** api */
+  // @ts-ignore
   @inject(ICommandContextProvider) contextProvider: ICommand['contextProvider'];
 
   /** 执行Cmd */
@@ -40,6 +41,7 @@ export class TestAsyncCommand implements ICommand {
     const result = await hooks.testCmd.call(
       args,
       async (handlerArgs) => {
+        // @ts-ignore
         const { commandService, modelService, graphMeta, test } = handlerArgs;
         console.log(graph, commandService, modelService, graphMeta, test);
         return { test: true };
@@ -47,6 +49,7 @@ export class TestAsyncCommand implements ICommand {
       runtimeHook,
     );
 
+    // @ts-ignore
     ctx.setResult(result);
     return this;
   };

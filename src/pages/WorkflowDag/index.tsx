@@ -51,6 +51,7 @@ export const Demo: React.FC<IProps> = (props) => {
 
   const cache = React.useMemo<{ app: IApplication } | null>(
     () => ({
+      // @ts-ignore
       app: null,
     }),
     [],
@@ -61,16 +62,16 @@ export const Demo: React.FC<IProps> = (props) => {
    */
 
   const onLoad: IAppLoad = async (app) => {
-    cache.app = app;
-    initGraphCmds(cache.app);
+    cache!.app = app;
+    initGraphCmds(cache!.app);
   };
 
   /** 父组件meta属性更新时,执行initGraphCmds */
   React.useEffect(() => {
-    if (cache.app) {
-      initGraphCmds(cache.app);
+    if (cache!.app) {
+      initGraphCmds(cache!.app);
     }
-  }, [cache.app, meta]);
+  }, [cache!.app, meta]);
 
   return (
     <XFlow
