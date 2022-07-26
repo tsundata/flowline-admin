@@ -24,8 +24,8 @@ const loginOut = async (uid: any) => {
   const redirect = urlParams.get('redirect');
   // Note: There may be security issues, please note
   if (window.location.pathname !== '/user/login' && !redirect) {
-    localStorage.removeItem('uid');
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('uid');
+    sessionStorage.removeItem('token');
     history.replace({
       pathname: '/user/login',
       search: stringify({

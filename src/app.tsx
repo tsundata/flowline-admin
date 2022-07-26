@@ -31,7 +31,7 @@ export async function getInitialState(): Promise<{
   };
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
-    const uid = localStorage.getItem('uid');
+    const uid = sessionStorage.getItem('uid');
     const currentUser = await fetchUserInfo(uid);
     return {
       fetchUserInfo,
@@ -104,8 +104,8 @@ export const request: RequestConfig = {
   requestInterceptors: [
     (config) => {
       const headers = config.headers;
-      headers.Authorization = 'abc';
-      const url = 'http://127.0.0.1:5000' + config.url;
+      headers.Authorization = 'Bearer ' + sessionStorage.getItem('token');
+      const url = 'http://127.0.0.1:5000' + config.url; // fixme
       return { ...config, headers, url };
     },
   ],

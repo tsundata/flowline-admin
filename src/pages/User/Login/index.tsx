@@ -37,8 +37,6 @@ const Login: React.FC = () => {
         currentUserToken: token,
         currentUser: userInfo,
       }));
-      localStorage.setItem('uid', uid);
-      localStorage.setItem('token', token);
     }
   };
 
@@ -47,6 +45,8 @@ const Login: React.FC = () => {
       // 登录
       const msg = await userCreateSession({ ...values });
       if (msg.token !== '') {
+        sessionStorage.setItem('uid', msg.userUID!);
+        sessionStorage.setItem('token', msg.token!);
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
