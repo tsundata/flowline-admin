@@ -16,12 +16,10 @@ const loginPath = '/user/login';
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.User;
   loading?: boolean;
-  userUID?: string;
-  userToken?: string;
+  currentUserToken?: string;
+  currentUser?: API.User;
   fetchUserInfo?: (uid: any) => Promise<API.User | undefined>;
-  setAuthStorage?: (uid: any, token: any) => boolean;
 }> {
   const fetchUserInfo = async (uid: any) => {
     try {
@@ -31,14 +29,9 @@ export async function getInitialState(): Promise<{
     }
     return undefined;
   };
-  const setAuthStorage = (uid: any, token: any) => {
-    localStorage.setItem('uid', uid);
-    localStorage.setItem('token', token);
-    return true;
-  };
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
-    const uid = localStorage.getItem('uid'); //fixme
+    const uid = localStorage.getItem('uid');
     const currentUser = await fetchUserInfo(uid);
     return {
       fetchUserInfo,
@@ -48,7 +41,6 @@ export async function getInitialState(): Promise<{
   }
   return {
     fetchUserInfo,
-    setAuthStorage,
     settings: defaultSettings,
   };
 }

@@ -29,13 +29,16 @@ const Login: React.FC = () => {
 
   const intl = useIntl();
 
-  const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.(initialState?.currentUser?.uid);
+  const fetchUserInfo = async (uid: any, token: any) => {
+    const userInfo = await initialState?.fetchUserInfo?.(uid);
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,
+        currentUserToken: token,
         currentUser: userInfo,
       }));
+      localStorage.setItem('uid', uid);
+      localStorage.setItem('token', token);
     }
   };
 
@@ -44,13 +47,12 @@ const Login: React.FC = () => {
       // 登录
       const msg = await userCreateSession({ ...values });
       if (msg.token !== '') {
-        initialState?.setAuthStorage?.(msg.userUID, msg.token);
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
         });
         message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
+        await fetchUserInfo(msg.userUID, msg.token);
         const urlParams = new URL(window.location.href).searchParams;
         history.push(urlParams.get('redirect') || '/');
         return;
