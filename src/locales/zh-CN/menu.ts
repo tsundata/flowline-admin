@@ -1,5 +1,4 @@
 export default {
-  'menu.welcome': '欢迎',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理员',
@@ -50,7 +49,10 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+
+  'menu.welcome': '欢迎',
   'menu.workflows': '工作流',
+  'menu.dag': 'DAG',
   'menu.security': '安全',
   'menu.security.users': '用户列表',
   'menu.security.roles': '角色列表',

@@ -58,10 +58,5 @@ export default defineConfig({
       mock: true,
       projectName: 'flowline',
     },
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
-    },
   ],
 });

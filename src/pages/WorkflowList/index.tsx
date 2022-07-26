@@ -15,21 +15,22 @@ import {
   ProFormTextArea,
   ProTable,
 } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl } from '@umijs/max';
+import { FormattedMessage, useIntl, useNavigate } from '@umijs/max';
 import { Button, Drawer, Input, message } from 'antd';
 import React, { useRef, useState } from 'react';
-import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
 
 /**
- * @en-US Add node
- * @zh-CN 添加节点
+ * @en-US Add workflow
+ * @zh-CN 添加工作流
  * @param fields
  */
 const handleAdd = async (fields: API.Workflow) => {
-  const hide = message.loading('正在添加');
+  const hide = message.loading('Adding');
   try {
-    await workflowCreate({ ...fields });
+    const kind = 'workflow';
+    const apiVersion = 'v1';
+    await workflowCreate({ ...fields, kind, apiVersion });
     hide();
     message.success('Added successfully');
     return true;
@@ -41,39 +42,40 @@ const handleAdd = async (fields: API.Workflow) => {
 };
 
 /**
- * @en-US Update node
- * @zh-CN 更新节点
+ * @en-US Update workflow
+ * @zh-CN 更新工作流
  *
  * @param fields
  */
-const handleUpdate = async (fields: FormValueType) => {
-  const hide = message.loading('Configuring');
+const handleUpdate = async (fields: API.Workflow) => {
+  const hide = message.loading('Updating');
   try {
     await workflowUpdate(
       { uid: 'uid' },
       {
-        name: fields.name, // todo
+        name: fields.name,
+        describe: fields.describe,
       },
     );
     hide();
 
-    message.success('Configuration is successful');
+    message.success('Update is successful');
     return true;
   } catch (error) {
     hide();
-    message.error('Configuration failed, please try again!');
+    message.error('Update failed, please try again!');
     return false;
   }
 };
 
 /**
- *  Delete node
- * @zh-CN 删除节点
+ *  Delete workflow
+ * @zh-CN 删除工作流
  *
  * @param selectedRows
  */
 const handleRemove = async (selectedRows: API.Workflow[]) => {
-  const hide = message.loading('正在删除');
+  const hide = message.loading('deleting');
   if (!selectedRows) return true;
   try {
     await workflowDelete({
@@ -107,6 +109,8 @@ const TableList: React.FC = () => {
   const [currentRow, setCurrentRow] = useState<API.Workflow>();
   const [selectedRowsState, setSelectedRows] = useState<API.Workflow[]>([]);
 
+  const navigate = useNavigate();
+
   /**
    * @en-US International configuration
    * @zh-CN 国际化配置
@@ -115,14 +119,9 @@ const TableList: React.FC = () => {
 
   const columns: ProColumns<API.Workflow>[] = [
     {
-      title: (
-        <FormattedMessage
-          id="pages.searchTable.updateForm.ruleName.nameLabel"
-          defaultMessage="Rule name"
-        />
-      ),
-      dataIndex: 'name',
-      tip: 'The rule name is the unique key',
+      title: <FormattedMessage id="pages.common.uid" defaultMessage="UID" />,
+      dataIndex: 'uid',
+      tip: 'The uid is the unique key',
       render: (dom, entity) => {
         return (
           <a
@@ -137,56 +136,64 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="Description" />,
-      dataIndex: 'desc',
+      title: (
+        <FormattedMessage
+          id="pages.workflowList.updateForm.workflowName.nameLabel"
+          defaultMessage="Workflow name"
+        />
+      ),
+      dataIndex: 'name',
+    },
+    {
+      title: <FormattedMessage id="pages.workflowList.titleDesc" defaultMessage="Description" />,
+      dataIndex: 'describe',
       valueType: 'textarea',
     },
     {
       title: (
         <FormattedMessage
-          id="pages.searchTable.titleCallNo"
+          id="pages.workflowList.titleRunNo"
           defaultMessage="Number of service calls"
         />
       ),
       dataIndex: 'callNo',
       sorter: true,
       hideInForm: true,
-      renderText: (val: string) =>
-        `${val}${intl.formatMessage({
-          id: 'pages.searchTable.tenThousand',
-          defaultMessage: ' 万 ',
-        })}`,
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="Status" />,
-      dataIndex: 'status',
+      title: <FormattedMessage id="pages.workflowList.titleActive" defaultMessage="Is active" />,
+      dataIndex: 'active',
+      sorter: true,
+      hideInForm: true,
+      renderText: (val: string) => `${val ? 'Yes' : 'No'}`,
+    },
+    {
+      title: <FormattedMessage id="pages.workflowList.titleState" defaultMessage="Status" />,
+      dataIndex: 'state',
       hideInForm: true,
       valueEnum: {
         0: {
           text: (
-            <FormattedMessage
-              id="pages.searchTable.nameStatus.default"
-              defaultMessage="Shut down"
-            />
+            <FormattedMessage id="pages.workflowList.nameStatus.default" defaultMessage="Create" />
           ),
           status: 'Default',
         },
         1: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="Running" />
+            <FormattedMessage id="pages.workflowList.nameStatus.running" defaultMessage="Running" />
           ),
           status: 'Processing',
         },
         2: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="Online" />
+            <FormattedMessage id="pages.workflowList.nameStatus.online" defaultMessage="Online" />
           ),
           status: 'Success',
         },
         3: {
           text: (
             <FormattedMessage
-              id="pages.searchTable.nameStatus.abnormal"
+              id="pages.workflowList.nameStatus.abnormal"
               defaultMessage="Abnormal"
             />
           ),
@@ -197,12 +204,12 @@ const TableList: React.FC = () => {
     {
       title: (
         <FormattedMessage
-          id="pages.searchTable.titleUpdatedAt"
+          id="pages.workflowList.titleUpdatedAt"
           defaultMessage="Last scheduled time"
         />
       ),
       sorter: true,
-      dataIndex: 'updatedAt',
+      dataIndex: 'lastTriggerTimestamp',
       valueType: 'dateTime',
       renderFormItem: (item, { defaultRender, ...rest }, form) => {
         const status = form.getFieldValue('status');
@@ -224,7 +231,7 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
+      title: <FormattedMessage id="pages.common.titleOption" defaultMessage="Operating" />,
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
@@ -237,11 +244,13 @@ const TableList: React.FC = () => {
         >
           <FormattedMessage id="pages.searchTable.config" defaultMessage="Configuration" />
         </a>,
-        <a key="subscribeAlert" href="https://procomponents.ant.design/">
-          <FormattedMessage
-            id="pages.searchTable.subscribeAlert"
-            defaultMessage="Subscribe to alerts"
-          />
+        <a
+          key="dag"
+          onClick={() => {
+            navigate(`/workflow/${record.uid}/dag`, { replace: true });
+          }}
+        >
+          <FormattedMessage id="pages.workflowList.dag" defaultMessage="DAG" />
         </a>,
       ],
     },
@@ -251,11 +260,11 @@ const TableList: React.FC = () => {
     <PageContainer>
       <ProTable<API.Workflow, API.PageParams>
         headerTitle={intl.formatMessage({
-          id: 'pages.searchTable.title',
+          id: 'pages.common.tableTitle',
           defaultMessage: 'Enquiry form',
         })}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="uid"
         search={{
           labelWidth: 120,
         }}
@@ -267,10 +276,16 @@ const TableList: React.FC = () => {
               handleModalVisible(true);
             }}
           >
-            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
+            <PlusOutlined /> <FormattedMessage id="pages.common.new" defaultMessage="New" />
           </Button>,
         ]}
-        request={workflowList}
+        request={async () => {
+          const msg = await workflowList();
+          return {
+            data: msg.Items,
+            success: true,
+          };
+        }}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
@@ -304,23 +319,17 @@ const TableList: React.FC = () => {
               actionRef.current?.reloadAndRest?.();
             }}
           >
-            <FormattedMessage
-              id="pages.searchTable.batchDeletion"
-              defaultMessage="Batch deletion"
-            />
+            <FormattedMessage id="pages.common.batchDeletion" defaultMessage="Batch deletion" />
           </Button>
           <Button type="primary">
-            <FormattedMessage
-              id="pages.searchTable.batchApproval"
-              defaultMessage="Batch approval"
-            />
+            <FormattedMessage id="pages.common.batchApproval" defaultMessage="Batch approval" />
           </Button>
         </FooterToolbar>
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.searchTable.createForm.newRule',
-          defaultMessage: 'New rule',
+          id: 'pages.workflowList.createForm.newWorkflow',
+          defaultMessage: 'New workflow',
         })}
         width="400px"
         visible={createModalVisible}
@@ -341,16 +350,27 @@ const TableList: React.FC = () => {
               required: true,
               message: (
                 <FormattedMessage
-                  id="pages.searchTable.ruleName"
-                  defaultMessage="Rule name is required"
+                  id="pages.workflowList.ruleName"
+                  defaultMessage="Workflow name is required"
                 />
               ),
             },
           ]}
           width="md"
           name="name"
+          placeholder={intl.formatMessage({
+            id: 'pages.workflowList.createForm.name',
+            defaultMessage: 'Workflow name',
+          })}
         />
-        <ProFormTextArea width="md" name="desc" />
+        <ProFormTextArea
+          width="md"
+          name="describe"
+          placeholder={intl.formatMessage({
+            id: 'pages.workflowList.createForm.describe',
+            defaultMessage: 'Workflow describe',
+          })}
+        />
       </ModalForm>
       <UpdateForm
         onSubmit={async (value) => {
@@ -382,15 +402,15 @@ const TableList: React.FC = () => {
         }}
         closable={false}
       >
-        {currentRow?.name && (
+        {currentRow?.uid && (
           <ProDescriptions<API.Workflow>
             column={2}
-            title={currentRow?.name}
+            title={currentRow?.uid}
             request={async () => ({
               data: currentRow || {},
             })}
             params={{
-              id: currentRow?.name,
+              id: currentRow?.uid,
             }}
             columns={columns as ProDescriptionsItemProps<API.Workflow>[]}
           />

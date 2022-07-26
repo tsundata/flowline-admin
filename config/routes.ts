@@ -26,6 +26,12 @@
     component: './WorkflowList',
   },
   {
+    path: '/workflow/:uid/dag',
+    name: 'dag',
+    component: './WorkflowDag',
+    hideInMenu: true,
+  },
+  {
     path: '/security',
     name: 'security',
     icon: 'SecurityScan',

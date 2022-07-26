@@ -619,6 +619,7 @@ declare namespace API {
     current_trigger_timestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
+    describe?: string;
     finalizers?: string[];
     generation?: number;
     kind?: string;
