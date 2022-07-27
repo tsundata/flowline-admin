@@ -34,13 +34,14 @@ import * as dndPanelConfig from './config-dnd-panel';
 import { controlMapService, formSchemaService, formValueUpdateService } from './config-form';
 
 import '@antv/xflow/dist/index.css';
+import { useParams } from '@umijs/max';
 import './index.less';
 
 export interface IProps {
   meta: { flowId: string };
 }
 
-export const Demo: React.FC<IProps> = (props) => {
+export const WorkflowDag: React.FC<IProps> = (props) => {
   const { meta } = props;
   const graphHooksConfig = useGraphHookConfig(props);
   const toolbarConfig = useToolbarConfig();
@@ -48,6 +49,7 @@ export const Demo: React.FC<IProps> = (props) => {
   const cmdConfig = useCmdConfig();
   const modelServiceConfig = useModelServiceConfig();
   const keybindingConfig = useKeybindingConfig();
+  const params = useParams();
 
   const cache = React.useMemo<{ app: IApplication } | null>(
     () => ({
@@ -62,16 +64,18 @@ export const Demo: React.FC<IProps> = (props) => {
    */
 
   const onLoad: IAppLoad = async (app) => {
+    console.log('params', params.uid);
     cache!.app = app;
-    initGraphCmds(cache!.app);
+    initGraphCmds(cache!.app, params.uid!);
   };
 
   /** 父组件meta属性更新时,执行initGraphCmds */
   React.useEffect(() => {
     if (cache!.app) {
-      initGraphCmds(cache!.app);
+      initGraphCmds(cache!.app, params.uid!);
     }
-  }, [cache!.app, meta]);
+    // @ts-ignore
+  }, [cache.app, meta]);
 
   return (
     <XFlow
@@ -117,8 +121,8 @@ export const Demo: React.FC<IProps> = (props) => {
   );
 };
 
-export default Demo;
+export default WorkflowDag;
 
-Demo.defaultProps = {
-  meta: { flowId: 'test-meta-flow-id' },
+WorkflowDag.defaultProps = {
+  meta: { flowId: 'workflow-meta-flow-id' },
 };

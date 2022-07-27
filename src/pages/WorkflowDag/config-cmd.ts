@@ -62,12 +62,13 @@ export const useCmdConfig = createCmdConfig((config) => {
 });
 
 /** 查询图的节点和边的数据 */
-export const initGraphCmds = (app: IApplication) => {
+export const initGraphCmds = (app: IApplication, uid: string) => {
   app.executeCommandPipeline([
     /** 1. 从服务端获取数据 */
     {
       commandId: XFlowGraphCommands.LOAD_DATA.id,
       getCommandOption: async () => {
+        console.log('loadGraphData', uid);
         return {
           args: {
             loadDataService: MockApi.loadGraphData,

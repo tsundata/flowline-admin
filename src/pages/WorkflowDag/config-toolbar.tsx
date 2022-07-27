@@ -7,21 +7,16 @@ import {
   StopOutlined,
   UngroupOutlined,
 } from '@ant-design/icons';
-import type { IModelService, IToolbarItemOptions, NsGraphCmd, NsGroupCmd } from '@antv/xflow';
+import type { IModelService, IToolbarItemOptions, NsGraphCmd } from '@antv/xflow';
 import {
   createToolbarConfig,
   IconStore,
   MODELS,
   NsGraphStatusCommand,
-  uuidv4,
   XFlowDagCommands,
   XFlowGraphCommands,
-  XFlowGroupCommands,
 } from '@antv/xflow';
 import { Popconfirm } from 'antd';
-import type { NsDeployDagCmd } from './cmd-extensions/cmd-deploy';
-import { CustomCommands } from './cmd-extensions/constants';
-import { GROUP_NODE_RENDER_ID } from './constant';
 import { MockApi } from './service';
 
 export namespace NSToolbarConfig {
@@ -74,7 +69,19 @@ export namespace NSToolbarConfig {
   export const getToolbarItems = async (state: IToolbarState) => {
     const toolbarGroup1: IToolbarItemOptions[] = [];
     const toolbarGroup2: IToolbarItemOptions[] = [];
-    const toolbarGroup3: IToolbarItemOptions[] = [];
+    /** 语法检查 */
+    toolbarGroup1.push({
+      id: XFlowGraphCommands.SAVE_GRAPH_DATA.id + 'check',
+      iconName: 'GatewayOutlined',
+      tooltip: '语法检查',
+      onClick: async ({ commandService }) => {
+        commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
+          XFlowGraphCommands.SAVE_GRAPH_DATA.id,
+          // @ts-ignore
+          { saveGraphDataService: (meta, graphData) => MockApi.saveGraphData(meta, graphData) },
+        );
+      },
+    });
     /** 保存数据 */
     toolbarGroup1.push({
       id: XFlowGraphCommands.SAVE_GRAPH_DATA.id,
@@ -88,66 +95,8 @@ export namespace NSToolbarConfig {
         );
       },
     });
-    /** 部署服务按钮 */
-    toolbarGroup1.push({
-      iconName: 'CloudSyncOutlined',
-      tooltip: '部署服务',
-      id: CustomCommands.DEPLOY_SERVICE.id,
-      onClick: ({ commandService }) => {
-        commandService.executeCommand<NsDeployDagCmd.IArgs>(CustomCommands.DEPLOY_SERVICE.id, {
-          deployDagService: (meta, graphData) => MockApi.deployDagService(meta, graphData),
-        });
-      },
-    });
-    /** 开启框选 */
+    /** 开始执行 */
     toolbarGroup2.push({
-      id: XFlowGraphCommands.GRAPH_TOGGLE_MULTI_SELECT.id,
-      tooltip: '开启框选',
-      iconName: 'GatewayOutlined',
-      active: state.isMultiSelectionActive,
-      onClick: async ({ commandService }) => {
-        commandService.executeCommand<NsGraphCmd.GraphToggleMultiSelect.IArgs>(
-          XFlowGraphCommands.GRAPH_TOGGLE_MULTI_SELECT.id,
-          {},
-        );
-      },
-    });
-    /** 新建群组 */
-    toolbarGroup2.push({
-      id: XFlowGroupCommands.ADD_GROUP.id,
-      tooltip: '新建群组',
-      iconName: 'GroupOutlined',
-      isEnabled: state.isNodeSelected,
-      onClick: async ({ commandService, modelService }) => {
-        const cells = await MODELS.SELECTED_CELLS.useValue(modelService);
-        const groupChildren = cells.map((cell) => cell.id);
-        commandService.executeCommand<NsGroupCmd.AddGroup.IArgs>(XFlowGroupCommands.ADD_GROUP.id, {
-          nodeConfig: {
-            id: uuidv4(),
-            renderKey: GROUP_NODE_RENDER_ID,
-            groupChildren,
-            groupCollapsedSize: { width: 200, height: 40 },
-            label: '新建群组',
-          },
-        });
-      },
-    });
-    /** 解散群组 */
-    toolbarGroup2.push({
-      id: XFlowGroupCommands.DEL_GROUP.id,
-      tooltip: '解散群组',
-      iconName: 'UngroupOutlined',
-      isEnabled: state.isGroupSelected,
-      onClick: async ({ commandService, modelService }) => {
-        const cell = await MODELS.SELECTED_NODE.useValue(modelService);
-        const nodeConfig = cell.getData();
-        commandService.executeCommand<NsGroupCmd.AddGroup.IArgs>(XFlowGroupCommands.DEL_GROUP.id, {
-          nodeConfig: nodeConfig,
-        });
-      },
-    });
-
-    toolbarGroup3.push({
       id: XFlowDagCommands.QUERY_GRAPH_STATUS.id + 'play',
       tooltip: '开始执行',
       iconName: 'PlaySquareOutlined',
@@ -162,7 +111,8 @@ export namespace NSToolbarConfig {
         );
       },
     });
-    toolbarGroup3.push({
+    /** 停止执行 */
+    toolbarGroup2.push({
       id: XFlowDagCommands.QUERY_GRAPH_STATUS.id + 'stop',
       tooltip: '停止执行',
       iconName: 'StopOutlined',
@@ -192,11 +142,7 @@ export namespace NSToolbarConfig {
 
     return [
       { name: 'graphData', items: toolbarGroup1 },
-      { name: 'groupOperations', items: toolbarGroup2 },
-      {
-        name: 'customCmd',
-        items: toolbarGroup3,
-      },
+      { name: 'customCmd', items: toolbarGroup2 },
     ];
   };
 }
