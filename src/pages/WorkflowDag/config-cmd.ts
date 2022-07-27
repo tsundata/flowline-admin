@@ -1,7 +1,7 @@
 import type { IApplication, IGraphPipelineCommand, NsGraphCmd } from '@antv/xflow';
-import { createCmdConfig, DisposableCollection, XFlowGraphCommands } from '@antv/xflow';
+import { createCmdConfig, DisposableCollection, NsGraph, XFlowGraphCommands } from '@antv/xflow';
 import { commandContributions } from './cmd-extensions';
-import { MockApi } from './service';
+import { DagApi } from './service';
 
 export const useCmdConfig = createCmdConfig((config) => {
   // 注册全局Command扩展
@@ -12,33 +12,33 @@ export const useCmdConfig = createCmdConfig((config) => {
       hooks.graphMeta.registerHook({
         name: 'get graph meta from backend',
         handler: async (args) => {
-          args.graphMetaService = MockApi.queryGraphMeta;
+          args.graphMetaService = DagApi.queryGraphMeta;
         },
       }),
       hooks.saveGraphData.registerHook({
         name: 'save graph data',
         handler: async (args) => {
           if (!args.saveGraphDataService) {
-            args.saveGraphDataService = MockApi.saveGraphData;
+            args.saveGraphDataService = DagApi.saveGraphData;
           }
         },
       }),
       hooks.addNode.registerHook({
         name: 'get node config from backend api',
         handler: async (args) => {
-          args.createNodeService = MockApi.addNode;
+          args.createNodeService = DagApi.addNode;
         },
       }),
       hooks.delNode.registerHook({
         name: 'get edge config from backend api',
         handler: async (args) => {
-          args.deleteNodeService = MockApi.delNode;
+          args.deleteNodeService = DagApi.delNode;
         },
       }),
       hooks.addEdge.registerHook({
         name: 'get edge config from backend api',
         handler: async (args) => {
-          args.createEdgeService = MockApi.addEdge;
+          args.createEdgeService = DagApi.addEdge;
           args.edgeConfig = {
             ...args.edgeConfig,
             connector: { name: 'rounded' },
@@ -51,7 +51,7 @@ export const useCmdConfig = createCmdConfig((config) => {
       hooks.delEdge.registerHook({
         name: 'get edge config from backend api',
         handler: async (args) => {
-          args.deleteEdgeService = MockApi.delEdge;
+          args.deleteEdgeService = DagApi.delEdge;
         },
       }),
     ];
@@ -68,10 +68,11 @@ export const initGraphCmds = (app: IApplication, uid: string) => {
     {
       commandId: XFlowGraphCommands.LOAD_DATA.id,
       getCommandOption: async () => {
-        console.log('loadGraphData', uid);
         return {
           args: {
-            loadDataService: MockApi.loadGraphData,
+            loadDataService: async (meta: NsGraph.IGraphMeta) => {
+              return await DagApi.loadGraphData(uid, meta);
+            },
           },
         };
       },

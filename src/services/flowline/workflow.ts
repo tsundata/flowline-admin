@@ -61,6 +61,39 @@ export async function workflowDelete(
   });
 }
 
+/** Get workflow resource to dag subresource GET /api/apps/v1/workflow/${param0}/dag */
+export async function workflowGetDag(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.workflowGetDagParams,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Dag>(`/api/apps/v1/workflow/${param0}/dag`, {
+    method: 'GET',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
+/** Update workflow resource PUT /api/apps/v1/workflow/${param0}/dag */
+export async function workflowUpdateDag(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.workflowUpdateDagParams,
+  body: API.Dag,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Status>(`/api/apps/v1/workflow/${param0}/dag`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch workflow resource GET /api/apps/v1/workflow/${param0}/watch */
 export async function workflowWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

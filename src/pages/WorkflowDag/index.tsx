@@ -38,7 +38,7 @@ import { useParams } from '@umijs/max';
 import './index.less';
 
 export interface IProps {
-  meta: { flowId: string };
+  meta: { flowId: string; dagId: string };
 }
 
 export const WorkflowDag: React.FC<IProps> = (props) => {
@@ -124,5 +124,5 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
 export default WorkflowDag;
 
 WorkflowDag.defaultProps = {
-  meta: { flowId: 'workflow-meta-flow-id' },
+  meta: { flowId: 'workflow-meta-workflow-id', dagId: 'workflow-meta-dag-id' },
 };

@@ -10,7 +10,7 @@ import {
 } from '@antv/xflow';
 import type { NsRenameNodeCmd } from './cmd-extensions/cmd-rename-node-modal';
 import { CustomCommands } from './cmd-extensions/constants';
-import { MockApi } from './service';
+import { DagApi } from './service';
 
 /** menuitem 配置 */
 export namespace NsMenuItemConfig {
@@ -58,7 +58,7 @@ export namespace NsMenuItemConfig {
       const nodeConfig = target.data as NsGraph.INodeConfig;
       commandService.executeCommand<NsRenameNodeCmd.IArgs>(CustomCommands.SHOW_RENAME_MODAL.id, {
         nodeConfig,
-        updateNodeNameService: MockApi.renameNode,
+        updateNodeNameService: DagApi.renameNode,
       });
     },
   };

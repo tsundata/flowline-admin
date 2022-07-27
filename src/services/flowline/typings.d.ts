@@ -260,12 +260,15 @@ declare namespace API {
   };
 
   type Node = {
-    _order?: string;
+    _order?: number;
+    group?: string;
     height?: number;
     id?: string;
+    isGroup?: boolean;
     label?: string;
+    parentId?: string;
     ports?: ports[];
-    render_key?: string;
+    renderKey?: string;
     width?: number;
     x?: number;
     y?: number;
@@ -288,6 +291,7 @@ declare namespace API {
   type permissions = Record<string, any>;
 
   type ports = {
+    connected?: boolean;
     group?: string;
     id?: string;
     tooltip?: string;
@@ -441,6 +445,26 @@ declare namespace API {
   type stageWatchParams = {
     /** uid of the resource */
     uid: string;
+  };
+
+  type Status = {
+    apiVersion?: string;
+    code?: number;
+    details?: StatusDetails;
+    kind?: string;
+    message?: string;
+    metadata?: ListMeta;
+    reason?: string;
+    status?: string;
+  };
+
+  type StatusDetails = {
+    causes?: string[];
+    group?: string;
+    kind?: string;
+    name?: string;
+    retryAfterSeconds?: number;
+    uid?: string;
   };
 
   type TypeMeta = {
@@ -616,7 +640,7 @@ declare namespace API {
     active?: boolean;
     apiVersion?: string;
     creationTimestamp?: string;
-    current_trigger_timestamp?: string;
+    currentTriggerTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
     describe?: string;
@@ -624,15 +648,20 @@ declare namespace API {
     generation?: number;
     kind?: string;
     labels?: Record<string, any>;
-    last_trigger_timestamp?: string;
+    lastTriggerTimestamp?: string;
     name?: string;
     resourceVersion?: string;
     trigger?: string;
-    trigger_param?: string;
+    triggerParam?: string;
     uid?: string;
   };
 
   type workflowDeleteParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
+  type workflowGetDagParams = {
     /** uid of the resource */
     uid: string;
   };
@@ -649,6 +678,11 @@ declare namespace API {
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type workflowUpdateDagParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type workflowUpdateParams = {

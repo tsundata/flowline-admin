@@ -17,7 +17,7 @@ import {
   XFlowGraphCommands,
 } from '@antv/xflow';
 import { Popconfirm } from 'antd';
-import { MockApi } from './service';
+import { DagApi } from './service';
 
 export namespace NSToolbarConfig {
   /** 注册icon 类型 */
@@ -78,7 +78,7 @@ export namespace NSToolbarConfig {
         commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
           XFlowGraphCommands.SAVE_GRAPH_DATA.id,
           // @ts-ignore
-          { saveGraphDataService: (meta, graphData) => MockApi.saveGraphData(meta, graphData) },
+          { saveGraphDataService: (meta, graphData) => DagApi.saveGraphData(meta, graphData) },
         );
       },
     });
@@ -91,7 +91,7 @@ export namespace NSToolbarConfig {
         commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
           XFlowGraphCommands.SAVE_GRAPH_DATA.id,
           // @ts-ignore
-          { saveGraphDataService: (meta, graphData) => MockApi.saveGraphData(meta, graphData) },
+          { saveGraphDataService: (meta, graphData) => DagApi.saveGraphData(meta, graphData) },
         );
       },
     });
@@ -105,7 +105,7 @@ export namespace NSToolbarConfig {
         commandService.executeCommand<NsGraphStatusCommand.IArgs>(
           XFlowDagCommands.QUERY_GRAPH_STATUS.id,
           {
-            graphStatusService: MockApi.graphStatusService,
+            graphStatusService: DagApi.graphStatusService,
             loopInterval: 3000,
           },
         );
@@ -121,7 +121,7 @@ export namespace NSToolbarConfig {
         commandService.executeCommand<NsGraphStatusCommand.IArgs>(
           XFlowDagCommands.QUERY_GRAPH_STATUS.id,
           {
-            graphStatusService: MockApi.stopGraphStatusService,
+            graphStatusService: DagApi.stopGraphStatusService,
             loopInterval: 5000,
           },
         );
