@@ -1,5 +1,5 @@
 import type { IApplication, IGraphPipelineCommand, NsGraphCmd } from '@antv/xflow';
-import { createCmdConfig, DisposableCollection, NsGraph, XFlowGraphCommands } from '@antv/xflow';
+import { createCmdConfig, DisposableCollection, XFlowGraphCommands } from '@antv/xflow';
 import { commandContributions } from './cmd-extensions';
 import { DagApi } from './service';
 
@@ -62,7 +62,7 @@ export const useCmdConfig = createCmdConfig((config) => {
 });
 
 /** 查询图的节点和边的数据 */
-export const initGraphCmds = (app: IApplication, uid: string) => {
+export const initGraphCmds = (app: IApplication) => {
   app.executeCommandPipeline([
     /** 1. 从服务端获取数据 */
     {
@@ -70,9 +70,7 @@ export const initGraphCmds = (app: IApplication, uid: string) => {
       getCommandOption: async () => {
         return {
           args: {
-            loadDataService: async (meta: NsGraph.IGraphMeta) => {
-              return await DagApi.loadGraphData(uid, meta);
-            },
+            loadDataService: DagApi.loadGraphData,
           },
         };
       },

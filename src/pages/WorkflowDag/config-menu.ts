@@ -8,6 +8,7 @@ import {
   XFlowEdgeCommands,
   XFlowNodeCommands,
 } from '@antv/xflow';
+import { Modal } from 'antd';
 import type { NsRenameNodeCmd } from './cmd-extensions/cmd-rename-node-modal';
 import { CustomCommands } from './cmd-extensions/constants';
 import { DagApi } from './service';
@@ -35,9 +36,17 @@ export namespace NsMenuItemConfig {
     label: '删除节点',
     iconName: 'DeleteOutlined',
     onClick: async ({ target, commandService }) => {
-      commandService.executeCommand<NsNodeCmd.DelNode.IArgs>(XFlowNodeCommands.DEL_NODE.id, {
-        // @ts-ignore
-        nodeConfig: { id: target.data.id },
+      Modal.confirm({
+        title: 'Confirm delete node?',
+        content: `${target.data?.label} [${target.data?.id}]`,
+        okText: '确认',
+        cancelText: '取消',
+        onOk: () => {
+          commandService.executeCommand<NsNodeCmd.DelNode.IArgs>(XFlowNodeCommands.DEL_NODE.id, {
+            // @ts-ignore
+            nodeConfig: { id: target.data.id },
+          });
+        },
       });
     },
   };

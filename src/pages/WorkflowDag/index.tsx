@@ -38,7 +38,7 @@ import { useParams } from '@umijs/max';
 import './index.less';
 
 export interface IProps {
-  meta: { flowId: string; dagId: string };
+  meta: { flowId: any };
 }
 
 export const WorkflowDag: React.FC<IProps> = (props) => {
@@ -62,17 +62,15 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
    * @param app 当前XFlow工作空间
    * @param extensionRegistry 当前XFlow配置项
    */
-
-  const onLoad: IAppLoad = async (app) => {
-    console.log('params', params.uid);
-    cache!.app = app;
-    initGraphCmds(cache!.app, params.uid!);
+  const onLoad: IAppLoad = async (a) => {
+    cache!.app = a;
+    initGraphCmds(cache!.app);
   };
 
   /** 父组件meta属性更新时,执行initGraphCmds */
   React.useEffect(() => {
     if (cache!.app) {
-      initGraphCmds(cache!.app, params.uid!);
+      initGraphCmds(cache!.app);
     }
     // @ts-ignore
   }, [cache.app, meta]);
@@ -84,7 +82,7 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
       modelServiceConfig={modelServiceConfig}
       commandConfig={cmdConfig}
       onLoad={onLoad}
-      meta={meta}
+      meta={{ flowId: params.uid }}
     >
       <DagGraphExtension />
       <NodeCollapsePanel
@@ -122,7 +120,3 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
 };
 
 export default WorkflowDag;
-
-WorkflowDag.defaultProps = {
-  meta: { flowId: 'workflow-meta-workflow-id', dagId: 'workflow-meta-dag-id' },
-};

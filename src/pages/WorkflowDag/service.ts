@@ -20,8 +20,8 @@ export namespace DagApi {
     return { ...args, flowId: args.meta.flowId };
   };
   /** 加载图数据的api */
-  export const loadGraphData = async (uid: string, meta: NsGraph.IGraphMeta) => {
-    return await workflowGetDag({ uid: uid });
+  export const loadGraphData = async (meta: NsGraph.IGraphMeta) => {
+    return await workflowGetDag({ uid: meta.flowId });
   };
   /** 保存图数据的api */
   export const saveGraphData: NsGraphCmd.SaveGraphData.IArgs['saveGraphDataService'] = async (
@@ -31,7 +31,7 @@ export namespace DagApi {
     console.log('保存数据 api', meta, graphData);
 
     const result = await workflowUpdateDag(
-      { uid: 'uid' },
+      { uid: meta.flowId },
       {
         // @ts-ignore
         nodes: graphData.nodes,
