@@ -115,6 +115,11 @@
         component: './TableList',
       },
       {
+        path: '/admin/code',
+        name: 'code',
+        component: './TableList',
+      },
+      {
         path: '/admin/connections',
         name: 'connections',
         component: './TableList',

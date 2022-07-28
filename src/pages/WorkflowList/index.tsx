@@ -16,7 +16,7 @@ import {
   ProTable,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl, useNavigate } from '@umijs/max';
-import { Button, Drawer, Input, message } from 'antd';
+import { Button, Drawer, Input, message, Modal } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 
@@ -138,7 +138,7 @@ const TableList: React.FC = () => {
     {
       title: (
         <FormattedMessage
-          id="pages.workflowList.updateForm.workflowName.nameLabel"
+          id="pages.workflowList.form.workflowName.nameLabel"
           defaultMessage="Workflow name"
         />
       ),
@@ -202,6 +202,21 @@ const TableList: React.FC = () => {
       },
     },
     {
+      title: <FormattedMessage id="pages.workflowList.trigger" defaultMessage="Trigger" />,
+      dataIndex: 'trigger',
+      hideInForm: true,
+      valueEnum: {
+        0: {
+          text: <FormattedMessage id="pages.workflowList.trigger.manual" defaultMessage="Manual" />,
+          status: 'manual',
+        },
+        1: {
+          text: <FormattedMessage id="pages.workflowList.trigger.cron" defaultMessage="Cron" />,
+          status: 'cron',
+        },
+      },
+    },
+    {
       title: (
         <FormattedMessage
           id="pages.workflowList.titleUpdatedAt"
@@ -235,6 +250,20 @@ const TableList: React.FC = () => {
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
+        <a
+          key="run"
+          onClick={() => {
+            Modal.confirm({
+              title: 'Confirm schedule now?',
+              onOk: () => {
+                console.log('schedule now', record);
+                message.info('已开始调度');
+              },
+            });
+          }}
+        >
+          <FormattedMessage id="pages.workflowList.scheduleNow" defaultMessage="Schedule now" />
+        </a>,
         <a
           key="config"
           onClick={() => {
@@ -328,7 +357,7 @@ const TableList: React.FC = () => {
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.workflowList.createForm.newWorkflow',
+          id: 'pages.workflowList.form.newWorkflow',
           defaultMessage: 'New workflow',
         })}
         width="400px"
@@ -359,7 +388,7 @@ const TableList: React.FC = () => {
           width="md"
           name="name"
           placeholder={intl.formatMessage({
-            id: 'pages.workflowList.createForm.name',
+            id: 'pages.workflowList.form.name',
             defaultMessage: 'Workflow name',
           })}
         />
@@ -367,7 +396,7 @@ const TableList: React.FC = () => {
           width="md"
           name="describe"
           placeholder={intl.formatMessage({
-            id: 'pages.workflowList.createForm.describe',
+            id: 'pages.workflowList.form.describe',
             defaultMessage: 'Workflow describe',
           })}
         />

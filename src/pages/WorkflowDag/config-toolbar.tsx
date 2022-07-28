@@ -16,7 +16,7 @@ import {
   XFlowDagCommands,
   XFlowGraphCommands,
 } from '@antv/xflow';
-import { Modal, Popconfirm } from 'antd';
+import { Popconfirm } from 'antd';
 import { DagApi } from './service';
 
 export namespace NSToolbarConfig {
@@ -88,18 +88,23 @@ export namespace NSToolbarConfig {
       iconName: 'SaveOutlined',
       tooltip: '保存数据',
       onClick: async ({ commandService }) => {
-        Modal.confirm({
-          title: 'Confirm save workflow?',
-          okText: '确认',
-          cancelText: '取消',
-          onOk: () => {
-            commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
-              XFlowGraphCommands.SAVE_GRAPH_DATA.id,
-              // @ts-ignore
-              { saveGraphDataService: (meta, graphData) => DagApi.saveGraphData(meta, graphData) },
-            );
-          },
-        });
+        commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
+          XFlowGraphCommands.SAVE_GRAPH_DATA.id,
+          // @ts-ignore
+          { saveGraphDataService: (meta, graphData) => DagApi.saveGraphData(meta, graphData) },
+        );
+      },
+      render: (props) => {
+        return (
+          <Popconfirm
+            title="确定保存数据？"
+            onConfirm={() => {
+              props.onClick();
+            }}
+          >
+            {props.children}
+          </Popconfirm>
+        );
       },
     });
     /** 开始执行 */

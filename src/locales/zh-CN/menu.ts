@@ -1,9 +1,6 @@
 export default {
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
-  'menu.admin': '管理员',
-  'menu.admin.variables': '变量管理',
-  'menu.admin.connections': '连接管理',
   'menu.login': '登录',
   'menu.register': '注册',
   'menu.register-result': '注册结果',
@@ -65,4 +62,8 @@ export default {
   'menu.logs.jobs': '任务日志',
   'menu.logs.audit': '审计日志',
   'menu.logs.workers': '计算节点日志',
+  'menu.admin': '管理员',
+  'menu.admin.code': '代码管理',
+  'menu.admin.variables': '变量管理',
+  'menu.admin.connections': '连接管理',
 };
