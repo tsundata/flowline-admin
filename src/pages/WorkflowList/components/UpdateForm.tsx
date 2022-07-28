@@ -1,4 +1,3 @@
-import { workflowUpdate } from '@/services/flowline/workflow';
 import { ProFormSelect, ProFormText, ProFormTextArea, StepsForm } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { message, Modal } from 'antd';
@@ -53,8 +52,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             return false;
           }
         }
-        await workflowUpdate({ uid: props.values.uid! }, { ...props.values, ...values });
-        message.success('提交成功');
+        await props.onSubmit({ ...props.values, ...values });
         return true;
       }}
     >

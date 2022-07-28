@@ -1,9 +1,4 @@
-import {
-  workflowCreate,
-  workflowDelete,
-  workflowList,
-  workflowUpdate,
-} from '@/services/flowline/workflow';
+import { codeCreate, codeDelete, codeList, codeUpdate } from '@/services/flowline/code';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
@@ -15,22 +10,22 @@ import {
   ProFormTextArea,
   ProTable,
 } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useNavigate } from '@umijs/max';
-import { Button, Drawer, Input, message, Modal } from 'antd';
+import { FormattedMessage, useIntl } from '@umijs/max';
+import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 
 /**
- * @en-US Add workflow
+ * @en-US Add code
  * @zh-CN 添加工作流
  * @param fields
  */
-const handleAdd = async (fields: API.Workflow) => {
+const handleAdd = async (fields: API.Code) => {
   const hide = message.loading('Adding');
   try {
-    const kind = 'workflow';
+    const kind = 'code';
     const apiVersion = 'v1';
-    await workflowCreate({ ...fields, kind, apiVersion });
+    await codeCreate({ ...fields, kind, apiVersion });
     hide();
     message.success('Added successfully');
     return true;
@@ -42,15 +37,15 @@ const handleAdd = async (fields: API.Workflow) => {
 };
 
 /**
- * @en-US Update workflow
+ * @en-US Update code
  * @zh-CN 更新工作流
  *
  * @param fields
  */
-const handleUpdate = async (fields: API.Workflow) => {
+const handleUpdate = async (fields: API.Code) => {
   const hide = message.loading('Updating');
   try {
-    await workflowUpdate({ uid: fields.uid! }, fields);
+    await codeUpdate({ uid: fields.uid! }, fields);
     hide();
 
     message.success('Update is successful');
@@ -63,16 +58,16 @@ const handleUpdate = async (fields: API.Workflow) => {
 };
 
 /**
- *  Delete workflow
+ *  Delete code
  * @zh-CN 删除工作流
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: API.Workflow[]) => {
+const handleRemove = async (selectedRows: API.Code[]) => {
   const hide = message.loading('deleting');
   if (!selectedRows) return true;
   try {
-    await workflowDelete({
+    await codeDelete({
       uid: '-',
     });
     hide();
@@ -85,7 +80,7 @@ const handleRemove = async (selectedRows: API.Workflow[]) => {
   }
 };
 
-const WorkflowList: React.FC = () => {
+const CodeList: React.FC = () => {
   /**
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
@@ -100,10 +95,8 @@ const WorkflowList: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.Workflow>();
-  const [selectedRowsState, setSelectedRows] = useState<API.Workflow[]>([]);
-
-  const navigate = useNavigate();
+  const [currentRow, setCurrentRow] = useState<API.Code>();
+  const [selectedRowsState, setSelectedRows] = useState<API.Code[]>([]);
 
   /**
    * @en-US International configuration
@@ -111,7 +104,7 @@ const WorkflowList: React.FC = () => {
    * */
   const intl = useIntl();
 
-  const columns: ProColumns<API.Workflow>[] = [
+  const columns: ProColumns<API.Code>[] = [
     {
       title: <FormattedMessage id="pages.common.uid" defaultMessage="UID" />,
       dataIndex: 'uid',
@@ -131,113 +124,26 @@ const WorkflowList: React.FC = () => {
     },
     {
       title: (
-        <FormattedMessage
-          id="pages.workflowList.form.workflowName.nameLabel"
-          defaultMessage="Workflow name"
-        />
+        <FormattedMessage id="pages.codeList.form.codeName.nameLabel" defaultMessage="Code name" />
       ),
       dataIndex: 'name',
     },
     {
-      title: <FormattedMessage id="pages.workflowList.titleDesc" defaultMessage="Description" />,
+      title: <FormattedMessage id="pages.codeList.titleDesc" defaultMessage="Description" />,
       dataIndex: 'describe',
       valueType: 'textarea',
     },
     {
-      title: (
-        <FormattedMessage
-          id="pages.workflowList.titleRunNo"
-          defaultMessage="Number of service calls"
-        />
-      ),
-      dataIndex: 'callNo',
+      title: <FormattedMessage id="pages.codeList.form.runtime" defaultMessage="code runtime" />,
+      dataIndex: 'runtime',
       sorter: true,
       hideInForm: true,
     },
     {
-      title: <FormattedMessage id="pages.workflowList.titleActive" defaultMessage="Is active" />,
-      dataIndex: 'active',
+      title: <FormattedMessage id="pages.codeList.titleCreatedAt" defaultMessage="Created time" />,
       sorter: true,
-      hideInForm: true,
-      renderText: (val: string) => `${val ? 'Yes' : 'No'}`,
-    },
-    {
-      title: <FormattedMessage id="pages.workflowList.titleState" defaultMessage="Status" />,
-      dataIndex: 'state',
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage id="pages.workflowList.nameStatus.default" defaultMessage="Create" />
-          ),
-          status: 'Default',
-        },
-        1: {
-          text: (
-            <FormattedMessage id="pages.workflowList.nameStatus.running" defaultMessage="Running" />
-          ),
-          status: 'Processing',
-        },
-        2: {
-          text: (
-            <FormattedMessage id="pages.workflowList.nameStatus.online" defaultMessage="Online" />
-          ),
-          status: 'Success',
-        },
-        3: {
-          text: (
-            <FormattedMessage
-              id="pages.workflowList.nameStatus.abnormal"
-              defaultMessage="Abnormal"
-            />
-          ),
-          status: 'Error',
-        },
-      },
-    },
-    {
-      title: <FormattedMessage id="pages.workflowList.trigger" defaultMessage="Trigger" />,
-      dataIndex: 'trigger',
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: <FormattedMessage id="pages.workflowList.trigger.manual" defaultMessage="Manual" />,
-          status: 'manual',
-        },
-        1: {
-          text: <FormattedMessage id="pages.workflowList.trigger.cron" defaultMessage="Cron" />,
-          status: 'cron',
-        },
-      },
-    },
-    {
-      title: (
-        <FormattedMessage
-          id="pages.workflowList.titleUpdatedAt"
-          defaultMessage="Last scheduled time"
-        />
-      ),
-      sorter: true,
-      dataIndex: 'lastTriggerTimestamp',
+      dataIndex: 'creationTimestamp',
       valueType: 'dateTime',
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status');
-        if (`${status}` === '0') {
-          return false;
-        }
-        if (`${status}` === '3') {
-          return (
-            <Input
-              {...rest}
-              placeholder={intl.formatMessage({
-                id: 'pages.searchTable.exception',
-                defaultMessage: 'Please enter the reason for the exception!',
-              })}
-            />
-          );
-        }
-        return defaultRender(item);
-      },
     },
     {
       title: <FormattedMessage id="pages.common.titleOption" defaultMessage="Operating" />,
@@ -245,35 +151,13 @@ const WorkflowList: React.FC = () => {
       valueType: 'option',
       render: (_, record) => [
         <a
-          key="run"
-          onClick={() => {
-            Modal.confirm({
-              title: 'Confirm schedule now?',
-              onOk: () => {
-                console.log('schedule now', record);
-                message.info('已开始调度');
-              },
-            });
-          }}
-        >
-          <FormattedMessage id="pages.workflowList.scheduleNow" defaultMessage="Schedule now" />
-        </a>,
-        <a
           key="config"
           onClick={() => {
             handleUpdateModalVisible(true);
             setCurrentRow(record);
           }}
         >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="Configuration" />
-        </a>,
-        <a
-          key="dag"
-          onClick={() => {
-            navigate(`/workflow/${record.uid}/dag`, { replace: true });
-          }}
-        >
-          <FormattedMessage id="pages.workflowList.dag" defaultMessage="DAG" />
+          <FormattedMessage id="pages.codeList.form.codeConfig" defaultMessage="Configuration" />
         </a>,
       ],
     },
@@ -281,7 +165,7 @@ const WorkflowList: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.Workflow, API.PageParams>
+      <ProTable<API.Code, API.PageParams>
         headerTitle={intl.formatMessage({
           id: 'pages.common.tableTitle',
           defaultMessage: 'Enquiry form',
@@ -303,7 +187,7 @@ const WorkflowList: React.FC = () => {
           </Button>,
         ]}
         request={async () => {
-          const msg = await workflowList();
+          const msg = await codeList();
           return {
             data: msg.Items,
             success: true,
@@ -351,14 +235,14 @@ const WorkflowList: React.FC = () => {
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.workflowList.form.newWorkflow',
-          defaultMessage: 'New workflow',
+          id: 'pages.codeList.form.newCode',
+          defaultMessage: 'New code',
         })}
         width="400px"
         visible={createModalVisible}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
-          const success = await handleAdd(value as API.Workflow);
+          const success = await handleAdd(value as API.Code);
           if (success) {
             handleModalVisible(false);
             if (actionRef.current) {
@@ -373,8 +257,8 @@ const WorkflowList: React.FC = () => {
               required: true,
               message: (
                 <FormattedMessage
-                  id="pages.workflowList.ruleName"
-                  defaultMessage="Workflow name is required"
+                  id="pages.codeList.ruleName"
+                  defaultMessage="Code name is required"
                 />
               ),
             },
@@ -382,16 +266,16 @@ const WorkflowList: React.FC = () => {
           width="md"
           name="name"
           placeholder={intl.formatMessage({
-            id: 'pages.workflowList.form.name',
-            defaultMessage: 'Workflow name',
+            id: 'pages.codeList.form.name',
+            defaultMessage: 'Code name',
           })}
         />
         <ProFormTextArea
           width="md"
           name="describe"
           placeholder={intl.formatMessage({
-            id: 'pages.workflowList.form.describe',
-            defaultMessage: 'Workflow describe',
+            id: 'pages.codeList.form.describe',
+            defaultMessage: 'Code describe',
           })}
         />
       </ModalForm>
@@ -426,7 +310,7 @@ const WorkflowList: React.FC = () => {
         closable={false}
       >
         {currentRow?.uid && (
-          <ProDescriptions<API.Workflow>
+          <ProDescriptions<API.Code>
             column={2}
             title={currentRow?.uid}
             request={async () => ({
@@ -435,7 +319,7 @@ const WorkflowList: React.FC = () => {
             params={{
               id: currentRow?.uid,
             }}
-            columns={columns as ProDescriptionsItemProps<API.Workflow>[]}
+            columns={columns as ProDescriptionsItemProps<API.Code>[]}
           />
         )}
       </Drawer>
@@ -443,4 +327,4 @@ const WorkflowList: React.FC = () => {
   );
 };
 
-export default WorkflowList;
+export default CodeList;

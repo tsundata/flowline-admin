@@ -110,13 +110,13 @@
     access: 'canAdmin',
     routes: [
       {
-        path: '/admin/variables',
-        name: 'variables',
-        component: './TableList',
-      },
-      {
         path: '/admin/code',
         name: 'code',
+        component: './CodeList',
+      },
+      {
+        path: '/admin/variables',
+        name: 'variables',
         component: './TableList',
       },
       {

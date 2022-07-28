@@ -20,6 +20,7 @@ declare namespace API {
     creationTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
+    describe?: string;
     finalizers?: string[];
     generation?: number;
     kind?: string;
@@ -119,13 +120,13 @@ declare namespace API {
     creationTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
-    edges?: Edge[];
+    edges: Edge[];
     finalizers?: string[];
     generation?: number;
     kind?: string;
     labels?: Record<string, any>;
     name?: string;
-    nodes?: Node[];
+    nodes: Node[];
     resourceVersion?: string;
     uid?: string;
     workflowUID?: string;
