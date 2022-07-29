@@ -4,7 +4,7 @@ import {
   workflowList,
   workflowUpdate,
 } from '@/services/flowline/workflow';
-import { PlusOutlined } from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
   FooterToolbar,
@@ -16,7 +16,7 @@ import {
   ProTable,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl, useNavigate } from '@umijs/max';
-import { Button, Drawer, Input, message, Modal } from 'antd';
+import { Button, Drawer, Input, message, Modal, Tag } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 
@@ -151,15 +151,13 @@ const WorkflowList: React.FC = () => {
         />
       ),
       dataIndex: 'callNo',
-      sorter: true,
       hideInForm: true,
     },
     {
       title: <FormattedMessage id="pages.workflowList.titleActive" defaultMessage="Is active" />,
       dataIndex: 'active',
-      sorter: true,
       hideInForm: true,
-      renderText: (val: string) => `${val ? 'Yes' : 'No'}`,
+      renderText: (val: boolean) => (val ? <CheckOutlined /> : <CloseOutlined />),
     },
     {
       title: <FormattedMessage id="pages.workflowList.titleState" defaultMessage="Status" />,
@@ -200,12 +198,20 @@ const WorkflowList: React.FC = () => {
       dataIndex: 'trigger',
       hideInForm: true,
       valueEnum: {
-        0: {
-          text: <FormattedMessage id="pages.workflowList.trigger.manual" defaultMessage="Manual" />,
+        manual: {
+          text: (
+            <Tag color="orange">
+              <FormattedMessage id="pages.workflowList.trigger.manual" defaultMessage="Manual" />
+            </Tag>
+          ),
           status: 'manual',
         },
-        1: {
-          text: <FormattedMessage id="pages.workflowList.trigger.cron" defaultMessage="Cron" />,
+        cron: {
+          text: (
+            <Tag color="blue">
+              <FormattedMessage id="pages.workflowList.trigger.cron" defaultMessage="Cron" />
+            </Tag>
+          ),
           status: 'cron',
         },
       },
