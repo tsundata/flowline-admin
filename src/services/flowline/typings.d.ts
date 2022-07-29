@@ -490,7 +490,6 @@ declare namespace API {
     resourceVersion?: string;
     uid?: string;
     unreadCount?: number;
-    username?: string;
   };
 
   type userDeleteParams = {

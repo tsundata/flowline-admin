@@ -40,7 +40,7 @@
       {
         path: '/security/users',
         name: 'users',
-        component: './TableList',
+        component: './UserList',
       },
       {
         path: '/security/roles',
