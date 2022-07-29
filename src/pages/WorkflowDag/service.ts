@@ -68,17 +68,7 @@ export namespace DagApi {
       {
         type: NsGraph.AnchorType.INPUT,
         group: NsGraph.AnchorGroup.TOP,
-        tooltip: '输入桩1',
-      },
-      {
-        type: NsGraph.AnchorType.INPUT,
-        group: NsGraph.AnchorGroup.TOP,
-        tooltip: '输入桩2',
-      },
-      {
-        type: NsGraph.AnchorType.INPUT,
-        group: NsGraph.AnchorGroup.TOP,
-        tooltip: '输入桩3',
+        tooltip: '输入桩',
       },
       {
         type: NsGraph.AnchorType.OUTPUT,

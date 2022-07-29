@@ -262,6 +262,8 @@ declare namespace API {
 
   type Node = {
     _order?: number;
+    code: string;
+    connections: string[];
     group?: string;
     height?: number;
     id?: string;
@@ -270,6 +272,7 @@ declare namespace API {
     parentId?: string;
     ports?: ports[];
     renderKey?: string;
+    variables: string[];
     width?: number;
     x?: number;
     y?: number;

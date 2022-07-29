@@ -1,3 +1,6 @@
+import { codeList } from '@/services/flowline/code';
+import { connectionList } from '@/services/flowline/connection';
+import { variableList } from '@/services/flowline/variable';
 import type { NsJsonSchemaForm } from '@antv/xflow';
 import { MODELS } from '@antv/xflow';
 import { controlMapService, ControlShapeEnum } from './form-controls';
@@ -10,7 +13,6 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
   const { modelService, targetType } = args;
   /** 可以使用获取 graphMeta */
   const graphMeta = await MODELS.GRAPH_META.useValue(modelService);
-  console.log('formSchemaService', graphMeta, args);
 
   if (targetType === 'canvas') {
     return {
@@ -22,29 +24,29 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
               name: 'groupName',
               controls: [
                 {
-                  name: 'Tab2-1',
-                  label: 'DAG名称',
+                  name: 'workflowUID',
+                  label: 'WorkflowUID',
                   shape: 'Input',
-                  disabled: false,
+                  disabled: true,
                   required: true,
-                  tooltip: 'DAG名称',
-                  extra: 'WorkflowUID: fa97821a-5661-4744-a1b2-fcb3f09fcb45',
-                  placeholder: 'please write dag name',
+                  tooltip: 'Workflow UID',
+                  extra: '',
+                  placeholder: 'workflow uid',
                   value: '',
-                  defaultValue: '', // 可以认为是默认值
+                  defaultValue: graphMeta.flowId, // 可以认为是默认值
                   hidden: false,
                   options: [{ title: '', value: '' }],
                   originData: {}, // 原始数据
                 },
                 {
                   label: '图数据',
-                  name: 'Tab1-0',
+                  name: 'graphJSON',
                   /** 使用自定义shape */
                   shape: ControlShapeEnum.EDITOR,
                   disabled: false,
                   required: true,
                   tooltip: 'JSON 数据',
-                  placeholder: 'please write something',
+                  placeholder: 'JSON 数据',
                   value: '',
                   defaultValue: '', // 可以认为是默认值
                   hidden: false,
@@ -53,13 +55,13 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
                 },
                 {
                   label: '查看日志链接',
-                  name: 'Tab1-1',
+                  name: 'log',
                   /** 使用自定义shape */
                   shape: ControlShapeEnum.LINKSHAPE,
                   disabled: false,
                   required: true,
-                  tooltip: 'hello world',
-                  placeholder: 'please write something',
+                  tooltip: 'log link',
+                  placeholder: 'log link',
                   value: '',
                   defaultValue: '', // 可以认为是默认值
                   hidden: false,
@@ -74,69 +76,80 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
     };
   }
 
+  console.log('node data', args.targetData);
+
+  const codes = await codeList();
+  const variables = await variableList();
+  const connections = await connectionList();
+
+  // @ts-ignore
+  const codeOptions = [];
+  codes.Items.forEach((i) => {
+    codeOptions.push({ label: i.name, value: i.uid });
+  });
+  // @ts-ignore
+  const variableOptions = [];
+  variables.Items.forEach((i) => {
+    variableOptions.push({ label: i.name, value: i.uid });
+  });
+  // @ts-ignore
+  const connectionOptions = [];
+  connections.Items.forEach((i) => {
+    connectionOptions.push({ label: i.name, value: i.uid });
+  });
+
   const nodeSchema: NsJsonSchemaForm.ISchema = {
     tabs: [
       {
         name: 'NodeMeta',
         groups: [
           {
-            name: 'groupName',
+            name: 'nodeName',
             controls: [
               {
-                label: 'CodeEditor',
-                name: 'Tab1-0',
+                label: '代码',
+                name: 'code',
                 /** 使用自定义shape */
-                shape: ControlShapeEnum.EDITOR,
+                shape: ControlShapeEnum.SELECTOR,
                 disabled: false,
                 required: true,
-                tooltip: 'hello world',
-                placeholder: 'please write something',
-                value: '',
+                tooltip: 'The code to be run by the compute node',
+                placeholder: 'please select code',
+                value: args.targetData?.code,
                 defaultValue: '', // 可以认为是默认值
                 hidden: false,
-                options: [{ title: '', value: '' }],
+                // @ts-ignore
+                options: codeOptions,
                 originData: {}, // 原始数据
               },
               {
-                label: 'Tab1-2',
-                name: 'Tab1-2',
-                shape: 'Input',
+                label: '变量',
+                name: 'variables',
+                shape: ControlShapeEnum.SELECTOR,
                 disabled: false,
                 required: true,
-                tooltip: 'hello world',
-                placeholder: 'please write something',
-                value: '',
+                tooltip: 'Variables loaded by compute nodes',
+                placeholder: 'please select connections',
+                value: args.targetData?.variables,
                 defaultValue: '', // 可以认为是默认值
                 hidden: false,
-                options: [{ title: '', value: '' }],
+                // @ts-ignore
+                options: variableOptions,
                 originData: {}, // 原始数据
               },
               {
-                label: 'Tab1-3',
-                name: 'Tab1-3',
-                shape: 'Input',
+                label: '连接',
+                name: 'connections',
+                shape: ControlShapeEnum.SELECTOR,
                 disabled: false,
                 required: true,
-                tooltip: 'hello world',
-                placeholder: 'please write something',
-                value: '',
+                tooltip: 'Connections loaded by compute nodes',
+                placeholder: 'please select connections',
+                value: args.targetData?.connections,
                 defaultValue: '', // 可以认为是默认值
                 hidden: false,
-                options: [{ title: '', value: '' }],
-                originData: {}, // 原始数据
-              },
-              {
-                label: 'Tab1-4',
-                name: 'Tab1-4',
-                shape: 'Input',
-                disabled: false,
-                required: true,
-                tooltip: 'hello world',
-                placeholder: 'please write something',
-                value: '',
-                defaultValue: '', // 可以认为是默认值
-                hidden: false,
-                options: [{ title: '', value: '' }],
+                // @ts-ignore
+                options: connectionOptions,
                 originData: {}, // 原始数据
               },
             ],
