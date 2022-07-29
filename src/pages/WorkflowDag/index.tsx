@@ -33,8 +33,10 @@ import * as dndPanelConfig from './config-dnd-panel';
 /** 配置JsonConfigForm */
 import { controlMapService, formSchemaService, formValueUpdateService } from './config-form';
 
+import { PageContainer } from '@ant-design/pro-components';
 import '@antv/xflow/dist/index.css';
-import { useParams } from '@umijs/max';
+import { useNavigate, useParams } from '@umijs/max';
+import { Button } from 'antd';
 import './index.less';
 
 export interface IProps {
@@ -50,6 +52,7 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
   const modelServiceConfig = useModelServiceConfig();
   const keybindingConfig = useKeybindingConfig();
   const params = useParams();
+  const navigate = useNavigate();
 
   const cache = React.useMemo<{ app: IApplication } | null>(
     () => ({
@@ -76,46 +79,68 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
   }, [cache.app, meta]);
 
   return (
-    <XFlow
-      className="dag-user-custom-clz"
-      hookConfig={graphHooksConfig}
-      modelServiceConfig={modelServiceConfig}
-      commandConfig={cmdConfig}
-      onLoad={onLoad}
-      meta={{ flowId: params.uid }}
+    <PageContainer
+      header={{
+        breadcrumb: {
+          routes: [
+            {
+              path: '',
+              breadcrumbName: '工作流',
+            },
+            {
+              path: '',
+              breadcrumbName: 'DAG',
+            },
+          ],
+        },
+        extra: [
+          <Button key="back" onClick={() => navigate('/workflows')}>
+            返回
+          </Button>,
+        ],
+      }}
     >
-      <DagGraphExtension />
-      <NodeCollapsePanel
-        className="xflow-node-panel"
-        searchService={dndPanelConfig.searchService}
-        nodeDataService={dndPanelConfig.nodeDataService}
-        onNodeDrop={dndPanelConfig.onNodeDrop}
-        position={{ width: 230, top: 0, bottom: 0, left: 0 }}
-        footerPosition={{ height: 0 }}
-        bodyPosition={{ top: 40, bottom: 0, left: 0 }}
-      />
-      <CanvasToolbar
-        className="xflow-workspace-toolbar-top"
-        layout="horizontal"
-        config={toolbarConfig}
-        position={{ top: 0, left: 230, right: 290, bottom: 0 }}
-      />
-      <XFlowCanvas position={{ top: 40, left: 230, right: 290, bottom: 0 }}>
-        <CanvasScaleToolbar position={{ top: 12, right: 12 }} />
-        <CanvasContextMenu config={menuConfig} />
-        <CanvasSnapline color="#faad14" />
-        <CanvasNodePortTooltip />
-      </XFlowCanvas>
-      <JsonSchemaForm
-        controlMapService={controlMapService}
-        formSchemaService={formSchemaService}
-        formValueUpdateService={formValueUpdateService}
-        bodyPosition={{ top: 0, bottom: 0, right: 0 }}
-        position={{ width: 290, top: 0, bottom: 0, right: 0 }}
-        footerPosition={{ height: 0 }}
-      />
-      <KeyBindings config={keybindingConfig} />
-    </XFlow>
+      <XFlow
+        className="dag-user-custom-clz"
+        hookConfig={graphHooksConfig}
+        modelServiceConfig={modelServiceConfig}
+        commandConfig={cmdConfig}
+        onLoad={onLoad}
+        meta={{ flowId: params.uid }}
+      >
+        <DagGraphExtension />
+        <NodeCollapsePanel
+          className="xflow-node-panel"
+          searchService={dndPanelConfig.searchService}
+          nodeDataService={dndPanelConfig.nodeDataService}
+          onNodeDrop={dndPanelConfig.onNodeDrop}
+          position={{ width: 230, top: 0, bottom: 0, left: 0 }}
+          footerPosition={{ height: 0 }}
+          bodyPosition={{ top: 40, bottom: 0, left: 0 }}
+        />
+        <CanvasToolbar
+          className="xflow-workspace-toolbar-top"
+          layout="horizontal"
+          config={toolbarConfig}
+          position={{ top: 0, left: 230, right: 290, bottom: 0 }}
+        />
+        <XFlowCanvas position={{ top: 40, left: 230, right: 290, bottom: 0 }}>
+          <CanvasScaleToolbar position={{ top: 12, right: 12 }} />
+          <CanvasContextMenu config={menuConfig} />
+          <CanvasSnapline color="#faad14" />
+          <CanvasNodePortTooltip />
+        </XFlowCanvas>
+        <JsonSchemaForm
+          controlMapService={controlMapService}
+          formSchemaService={formSchemaService}
+          formValueUpdateService={formValueUpdateService}
+          bodyPosition={{ top: 0, bottom: 0, right: 0 }}
+          position={{ width: 290, top: 0, bottom: 0, right: 0 }}
+          footerPosition={{ height: 0 }}
+        />
+        <KeyBindings config={keybindingConfig} />
+      </XFlow>
+    </PageContainer>
   );
 };
 
