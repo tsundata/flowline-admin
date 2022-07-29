@@ -122,7 +122,7 @@
       {
         path: '/admin/connections',
         name: 'connections',
-        component: './TableList',
+        component: './ConnectionList',
       },
       {
         component: './404',

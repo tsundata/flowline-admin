@@ -65,7 +65,7 @@ declare namespace API {
     creationTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
-    description?: string;
+    describe?: string;
     extra?: string;
     finalizers?: string[];
     generation?: number;
@@ -572,7 +572,7 @@ declare namespace API {
   };
 
   type VariableList = {
-    Items: User[];
+    Items: Variable[];
     apiVersion?: string;
     continue?: string;
     kind?: string;
