@@ -1,4 +1,9 @@
-import { codeCreate, codeDelete, codeList, codeUpdate } from '@/services/flowline/code';
+import {
+  variableCreate,
+  variableDelete,
+  variableList,
+  variableUpdate,
+} from '@/services/flowline/variable';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
@@ -16,16 +21,16 @@ import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 
 /**
- * @en-US Add code
- * @zh-CN 添加代码
+ * @en-US Add variable
+ * @zh-CN 添加变量
  * @param fields
  */
-const handleAdd = async (fields: API.Code) => {
+const handleAdd = async (fields: API.Variable) => {
   const hide = message.loading('Adding');
   try {
-    const kind = 'code';
+    const kind = 'variable';
     const apiVersion = 'v1';
-    await codeCreate({ ...fields, kind, apiVersion });
+    await variableCreate({ ...fields, kind, apiVersion });
     hide();
     message.success('Added successfully');
     return true;
@@ -37,15 +42,15 @@ const handleAdd = async (fields: API.Code) => {
 };
 
 /**
- * @en-US Update code
- * @zh-CN 更新代码
+ * @en-US Update variable
+ * @zh-CN 更新变量
  *
  * @param fields
  */
-const handleUpdate = async (fields: API.Code) => {
+const handleUpdate = async (fields: API.Variable) => {
   const hide = message.loading('Updating');
   try {
-    await codeUpdate({ uid: fields.uid! }, fields);
+    await variableUpdate({ uid: fields.uid! }, fields);
     hide();
 
     message.success('Update is successful');
@@ -58,16 +63,16 @@ const handleUpdate = async (fields: API.Code) => {
 };
 
 /**
- *  Delete code
- * @zh-CN 删除代码
+ *  Delete variable
+ * @zh-CN 删除变量
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: API.Code[]) => {
+const handleRemove = async (selectedRows: API.Variable[]) => {
   const hide = message.loading('deleting');
   if (!selectedRows) return true;
   try {
-    await codeDelete({
+    await variableDelete({
       uid: '-',
     });
     hide();
@@ -80,7 +85,7 @@ const handleRemove = async (selectedRows: API.Code[]) => {
   }
 };
 
-const CodeList: React.FC = () => {
+const VariableList: React.FC = () => {
   /**
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
@@ -95,8 +100,8 @@ const CodeList: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.Code>();
-  const [selectedRowsState, setSelectedRows] = useState<API.Code[]>([]);
+  const [currentRow, setCurrentRow] = useState<API.Variable>();
+  const [selectedRowsState, setSelectedRows] = useState<API.Variable[]>([]);
 
   /**
    * @en-US International configuration
@@ -104,7 +109,7 @@ const CodeList: React.FC = () => {
    * */
   const intl = useIntl();
 
-  const columns: ProColumns<API.Code>[] = [
+  const columns: ProColumns<API.Variable>[] = [
     {
       title: <FormattedMessage id="pages.common.uid" defaultMessage="UID" />,
       dataIndex: 'uid',
@@ -124,23 +129,28 @@ const CodeList: React.FC = () => {
     },
     {
       title: (
-        <FormattedMessage id="pages.codeList.form.codeName.nameLabel" defaultMessage="Code name" />
+        <FormattedMessage
+          id="pages.variableList.form.variableName.nameLabel"
+          defaultMessage="Variable name"
+        />
       ),
       dataIndex: 'name',
     },
     {
-      title: <FormattedMessage id="pages.codeList.titleDesc" defaultMessage="Description" />,
+      title: (
+        <FormattedMessage id="pages.variableList.form.value" defaultMessage="variable value" />
+      ),
+      dataIndex: 'value',
+    },
+    {
+      title: <FormattedMessage id="pages.variableList.titleDesc" defaultMessage="Description" />,
       dataIndex: 'describe',
       valueType: 'textarea',
     },
     {
-      title: <FormattedMessage id="pages.codeList.form.runtime" defaultMessage="code runtime" />,
-      dataIndex: 'runtime',
-      sorter: true,
-      hideInForm: true,
-    },
-    {
-      title: <FormattedMessage id="pages.codeList.titleCreatedAt" defaultMessage="Created time" />,
+      title: (
+        <FormattedMessage id="pages.variableList.titleCreatedAt" defaultMessage="Created time" />
+      ),
       sorter: true,
       dataIndex: 'creationTimestamp',
       valueType: 'dateTime',
@@ -157,7 +167,10 @@ const CodeList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          <FormattedMessage id="pages.codeList.form.codeConfig" defaultMessage="Configuration" />
+          <FormattedMessage
+            id="pages.variableList.form.variableConfig"
+            defaultMessage="Configuration"
+          />
         </a>,
       ],
     },
@@ -165,7 +178,7 @@ const CodeList: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.Code, API.PageParams>
+      <ProTable<API.Variable, API.PageParams>
         headerTitle={intl.formatMessage({
           id: 'pages.common.tableTitle',
           defaultMessage: 'Enquiry form',
@@ -187,7 +200,7 @@ const CodeList: React.FC = () => {
           </Button>,
         ]}
         request={async () => {
-          const msg = await codeList();
+          const msg = await variableList();
           return {
             data: msg.Items,
             success: true,
@@ -223,14 +236,14 @@ const CodeList: React.FC = () => {
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.codeList.form.newCode',
-          defaultMessage: 'New code',
+          id: 'pages.variableList.form.newVariable',
+          defaultMessage: 'New variable',
         })}
         width="400px"
         visible={createModalVisible}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
-          const success = await handleAdd(value as API.Code);
+          const success = await handleAdd(value as API.Variable);
           if (success) {
             handleModalVisible(false);
             if (actionRef.current) {
@@ -245,8 +258,8 @@ const CodeList: React.FC = () => {
               required: true,
               message: (
                 <FormattedMessage
-                  id="pages.codeList.ruleName"
-                  defaultMessage="Code name is required"
+                  id="pages.variableList.ruleName"
+                  defaultMessage="Variable name is required"
                 />
               ),
             },
@@ -254,16 +267,35 @@ const CodeList: React.FC = () => {
           width="md"
           name="name"
           placeholder={intl.formatMessage({
-            id: 'pages.codeList.form.name',
-            defaultMessage: 'Code name',
+            id: 'pages.variableList.form.name',
+            defaultMessage: 'Variable name',
           })}
         />
         <ProFormTextArea
           width="md"
           name="describe"
           placeholder={intl.formatMessage({
-            id: 'pages.codeList.form.describe',
-            defaultMessage: 'Code describe',
+            id: 'pages.variableList.form.describe',
+            defaultMessage: 'Variable describe',
+          })}
+        />
+        <ProFormText
+          rules={[
+            {
+              required: true,
+              message: (
+                <FormattedMessage
+                  id="pages.variableList.form.value.rule"
+                  defaultMessage="Variable value is required"
+                />
+              ),
+            },
+          ]}
+          width="md"
+          name="value"
+          placeholder={intl.formatMessage({
+            id: 'pages.variableList.form.value.rule',
+            defaultMessage: 'Variable value',
           })}
         />
       </ModalForm>
@@ -298,7 +330,7 @@ const CodeList: React.FC = () => {
         closable={false}
       >
         {currentRow?.uid && (
-          <ProDescriptions<API.Code>
+          <ProDescriptions<API.Variable>
             column={2}
             title={currentRow?.uid}
             request={async () => ({
@@ -307,7 +339,7 @@ const CodeList: React.FC = () => {
             params={{
               id: currentRow?.uid,
             }}
-            columns={columns as ProDescriptionsItemProps<API.Code>[]}
+            columns={columns as ProDescriptionsItemProps<API.Variable>[]}
           />
         )}
       </Drawer>
@@ -315,4 +347,4 @@ const CodeList: React.FC = () => {
   );
 };
 
-export default CodeList;
+export default VariableList;

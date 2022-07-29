@@ -550,10 +550,9 @@ declare namespace API {
     creationTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
-    description?: string;
+    describe?: string;
     finalizers?: string[];
     generation?: number;
-    key?: string;
     kind?: string;
     labels?: Record<string, any>;
     name?: string;

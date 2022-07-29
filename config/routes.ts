@@ -117,7 +117,7 @@
       {
         path: '/admin/variables',
         name: 'variables',
-        component: './TableList',
+        component: './VariableList',
       },
       {
         path: '/admin/connections',

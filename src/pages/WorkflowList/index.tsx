@@ -323,15 +323,6 @@ const WorkflowList: React.FC = () => {
               <FormattedMessage id="pages.searchTable.chosen" defaultMessage="Chosen" />{' '}
               <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
               <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
-              &nbsp;&nbsp;
-              <span>
-                <FormattedMessage
-                  id="pages.searchTable.totalServiceCalls"
-                  defaultMessage="Total number of service calls"
-                />{' '}
-                {selectedRowsState.reduce((pre, item) => pre + item.generation!, 0)}{' '}
-                <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
-              </span>
             </div>
           }
         >
@@ -343,9 +334,6 @@ const WorkflowList: React.FC = () => {
             }}
           >
             <FormattedMessage id="pages.common.batchDeletion" defaultMessage="Batch deletion" />
-          </Button>
-          <Button type="primary">
-            <FormattedMessage id="pages.common.batchApproval" defaultMessage="Batch approval" />
           </Button>
         </FooterToolbar>
       )}
