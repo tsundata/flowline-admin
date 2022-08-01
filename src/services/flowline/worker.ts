@@ -61,6 +61,25 @@ export async function workerDelete(
   });
 }
 
+/** Update worker resource PUT /api/apps/v1/worker/${param0}/heartbeat */
+export async function workerUpdateHeartbeat(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.workerUpdateHeartbeatParams,
+  body: API.Worker,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Status>(`/api/apps/v1/worker/${param0}/heartbeat`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch worker resource GET /api/apps/v1/worker/${param0}/watch */
 export async function workerWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
@@ -79,6 +98,18 @@ export async function workerWatch(
 export async function workerList(options?: { [key: string]: any }) {
   return request<API.WorkerList>('/api/apps/v1/worker/list', {
     method: 'GET',
+    ...(options || {}),
+  });
+}
+
+/** Create worker resource to register subresource POST /api/apps/v1/worker/register */
+export async function workerCreateRegister(body: API.Worker, options?: { [key: string]: any }) {
+  return request<API.Worker>('/api/apps/v1/worker/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
     ...(options || {}),
   });
 }

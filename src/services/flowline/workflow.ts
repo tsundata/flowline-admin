@@ -94,6 +94,25 @@ export async function workflowUpdateDag(
   });
 }
 
+/** Update workflow resource PUT /api/apps/v1/workflow/${param0}/state */
+export async function workflowUpdateState(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.workflowUpdateStateParams,
+  body: API.Workflow,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Workflow>(`/api/apps/v1/workflow/${param0}/state`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch workflow resource GET /api/apps/v1/workflow/${param0}/watch */
 export async function workflowWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

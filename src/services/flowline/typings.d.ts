@@ -210,6 +210,7 @@ declare namespace API {
 
   type Job = {
     apiVersion?: string;
+    completionTimestamp?: string;
     creationTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
@@ -223,6 +224,7 @@ declare namespace API {
     state?: string;
     triggerTimestamp?: string;
     uid?: string;
+    workflowUID: string;
   };
 
   type jobDeleteParams = {
@@ -245,6 +247,11 @@ declare namespace API {
   };
 
   type jobUpdateParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
+  type jobUpdateStateParams = {
     /** uid of the resource */
     uid: string;
   };
@@ -398,11 +405,12 @@ declare namespace API {
   type Stage = {
     apiVersion?: string;
     code?: string;
-    connection?: Connection[];
+    connections?: Connection[];
     creationTimestamp?: string;
     dagUID?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
+    dependNodeId?: string[];
     finalizers?: string[];
     generation?: number;
     input?: input;
@@ -417,9 +425,10 @@ declare namespace API {
     schedulerName?: string;
     state?: string;
     uid?: string;
-    variable?: Variable[];
+    variables?: Variable[];
     workerHost?: string;
     workerUID?: string;
+    workflowUID?: string;
   };
 
   type stageDeleteParams = {
@@ -599,7 +608,7 @@ declare namespace API {
     deletionTimestamp?: string;
     finalizers?: string[];
     generation?: number;
-    host?: string;
+    hostname?: string;
     kind?: string;
     labels?: Record<string, any>;
     name?: string;
@@ -628,6 +637,11 @@ declare namespace API {
     resourceVersion?: string;
   };
 
+  type workerUpdateHeartbeatParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
   type workerUpdateParams = {
     /** uid of the resource */
     uid: string;
@@ -639,6 +653,7 @@ declare namespace API {
   };
 
   type Workflow = {
+    LastSuccessfulTimestamp?: string;
     active?: boolean;
     apiVersion?: string;
     creationTimestamp?: string;
@@ -688,6 +703,11 @@ declare namespace API {
   };
 
   type workflowUpdateParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
+  type workflowUpdateStateParams = {
     /** uid of the resource */
     uid: string;
   };

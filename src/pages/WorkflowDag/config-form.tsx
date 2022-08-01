@@ -84,19 +84,26 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
 
   // @ts-ignore
   const codeOptions = [];
-  codes.Items.forEach((i) => {
-    codeOptions.push({ label: i.name, value: i.uid });
-  });
+  if (codes != null && codes.Items != null) {
+    codes.Items.forEach((i) => {
+      codeOptions.push({ label: i.name, value: i.uid });
+    });
+  }
   // @ts-ignore
   const variableOptions = [];
-  variables.Items.forEach((i) => {
-    variableOptions.push({ label: i.name, value: i.uid });
-  });
+  if (variables != null && variables.Items != null) {
+    console.log(variables);
+    variables.Items.forEach((i) => {
+      variableOptions.push({ label: i.name, value: i.uid });
+    });
+  }
   // @ts-ignore
   const connectionOptions = [];
-  connections.Items.forEach((i) => {
-    connectionOptions.push({ label: i.name, value: i.uid });
-  });
+  if (connections != null && connections.Items != null) {
+    connections.Items.forEach((i) => {
+      connectionOptions.push({ label: i.name, value: i.uid });
+    });
+  }
 
   const nodeSchema: NsJsonSchemaForm.ISchema = {
     tabs: [
@@ -127,7 +134,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
                 name: 'variables',
                 shape: ControlShapeEnum.SELECTOR,
                 disabled: false,
-                required: true,
+                required: false,
                 tooltip: 'Variables loaded by compute nodes',
                 placeholder: 'please select connections',
                 value: args.targetData?.variables,
@@ -142,7 +149,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
                 name: 'connections',
                 shape: ControlShapeEnum.SELECTOR,
                 disabled: false,
-                required: true,
+                required: false,
                 tooltip: 'Connections loaded by compute nodes',
                 placeholder: 'please select connections',
                 value: args.targetData?.connections,

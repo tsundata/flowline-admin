@@ -30,7 +30,8 @@ const handleAdd = async (fields: API.Workflow) => {
   try {
     const kind = 'workflow';
     const apiVersion = 'v1';
-    await workflowCreate({ ...fields, kind, apiVersion });
+    const active = true;
+    await workflowCreate({ ...fields, kind, apiVersion, active });
     hide();
     message.success('Added successfully');
     return true;
