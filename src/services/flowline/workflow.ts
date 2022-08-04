@@ -75,7 +75,7 @@ export async function workflowGetDag(
   });
 }
 
-/** Update workflow resource PUT /api/apps/v1/workflow/${param0}/dag */
+/** Update workflow resource to dag PUT /api/apps/v1/workflow/${param0}/dag */
 export async function workflowUpdateDag(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.workflowUpdateDagParams,
@@ -94,7 +94,7 @@ export async function workflowUpdateDag(
   });
 }
 
-/** Update workflow resource PUT /api/apps/v1/workflow/${param0}/state */
+/** Update workflow resource to state PUT /api/apps/v1/workflow/${param0}/state */
 export async function workflowUpdateState(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.workflowUpdateStateParams,

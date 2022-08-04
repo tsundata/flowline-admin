@@ -61,7 +61,7 @@ export async function workerDelete(
   });
 }
 
-/** Update worker resource PUT /api/apps/v1/worker/${param0}/heartbeat */
+/** Update worker resource to heartbeat PUT /api/apps/v1/worker/${param0}/heartbeat */
 export async function workerUpdateHeartbeat(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.workerUpdateHeartbeatParams,

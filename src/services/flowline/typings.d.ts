@@ -220,9 +220,7 @@ declare namespace API {
     labels?: Record<string, any>;
     name?: string;
     resourceVersion?: string;
-    scheduleTimestamp?: string;
     state?: string;
-    triggerTimestamp?: string;
     uid?: string;
     workflowUID: string;
   };
@@ -418,6 +416,7 @@ declare namespace API {
     kind?: string;
     labels?: Record<string, any>;
     name?: string;
+    nodeID?: string;
     output?: output;
     priority?: number;
     resourceVersion?: string;
@@ -448,6 +447,16 @@ declare namespace API {
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type stageUpdateBindingParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
+  type stageUpdateListParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type stageUpdateParams = {

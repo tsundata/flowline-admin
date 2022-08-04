@@ -61,6 +61,44 @@ export async function stageDelete(
   });
 }
 
+/** Update stage resource to binding PUT /api/apps/v1/stage/${param0}/binding */
+export async function stageUpdateBinding(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.stageUpdateBindingParams,
+  body: API.Binding,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Status>(`/api/apps/v1/stage/${param0}/binding`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** Update stage resource to list PUT /api/apps/v1/stage/${param0}/list */
+export async function stageUpdateList(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.stageUpdateListParams,
+  body: API.StageList,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Status>(`/api/apps/v1/stage/${param0}/list`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch stage resource GET /api/apps/v1/stage/${param0}/watch */
 export async function stageWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
@@ -71,18 +109,6 @@ export async function stageWatch(
   return request<any>(`/api/apps/v1/stage/${param0}/watch`, {
     method: 'GET',
     params: { ...queryParams },
-    ...(options || {}),
-  });
-}
-
-/** Create stage resource to binding subresource POST /api/apps/v1/stage/binding */
-export async function stageCreateBinding(body: API.Binding, options?: { [key: string]: any }) {
-  return request<API.Binding>('/api/apps/v1/stage/binding', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
     ...(options || {}),
   });
 }
