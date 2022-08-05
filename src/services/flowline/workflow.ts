@@ -61,6 +61,25 @@ export async function workflowDelete(
   });
 }
 
+/** Patch workflow resource PATCH /api/apps/v1/workflow/${param0} */
+export async function workflowPatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.workflowPatchParams,
+  body: API.Workflow,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Workflow>(`/api/apps/v1/workflow/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Get workflow resource to dag subresource GET /api/apps/v1/workflow/${param0}/dag */
 export async function workflowGetDag(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

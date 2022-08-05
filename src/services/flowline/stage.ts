@@ -61,6 +61,25 @@ export async function stageDelete(
   });
 }
 
+/** Patch stage resource PATCH /api/apps/v1/stage/${param0} */
+export async function stagePatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.stagePatchParams,
+  body: API.Stage,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Stage>(`/api/apps/v1/stage/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Update stage resource to binding PUT /api/apps/v1/stage/${param0}/binding */
 export async function stageUpdateBinding(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

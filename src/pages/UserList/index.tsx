@@ -194,7 +194,7 @@ const UserList: React.FC = () => {
         request={async () => {
           const msg = await userList();
           return {
-            data: msg.Items,
+            data: msg.items,
             success: true,
           };
         }}

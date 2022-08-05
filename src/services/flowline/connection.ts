@@ -61,6 +61,25 @@ export async function connectionDelete(
   });
 }
 
+/** Patch connection resource PATCH /api/apps/v1/connection/${param0} */
+export async function connectionPatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.connectionPatchParams,
+  body: API.Connection,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Connection>(`/api/apps/v1/connection/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch connection resource GET /api/apps/v1/connection/${param0}/watch */
 export async function connectionWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

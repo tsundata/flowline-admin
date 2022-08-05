@@ -61,6 +61,25 @@ export async function codeDelete(
   });
 }
 
+/** Patch code resource PATCH /api/apps/v1/code/${param0} */
+export async function codePatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.codePatchParams,
+  body: API.Code,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Code>(`/api/apps/v1/code/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch code resource GET /api/apps/v1/code/${param0}/watch */
 export async function codeWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

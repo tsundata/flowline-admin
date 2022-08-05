@@ -84,23 +84,23 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
 
   // @ts-ignore
   const codeOptions = [];
-  if (codes != null && codes.Items != null) {
-    codes.Items.forEach((i) => {
+  if (codes != null && codes.items != null) {
+    codes.items.forEach((i) => {
       codeOptions.push({ label: i.name, value: i.uid });
     });
   }
   // @ts-ignore
   const variableOptions = [];
-  if (variables != null && variables.Items != null) {
+  if (variables != null && variables.items != null) {
     console.log(variables);
-    variables.Items.forEach((i) => {
+    variables.items.forEach((i) => {
       variableOptions.push({ label: i.name, value: i.uid });
     });
   }
   // @ts-ignore
   const connectionOptions = [];
-  if (connections != null && connections.Items != null) {
-    connections.Items.forEach((i) => {
+  if (connections != null && connections.items != null) {
+    connections.items.forEach((i) => {
       connectionOptions.push({ label: i.name, value: i.uid });
     });
   }

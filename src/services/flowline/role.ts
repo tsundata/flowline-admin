@@ -61,6 +61,25 @@ export async function roleDelete(
   });
 }
 
+/** Patch role resource PATCH /api/apps/v1/role/${param0} */
+export async function rolePatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.rolePatchParams,
+  body: API.Role,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Role>(`/api/apps/v1/role/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch role resource GET /api/apps/v1/role/${param0}/watch */
 export async function roleWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

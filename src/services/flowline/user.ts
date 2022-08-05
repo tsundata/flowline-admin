@@ -61,6 +61,25 @@ export async function userDelete(
   });
 }
 
+/** Patch user resource PATCH /api/apps/v1/user/${param0} */
+export async function userPatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.userPatchParams,
+  body: API.User,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.User>(`/api/apps/v1/user/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Delete user resource to session subresource DELETE /api/apps/v1/user/${param0}/session */
 export async function userDeleteSession(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

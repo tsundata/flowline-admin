@@ -42,12 +42,17 @@ declare namespace API {
   };
 
   type CodeList = {
-    Items: Code[];
     apiVersion?: string;
     continue?: string;
+    items: Code[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type codePatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type codeUpdateParams = {
@@ -93,12 +98,17 @@ declare namespace API {
   };
 
   type ConnectionList = {
-    Items: Connection[];
     apiVersion?: string;
     continue?: string;
+    items: Connection[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type connectionPatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type connectionUpdateParams = {
@@ -143,12 +153,17 @@ declare namespace API {
   };
 
   type DagList = {
-    Items: Dag[];
     apiVersion?: string;
     continue?: string;
+    items: Dag[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type dagPatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type dagUpdateParams = {
@@ -164,16 +179,32 @@ declare namespace API {
   type Edge = connector;
 
   type Event = {
+    action?: string;
     apiVersion?: string;
+    count?: number;
     creationTimestamp?: string;
     deletionGracePeriodSeconds?: number;
     deletionTimestamp?: string;
+    eventTime?: string;
     finalizers?: string[];
+    firstTimestamp?: string;
     generation?: number;
+    involvedObject: ObjectReference;
     kind?: string;
     labels?: Record<string, any>;
+    lastTimestamp?: string;
+    message?: string;
     name?: string;
+    note?: string;
+    reason?: string;
+    regarding?: ObjectReference;
+    related?: ObjectReference;
+    reportingComponent: string;
+    reportingInstance: string;
     resourceVersion?: string;
+    series?: EventSeries;
+    source?: EventSource;
+    type?: string;
     uid?: string;
   };
 
@@ -188,12 +219,27 @@ declare namespace API {
   };
 
   type EventList = {
-    Items: Event[];
     apiVersion?: string;
     continue?: string;
+    items: Event[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type eventPatchParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
+  type EventSeries = {
+    count?: number;
+    lastObservedTime?: string;
+  };
+
+  type EventSource = {
+    component?: string;
+    host?: string;
   };
 
   type eventUpdateParams = {
@@ -236,12 +282,17 @@ declare namespace API {
   };
 
   type JobList = {
-    Items: Job[];
     apiVersion?: string;
     continue?: string;
+    items: Job[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type jobPatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type jobUpdateParams = {
@@ -290,6 +341,15 @@ declare namespace API {
     finalizers?: string[];
     generation?: number;
     labels?: Record<string, any>;
+    name?: string;
+    resourceVersion?: string;
+    uid?: string;
+  };
+
+  type ObjectReference = {
+    apiVersion?: string;
+    fieldPath?: string;
+    kind?: string;
     name?: string;
     resourceVersion?: string;
     uid?: string;
@@ -349,12 +409,17 @@ declare namespace API {
   };
 
   type RoleBindingList = {
-    Items: RoleBinding[];
     apiVersion?: string;
     continue?: string;
+    items: RoleBinding[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type rolebindingPatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type rolebindingUpdateParams = {
@@ -378,12 +443,17 @@ declare namespace API {
   };
 
   type RoleList = {
-    Items: Role[];
     apiVersion?: string;
     continue?: string;
+    items: Role[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type rolePatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type roleUpdateParams = {
@@ -441,12 +511,17 @@ declare namespace API {
   };
 
   type StageList = {
-    Items: Stage[];
     apiVersion?: string;
     continue?: string;
+    items: Stage[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type stagePatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type stageUpdateBindingParams = {
@@ -472,11 +547,13 @@ declare namespace API {
   type Status = {
     apiVersion?: string;
     code?: number;
+    continue?: string;
     details?: StatusDetails;
     kind?: string;
     message?: string;
-    metadata?: ListMeta;
     reason?: string;
+    remainingItemCount?: number;
+    resourceVersion?: string;
     status?: string;
   };
 
@@ -529,12 +606,17 @@ declare namespace API {
   };
 
   type UserList = {
-    Items: User[];
     apiVersion?: string;
     continue?: string;
+    items: User[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type userPatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type UserSession = {
@@ -592,12 +674,17 @@ declare namespace API {
   };
 
   type VariableList = {
-    Items: Variable[];
     apiVersion?: string;
     continue?: string;
+    items: Variable[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type variablePatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type variableUpdateParams = {
@@ -638,12 +725,17 @@ declare namespace API {
   };
 
   type WorkerList = {
-    Items: Worker[];
     apiVersion?: string;
     continue?: string;
+    items: Worker[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type workerPatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type workerUpdateHeartbeatParams = {
@@ -698,12 +790,17 @@ declare namespace API {
   };
 
   type WorkflowList = {
-    Items: Workflow[];
     apiVersion?: string;
     continue?: string;
+    items: Workflow[];
     kind?: string;
     remainingItemCount?: number;
     resourceVersion?: string;
+  };
+
+  type workflowPatchParams = {
+    /** uid of the resource */
+    uid: string;
   };
 
   type workflowUpdateDagParams = {

@@ -61,6 +61,25 @@ export async function variableDelete(
   });
 }
 
+/** Patch variable resource PATCH /api/apps/v1/variable/${param0} */
+export async function variablePatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.variablePatchParams,
+  body: API.Variable,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Variable>(`/api/apps/v1/variable/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch variable resource GET /api/apps/v1/variable/${param0}/watch */
 export async function variableWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

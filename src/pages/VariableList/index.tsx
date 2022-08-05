@@ -202,7 +202,7 @@ const VariableList: React.FC = () => {
         request={async () => {
           const msg = await variableList();
           return {
-            data: msg.Items,
+            data: msg.items,
             success: true,
           };
         }}

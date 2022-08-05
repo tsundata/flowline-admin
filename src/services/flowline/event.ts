@@ -61,6 +61,25 @@ export async function eventDelete(
   });
 }
 
+/** Patch event resource PATCH /api/apps/v1/event/${param0} */
+export async function eventPatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.eventPatchParams,
+  body: API.Event,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Event>(`/api/apps/v1/event/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch event resource GET /api/apps/v1/event/${param0}/watch */
 export async function eventWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

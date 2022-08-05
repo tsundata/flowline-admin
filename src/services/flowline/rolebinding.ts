@@ -61,6 +61,25 @@ export async function rolebindingDelete(
   });
 }
 
+/** Patch rolebinding resource PATCH /api/apps/v1/rolebinding/${param0} */
+export async function rolebindingPatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.rolebindingPatchParams,
+  body: API.RoleBinding,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.RoleBinding>(`/api/apps/v1/rolebinding/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch rolebinding resource GET /api/apps/v1/rolebinding/${param0}/watch */
 export async function rolebindingWatch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

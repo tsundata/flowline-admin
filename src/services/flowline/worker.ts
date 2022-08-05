@@ -61,6 +61,25 @@ export async function workerDelete(
   });
 }
 
+/** Patch worker resource PATCH /api/apps/v1/worker/${param0} */
+export async function workerPatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.workerPatchParams,
+  body: API.Worker,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Worker>(`/api/apps/v1/worker/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Update worker resource to heartbeat PUT /api/apps/v1/worker/${param0}/heartbeat */
 export async function workerUpdateHeartbeat(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

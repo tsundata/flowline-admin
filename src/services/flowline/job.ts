@@ -61,6 +61,25 @@ export async function jobDelete(
   });
 }
 
+/** Patch job resource PATCH /api/apps/v1/job/${param0} */
+export async function jobPatch(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.jobPatchParams,
+  body: API.Job,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Job>(`/api/apps/v1/job/${param0}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/merge-patch+json',
+    },
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Update job resource to state PUT /api/apps/v1/job/${param0}/state */
 export async function jobUpdateState(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

@@ -251,7 +251,7 @@ const ConnectionList: React.FC = () => {
         request={async () => {
           const msg = await connectionList();
           return {
-            data: msg.Items,
+            data: msg.items,
             success: true,
           };
         }}
