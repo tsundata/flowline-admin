@@ -1,4 +1,5 @@
 import EventList from '@/components/Events';
+import JobList from '@/components/Jobs';
 import {
   workflowCreate,
   workflowDelete,
@@ -106,12 +107,17 @@ const WorkflowList: React.FC = () => {
   const [selectedRowsState, setSelectedRows] = useState<API.Workflow[]>([]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isJobsModalVisible, setIsJobsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
+  };
+  const showJobsModal = () => {
+    setIsJobsModalVisible(true);
   };
   const handleClose = () => {
     setCurrentRow(undefined);
     setIsModalVisible(false);
+    setIsJobsModalVisible(false);
   };
 
   const navigate = useNavigate();
@@ -293,13 +299,22 @@ const WorkflowList: React.FC = () => {
           <FormattedMessage id="pages.workflowList.dag" defaultMessage="DAG" />
         </a>,
         <a
-          key="config"
+          key="events"
           onClick={() => {
             setCurrentRow(record);
             showModal();
           }}
         >
           <FormattedMessage id="pages.common.events" defaultMessage="Events" />
+        </a>,
+        <a
+          key="jobs"
+          onClick={() => {
+            setCurrentRow(record);
+            showJobsModal();
+          }}
+        >
+          <FormattedMessage id="pages.common.jobs" defaultMessage="Jobs" />
         </a>,
       ],
     },
@@ -461,6 +476,15 @@ const WorkflowList: React.FC = () => {
         onCancel={handleClose}
       >
         {currentRow?.uid && <EventList uid={currentRow?.uid} />}
+      </Modal>
+      <Modal
+        title={<FormattedMessage id="pages.common.jobs" defaultMessage="Jobs" />}
+        width={1500}
+        visible={isJobsModalVisible}
+        onOk={handleClose}
+        onCancel={handleClose}
+      >
+        {currentRow?.uid && <JobList uid={currentRow?.uid} />}
       </Modal>
     </PageContainer>
   );

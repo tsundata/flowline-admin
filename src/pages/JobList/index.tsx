@@ -80,7 +80,7 @@ const JobList: React.FC = () => {
       width: 100,
       render: (_, record) => [
         <a
-          key="config"
+          key="events"
           onClick={() => {
             setCurrentRow(record);
             showModal();

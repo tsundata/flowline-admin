@@ -72,6 +72,7 @@ export default {
   'pages.common.state': '状态',
   'pages.common.creationTimestamp': '创建时间',
   'pages.common.events': '事件',
+  'pages.common.jobs': '任务',
 
   'pages.workflowList.form.newWorkflow': '新建工作流',
   'pages.workflowList.form.name': '工作流名称',
