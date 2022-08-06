@@ -80,6 +80,20 @@ export async function userPatch(
   });
 }
 
+/** Get user resource to dashboard subresource GET /api/apps/v1/user/${param0}/dashboard */
+export async function userGetDashboard(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.userGetDashboardParams,
+  options?: { [key: string]: any },
+) {
+  const { uid: param0, ...queryParams } = params;
+  return request<API.Dashboard>(`/api/apps/v1/user/${param0}/dashboard`, {
+    method: 'GET',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
 /** Delete user resource to session subresource DELETE /api/apps/v1/user/${param0}/session */
 export async function userDeleteSession(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

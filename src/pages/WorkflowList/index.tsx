@@ -1,5 +1,4 @@
 import EventList from '@/components/Events';
-import JobList from '@/components/Jobs';
 import {
   workflowCreate,
   workflowDelete,
@@ -20,6 +19,7 @@ import {
 import { FormattedMessage, useIntl, useNavigate } from '@umijs/max';
 import { Button, Drawer, Input, message, Modal, Tag } from 'antd';
 import React, { useRef, useState } from 'react';
+import JobList from './components/JobsList';
 import UpdateForm from './components/UpdateForm';
 
 /**

@@ -176,6 +176,19 @@ declare namespace API {
     uid: string;
   };
 
+  type Dashboard = {
+    codeAmount: number;
+    data?: DashboardData[];
+    variableAmount: number;
+    workerAmount: number;
+    workflowAmount: number;
+  };
+
+  type DashboardData = {
+    date: string;
+    schedule: number;
+  };
+
   type Edge = connector;
 
   type Event = {
@@ -601,6 +614,11 @@ declare namespace API {
   };
 
   type userDeleteSessionParams = {
+    /** uid of the resource */
+    uid: string;
+  };
+
+  type userGetDashboardParams = {
     /** uid of the resource */
     uid: string;
   };
