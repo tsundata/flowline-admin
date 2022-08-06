@@ -1,3 +1,4 @@
+import EventList from '@/components/Events';
 import {
   workflowCreate,
   workflowDelete,
@@ -103,6 +104,15 @@ const WorkflowList: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<API.Workflow>();
   const [selectedRowsState, setSelectedRows] = useState<API.Workflow[]>([]);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleClose = () => {
+    setCurrentRow(undefined);
+    setIsModalVisible(false);
+  };
 
   const navigate = useNavigate();
 
@@ -282,6 +292,15 @@ const WorkflowList: React.FC = () => {
         >
           <FormattedMessage id="pages.workflowList.dag" defaultMessage="DAG" />
         </a>,
+        <a
+          key="config"
+          onClick={() => {
+            setCurrentRow(record);
+            showModal();
+          }}
+        >
+          <FormattedMessage id="pages.common.events" defaultMessage="Events" />
+        </a>,
       ],
     },
   ];
@@ -434,6 +453,15 @@ const WorkflowList: React.FC = () => {
           />
         )}
       </Drawer>
+      <Modal
+        title={<FormattedMessage id="pages.common.events" defaultMessage="Events" />}
+        width={1500}
+        visible={isModalVisible}
+        onOk={handleClose}
+        onCancel={handleClose}
+      >
+        {currentRow?.uid && <EventList uid={currentRow?.uid} />}
+      </Modal>
     </PageContainer>
   );
 };
