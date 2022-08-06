@@ -86,7 +86,7 @@
       {
         path: '/logs/jobs',
         name: 'jobs',
-        component: './TableList',
+        component: './JobList',
       },
       {
         path: '/logs/audit',

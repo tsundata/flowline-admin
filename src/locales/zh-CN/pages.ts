@@ -205,4 +205,8 @@ export default {
   'pages.stageList.uids': 'UIDs',
   'pages.stageList.code': '代码',
   'pages.stageList.dependNodeId': '依赖关系',
+
+  'pages.jobList.name': '名称',
+  'pages.jobList.workflowUID': 'Workflow UID',
+  'pages.jobList.completionTimestamp': '完成时间',
 };
