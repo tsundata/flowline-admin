@@ -209,4 +209,8 @@ export default {
   'pages.jobList.name': '名称',
   'pages.jobList.workflowUID': 'Workflow UID',
   'pages.jobList.completionTimestamp': '完成时间',
+
+  'pages.workerList.name': '名称',
+  'pages.workerList.hostname': '主机名',
+  'pages.workerList.runtimes': '运行时',
 };

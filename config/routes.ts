@@ -96,7 +96,7 @@
       {
         path: '/logs/workers',
         name: 'workers',
-        component: './TableList',
+        component: './WorkerList',
       },
       {
         component: './404',
