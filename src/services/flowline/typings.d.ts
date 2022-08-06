@@ -227,6 +227,11 @@ declare namespace API {
     resourceVersion?: string;
   };
 
+  type eventListKindParams = {
+    /** Involved Object UID */
+    uid: string;
+  };
+
   type eventPatchParams = {
     /** uid of the resource */
     uid: string;

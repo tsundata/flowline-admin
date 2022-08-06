@@ -69,6 +69,9 @@ export default {
   'pages.common.batchDeletion': '批量删除',
   'pages.common.batchApproval': '批量审批',
   'pages.common.titleOption': '操作',
+  'pages.common.state': '状态',
+  'pages.common.creationTimestamp': '创建时间',
+  'pages.common.events': '事件',
 
   'pages.workflowList.form.newWorkflow': '新建工作流',
   'pages.workflowList.form.name': '工作流名称',
@@ -187,4 +190,19 @@ export default {
   'pages.userList.form.avatar': '头像链接',
   'pages.userList.form.avatar.placeholder': '请输入头像链接',
   'pages.userList.form.avatar.rule': '请输入头像链接！',
+
+  'pages.eventList.name': '名称',
+  'pages.eventList.reason': '原因',
+  'pages.eventList.message': '消息',
+  'pages.eventList.note': '注释',
+  'pages.eventList.count': '次数',
+  'pages.eventList.source': '来源',
+  'pages.eventList.firstTimestamp': '首次时间',
+  'pages.eventList.lastTimestamp': '最后时间',
+  'pages.eventList.eventTime': '创建时间',
+
+  'pages.stageList.name': '名称',
+  'pages.stageList.uids': 'UIDs',
+  'pages.stageList.code': '代码',
+  'pages.stageList.dependNodeId': '依赖关系',
 };

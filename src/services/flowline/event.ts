@@ -102,6 +102,21 @@ export async function eventList(options?: { [key: string]: any }) {
   });
 }
 
+/** List event resource to kind subresource GET /api/apps/v1/event/list/kind */
+export async function eventListKind(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.eventListKindParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.EventList>('/api/apps/v1/event/list/kind', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
 /** Watch List event resource GET /api/apps/v1/event/watch */
 export async function eventWatchList(options?: { [key: string]: any }) {
   return request<any>('/api/apps/v1/event/watch', {

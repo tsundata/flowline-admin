@@ -81,7 +81,7 @@
       {
         path: '/logs/runs',
         name: 'runs',
-        component: './TableList',
+        component: './StageList',
       },
       {
         path: '/logs/jobs',
