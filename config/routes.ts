@@ -91,7 +91,7 @@
       {
         path: '/logs/audit',
         name: 'audit',
-        component: './TableList',
+        component: './EventList',
       },
       {
         path: '/logs/workers',
