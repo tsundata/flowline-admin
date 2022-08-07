@@ -53,8 +53,8 @@ export default defineConfig({
       requestLibPath: "import { request } from '@umijs/max'",
       // 或者使用在线的版本
       // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
-      // schemaPath: join(__dirname, 'apidocs.json'),
-      schemaPath: 'http://127.0.0.1:5000/apidocs.json',
+      // schemaPath: join(__dirname, 'swagger.json'),
+      schemaPath: 'http://127.0.0.1:5000/swagger.json',
       mock: true,
       projectName: 'flowline',
     },
