@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkflowline_admin=self.webpackChunkflowline_admin||[]).push([[821],{36821:function(f,t,n){n.r(t),n.d(t,{default:function(){return l}});var s=n(67294),u=n(95952),E=n(85893);function l(){return(0,E.jsx)(u.Outlet,{})}}}]);
