@@ -23,10 +23,7 @@ function createInputPort(portMeta: any) {
   };
 }
 
-export const useGraphHookConfig = createHookConfig<IProps>((config, proxy) => {
-  // 获取 Props
-  const props = proxy.getValue();
-  console.log('get main props', props);
+export const useGraphHookConfig = createHookConfig<IProps>((config) => {
   config.setRegisterHook((hooks) => {
     const disposableList = [
       // 注册增加 react Node Render

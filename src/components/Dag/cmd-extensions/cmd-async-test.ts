@@ -6,6 +6,7 @@ import { CustomCommands } from './constants';
 type ICommand = ICommandHandler<NsTestCmd.IArgs, NsTestCmd.IResult, NsTestCmd.ICmdHooks>;
 
 const { inject, injectable } = ManaSyringe;
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace NsTestCmd {
   /** Command: 用于注册named factory */
   export const command = CustomCommands.TEST_ASYNC_CMD;
@@ -43,7 +44,7 @@ export class TestAsyncCommand implements ICommand {
       async (handlerArgs) => {
         // @ts-ignore
         const { commandService, modelService, graphMeta, test } = handlerArgs;
-        console.log(graph, commandService, modelService, graphMeta, test);
+        console.debug(graph, commandService, modelService, graphMeta, test);
         return { test: true };
       },
       runtimeHook,

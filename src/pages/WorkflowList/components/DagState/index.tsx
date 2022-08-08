@@ -4,7 +4,6 @@ import type { IApplication, IAppLoad } from '@antv/xflow';
 import { XFlow, XFlowCanvas } from '@antv/xflow';
 /** 交互组件 */
 import {
-  CanvasNodePortTooltip,
   CanvasScaleToolbar,
   /** Graph的扩展交互组件 */
   CanvasSnapline,
@@ -29,7 +28,7 @@ import '@/components/Dag/index.less';
 import '@antv/xflow/dist/index.css';
 
 export interface IProps {
-  meta: { flowId: any };
+  meta: { flowId: any; jobUID: any };
 }
 
 export const DagState: React.FC<IProps> = (props) => {
@@ -57,11 +56,12 @@ export const DagState: React.FC<IProps> = (props) => {
 
   /** 父组件meta属性更新时,执行initGraphCmds */
   React.useEffect(() => {
+    console.log(meta.jobUID);
     if (cache!.app) {
       initGraphCmds(cache!.app);
     }
     // @ts-ignore
-  }, [cache, cache.app, meta]);
+  }, [cache, cache.app, meta.jobUID]);
 
   return (
     <XFlow
@@ -70,7 +70,7 @@ export const DagState: React.FC<IProps> = (props) => {
       modelServiceConfig={modelServiceConfig}
       commandConfig={cmdConfig}
       onLoad={onLoad}
-      meta={{ flowId: props.meta.flowId }}
+      meta={{ flowId: props.meta.flowId, jobUID: props.meta.jobUID }}
     >
       <DagGraphExtension />
       <CanvasToolbar
@@ -82,7 +82,6 @@ export const DagState: React.FC<IProps> = (props) => {
       <XFlowCanvas position={{ top: 40, left: 0, right: 290, bottom: 0 }}>
         <CanvasScaleToolbar position={{ top: 12, right: 12 }} />
         <CanvasSnapline color="#faad14" />
-        <CanvasNodePortTooltip />
       </XFlowCanvas>
       <JsonSchemaForm
         controlMapService={controlMapService}

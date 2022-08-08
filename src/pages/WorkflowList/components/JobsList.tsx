@@ -13,7 +13,7 @@ interface IProps {
 
 const JobList: React.FC<IProps> = (props) => {
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.Stage>();
+  const [currentRow, setCurrentRow] = useState<API.Job>();
 
   React.useEffect(() => {
     actionRef.current?.reload();
@@ -122,7 +122,9 @@ const JobList: React.FC<IProps> = (props) => {
         onOk={handleClose}
         onCancel={handleClose}
       >
-        {currentRow?.workflowUID && <DagState meta={{ flowId: currentRow?.workflowUID }} />}
+        {currentRow?.workflowUID && (
+          <DagState meta={{ flowId: currentRow?.workflowUID, jobUID: currentRow?.uid }} />
+        )}
       </Modal>
     </div>
   );

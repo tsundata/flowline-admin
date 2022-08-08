@@ -89,7 +89,9 @@ export async function workflowGetDag(
   const { uid: param0, ...queryParams } = params;
   return request<API.Dag>(`/api/apps/v1/workflow/${param0}/dag`, {
     method: 'GET',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }

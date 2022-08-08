@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { DND_RENDER_ID, NODE_HEIGHT, NODE_WIDTH } from '@/components/Dag/constant';
 import { workflowGetDag } from '@/services/flowline/workflow';
-import type { NsGraphCmd } from '@antv/xflow';
-import { NsGraph, NsGraphStatusCommand } from '@antv/xflow';
+import type { NsGraph, NsGraphCmd } from '@antv/xflow';
+import { NsGraphStatusCommand } from '@antv/xflow';
 /** 后端接口调用 */
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DagApi {
   export const NODE_COMMON_PROPS = {
     renderKey: DND_RENDER_ID,
@@ -13,13 +14,13 @@ export namespace DagApi {
 
   /** 查图的meta元信息 */
   export const queryGraphMeta: NsGraphCmd.GraphMeta.IArgs['graphMetaService'] = async (args) => {
-    console.log('queryMeta', args);
     // @ts-ignore
     return { ...args, flowId: args.meta.flowId };
   };
   /** 加载图数据的api */
   export const loadGraphData = async (meta: NsGraph.IGraphMeta) => {
-    return await workflowGetDag({ uid: meta.flowId });
+    console.log(meta.meta.jobUID);
+    return await workflowGetDag({ uid: meta.flowId, jobUID: meta.meta.jobUID });
   };
 
   let runningNodeId = 0;

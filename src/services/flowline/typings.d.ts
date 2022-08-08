@@ -346,6 +346,7 @@ declare namespace API {
     parentId?: string;
     ports?: ports[];
     renderKey?: string;
+    status?: string;
     variables: string[];
     width?: number;
     x?: number;
@@ -805,6 +806,8 @@ declare namespace API {
   type workflowGetDagParams = {
     /** uid of the resource */
     uid: string;
+    /** Job UID for query status */
+    jobUID?: string;
   };
 
   type workflowGetParams = {

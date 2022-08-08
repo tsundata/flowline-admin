@@ -76,8 +76,6 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
     };
   }
 
-  console.log('node data', args.targetData);
-
   const codes = await codeList();
   const variables = await variableList();
   const connections = await connectionList();
@@ -92,7 +90,6 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
   // @ts-ignore
   const variableOptions = [];
   if (variables != null && variables.items != null) {
-    console.log(variables);
     variables.items.forEach((i) => {
       variableOptions.push({ label: i.name, value: i.uid });
     });
@@ -169,8 +166,8 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
   return nodeSchema;
 };
 
-export const formValueUpdateService: NsJsonSchemaForm.IFormValueUpdateService = async (args) => {
-  console.log('formValueUpdateService', args);
+export const formValueUpdateService: NsJsonSchemaForm.IFormValueUpdateService = async () => {
+  // console.log('formValueUpdateService', args);
 };
 
 export { controlMapService };
