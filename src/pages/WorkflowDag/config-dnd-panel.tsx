@@ -14,9 +14,14 @@ export const onNodeDrop: NsNodeCollapsePanel.IOnNodeDrop = async (node, commands
 
 const NodeDescription = (props: { name: string }) => {
   return (
-    <Card size="small" title="计算节点介绍" style={{ width: '200px' }} bordered={false}>
-      欢迎使用：{props.name}
-      这里可以根据设置的代码进行运算
+    <Card
+      size="small"
+      title="Introduction to Compute Nodes"
+      style={{ width: '200px' }}
+      bordered={false}
+    >
+      Welcome：{props.name}
+      Here you can perform operations according to the set code
     </Card>
   );
 };
@@ -25,15 +30,15 @@ export const nodeDataService: NsNodeCollapsePanel.INodeDataService = async (meta
   console.log(meta, modelService);
   return [
     {
-      id: '数据计算',
-      header: '数据计算',
+      id: 'data calculation',
+      header: 'Data calculation',
       children: [
         {
           id: '2',
-          label: '计算节点',
+          label: 'Compute Node',
           parentId: '1',
           renderKey: DND_RENDER_ID,
-          popoverContent: <NodeDescription name="计算节点" />,
+          popoverContent: <NodeDescription name="Compute Node" />,
         },
       ],
     },

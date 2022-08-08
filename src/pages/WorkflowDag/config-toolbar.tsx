@@ -73,7 +73,7 @@ export namespace NSToolbarConfig {
     toolbarGroup1.push({
       id: XFlowGraphCommands.SAVE_GRAPH_DATA.id + 'check',
       iconName: 'GatewayOutlined',
-      tooltip: '语法检查',
+      tooltip: 'Grammar check',
       onClick: async ({ commandService }) => {
         commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
           XFlowGraphCommands.SAVE_GRAPH_DATA.id,
@@ -86,7 +86,7 @@ export namespace NSToolbarConfig {
     toolbarGroup1.push({
       id: XFlowGraphCommands.SAVE_GRAPH_DATA.id,
       iconName: 'SaveOutlined',
-      tooltip: '保存数据',
+      tooltip: 'Save data',
       onClick: async ({ commandService }) => {
         commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
           XFlowGraphCommands.SAVE_GRAPH_DATA.id,
@@ -97,7 +97,7 @@ export namespace NSToolbarConfig {
       render: (props) => {
         return (
           <Popconfirm
-            title="确定保存数据？"
+            title="Confirm to save data？"
             onConfirm={() => {
               props.onClick();
             }}
@@ -110,7 +110,7 @@ export namespace NSToolbarConfig {
     /** 开始执行 */
     toolbarGroup2.push({
       id: XFlowDagCommands.QUERY_GRAPH_STATUS.id + 'play',
-      tooltip: '开始执行',
+      tooltip: 'Start execution',
       iconName: 'PlaySquareOutlined',
       isEnabled: !state.isProcessing,
       onClick: async ({ commandService }) => {
@@ -126,7 +126,7 @@ export namespace NSToolbarConfig {
     /** 停止执行 */
     toolbarGroup2.push({
       id: XFlowDagCommands.QUERY_GRAPH_STATUS.id + 'stop',
-      tooltip: '停止执行',
+      tooltip: 'Stop execution',
       iconName: 'StopOutlined',
       isEnabled: state.isProcessing,
       onClick: async ({ commandService }) => {
@@ -141,7 +141,7 @@ export namespace NSToolbarConfig {
       render: (props) => {
         return (
           <Popconfirm
-            title="确定停止执行？"
+            title="Confirm stop execution？"
             onConfirm={() => {
               props.onClick();
             }}

@@ -22,7 +22,7 @@ export namespace NsMenuItemConfig {
 
   export const DELETE_EDGE: IMenuOptions = {
     id: XFlowEdgeCommands.DEL_EDGE.id,
-    label: '删除边',
+    label: 'Delete edge',
     iconName: 'DeleteOutlined',
     onClick: async ({ target, commandService }) => {
       commandService.executeCommand<NsEdgeCmd.DelEdge.IArgs>(XFlowEdgeCommands.DEL_EDGE.id, {
@@ -33,14 +33,14 @@ export namespace NsMenuItemConfig {
 
   export const DELETE_NODE: IMenuOptions = {
     id: XFlowNodeCommands.DEL_NODE.id,
-    label: '删除节点',
+    label: 'Delete node',
     iconName: 'DeleteOutlined',
     onClick: async ({ target, commandService }) => {
       Modal.confirm({
         title: 'Confirm delete node?',
         content: `${target.data?.label} [${target.data?.id}]`,
-        okText: '确认',
-        cancelText: '取消',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: () => {
           commandService.executeCommand<NsNodeCmd.DelNode.IArgs>(XFlowNodeCommands.DEL_NODE.id, {
             // @ts-ignore
@@ -53,14 +53,14 @@ export namespace NsMenuItemConfig {
 
   export const EMPTY_MENU: IMenuOptions = {
     id: 'EMPTY_MENU_ITEM',
-    label: '暂无可用',
+    label: 'Not available yet',
     isEnabled: false,
     iconName: 'DeleteOutlined',
   };
 
   export const RENAME_NODE: IMenuOptions = {
     id: CustomCommands.SHOW_RENAME_MODAL.id,
-    label: '重命名',
+    label: 'Rename',
     isVisible: true,
     iconName: 'EditOutlined',
     onClick: async ({ target, commandService }) => {

@@ -33,6 +33,7 @@ import * as dndPanelConfig from './config-dnd-panel';
 /** 配置JsonConfigForm */
 import { controlMapService, formSchemaService, formValueUpdateService } from './config-form';
 
+import { useIntl } from '@@/exports';
 import { PageContainer } from '@ant-design/pro-components';
 import '@antv/xflow/dist/index.css';
 import { useNavigate, useParams } from '@umijs/max';
@@ -76,7 +77,13 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
       initGraphCmds(cache!.app);
     }
     // @ts-ignore
-  }, [cache.app, meta]);
+  }, [cache, cache.app, meta]);
+
+  /**
+   * @en-US International configuration
+   * @zh-CN 国际化配置
+   * */
+  const intl = useIntl();
 
   return (
     <PageContainer
@@ -85,17 +92,17 @@ export const WorkflowDag: React.FC<IProps> = (props) => {
           routes: [
             {
               path: '',
-              breadcrumbName: '工作流',
+              breadcrumbName: intl.formatMessage({ id: 'menu.workflows' }),
             },
             {
               path: '',
-              breadcrumbName: 'DAG',
+              breadcrumbName: intl.formatMessage({ id: 'menu.dag' }),
             },
           ],
         },
         extra: [
           <Button key="back" onClick={() => navigate('/workflows')}>
-            返回
+            {intl.formatMessage({ id: 'pages.common.back' })}
           </Button>,
         ],
       }}

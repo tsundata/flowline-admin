@@ -75,6 +75,7 @@ export default {
   'pages.common.creationTimestamp': 'Created time',
   'pages.common.events': 'Events',
   'pages.common.jobs': 'Jobs',
+  'pages.common.back': 'Back',
 
   'pages.dashboard.count.workflow': 'Number of workflows',
   'pages.dashboard.count.workflow.tip': 'Count the number of all workflows',

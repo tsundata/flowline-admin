@@ -73,6 +73,7 @@ export default {
   'pages.common.creationTimestamp': '创建时间',
   'pages.common.events': '事件',
   'pages.common.jobs': '任务',
+  'pages.common.back': '返回',
 
   'pages.dashboard.count.workflow': '工作流数量',
   'pages.dashboard.count.workflow.tip': '统计全部工作流数量',

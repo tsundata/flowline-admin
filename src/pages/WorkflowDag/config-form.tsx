@@ -25,7 +25,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
               controls: [
                 {
                   name: 'workflowUID',
-                  label: 'WorkflowUID',
+                  label: 'Workflow UID',
                   shape: 'Input',
                   disabled: true,
                   required: true,
@@ -39,7 +39,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
                   originData: {}, // 原始数据
                 },
                 {
-                  label: '图数据',
+                  label: 'Graph data',
                   name: 'graphJSON',
                   /** 使用自定义shape */
                   shape: ControlShapeEnum.EDITOR,
@@ -54,7 +54,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
                   originData: {}, // 原始数据
                 },
                 {
-                  label: '查看日志链接',
+                  label: 'View log link',
                   name: 'log',
                   /** 使用自定义shape */
                   shape: ControlShapeEnum.LINKSHAPE,
@@ -114,7 +114,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
             name: 'nodeName',
             controls: [
               {
-                label: '代码',
+                label: 'Code',
                 name: 'code',
                 /** 使用自定义shape */
                 shape: ControlShapeEnum.SELECTOR,
@@ -130,7 +130,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
                 originData: {}, // 原始数据
               },
               {
-                label: '变量',
+                label: 'Variables',
                 name: 'variables',
                 shape: ControlShapeEnum.SELECTOR,
                 disabled: false,
@@ -145,7 +145,7 @@ export const formSchemaService: NsJsonSchemaForm.IFormSchemaService = async (arg
                 originData: {}, // 原始数据
               },
               {
-                label: '连接',
+                label: 'Connections',
                 name: 'connections',
                 shape: ControlShapeEnum.SELECTOR,
                 disabled: false,
