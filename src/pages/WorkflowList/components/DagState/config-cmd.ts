@@ -1,6 +1,6 @@
+import { commandContributions } from '@/components/Dag/cmd-extensions';
 import type { IApplication, IGraphPipelineCommand, NsGraphCmd } from '@antv/xflow';
 import { createCmdConfig, DisposableCollection, XFlowGraphCommands } from '@antv/xflow';
-import { commandContributions } from './cmd-extensions';
 import { DagApi } from './service';
 
 export const useCmdConfig = createCmdConfig((config) => {

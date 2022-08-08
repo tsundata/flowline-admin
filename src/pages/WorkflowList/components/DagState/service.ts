@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { NsDeployDagCmd } from '@/components/Dag/cmd-extensions/cmd-deploy';
+import type { NsRenameNodeCmd } from '@/components/Dag/cmd-extensions/cmd-rename-node-modal';
 import { DND_RENDER_ID, NODE_HEIGHT, NODE_WIDTH } from '@/components/Dag/constant';
 import { workflowGetDag, workflowUpdateDag } from '@/services/flowline/workflow';
 import type { NsEdgeCmd, NsGraphCmd, NsNodeCmd } from '@antv/xflow';
 import { NsGraph, NsGraphStatusCommand, uuidv4 } from '@antv/xflow';
-import type { NsDeployDagCmd } from './cmd-extensions/cmd-deploy';
-import type { NsRenameNodeCmd } from './cmd-extensions/cmd-rename-node-modal';
 /** 后端接口调用 */
 export namespace DagApi {
   export const NODE_COMMON_PROPS = {

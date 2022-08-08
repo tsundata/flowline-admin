@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { NsRenameNodeCmd } from '@/components/Dag/cmd-extensions/cmd-rename-node-modal';
+import { CustomCommands } from '@/components/Dag/cmd-extensions/constants';
 import { DeleteOutlined, EditOutlined, StopOutlined } from '@ant-design/icons';
 import type { IMenuOptions, NsEdgeCmd, NsGraph, NsNodeCmd } from '@antv/xflow';
 import {
@@ -9,8 +11,6 @@ import {
   XFlowNodeCommands,
 } from '@antv/xflow';
 import { Modal } from 'antd';
-import type { NsRenameNodeCmd } from './cmd-extensions/cmd-rename-node-modal';
-import { CustomCommands } from './cmd-extensions/constants';
 import { DagApi } from './service';
 
 /** menuitem 配置 */
