@@ -40,10 +40,6 @@ const EventList: React.FC<IProps> = (props) => {
       dataIndex: 'message',
     },
     {
-      title: <FormattedMessage id="pages.eventList.note" defaultMessage="Note" />,
-      dataIndex: 'note',
-    },
-    {
       title: <FormattedMessage id="pages.eventList.count" defaultMessage="Count" />,
       dataIndex: 'count',
     },

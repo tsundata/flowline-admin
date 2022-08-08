@@ -1,10 +1,6 @@
 export default {
-  'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
   'menu.home': 'Home',
-  'menu.admin': 'Admin',
-  'menu.admin.variables': 'Variables',
-  'menu.admin.connections': 'Connections',
   'menu.login': 'Login',
   'menu.register': 'Register',
   'menu.register-result': 'Register Result',
@@ -50,7 +46,10 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
+
+  'menu.welcome': 'Welcome',
   'menu.workflows': 'Workflows',
+  'menu.dag': 'DAG',
   'menu.security': 'Security',
   'menu.security.users': 'List users',
   'menu.security.roles': 'List roles',
@@ -63,4 +62,8 @@ export default {
   'menu.logs.jobs': 'Jobs',
   'menu.logs.audit': 'Audit log',
   'menu.logs.workers': 'Workers',
+  'menu.admin': 'Admin',
+  'menu.admin.code': 'Codes',
+  'menu.admin.variables': 'Variables',
+  'menu.admin.connections': 'Connections',
 };
