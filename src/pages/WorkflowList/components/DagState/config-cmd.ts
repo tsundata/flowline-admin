@@ -15,45 +15,6 @@ export const useCmdConfig = createCmdConfig((config) => {
           args.graphMetaService = DagApi.queryGraphMeta;
         },
       }),
-      hooks.saveGraphData.registerHook({
-        name: 'save graph data',
-        handler: async (args) => {
-          if (!args.saveGraphDataService) {
-            args.saveGraphDataService = DagApi.saveGraphData;
-          }
-        },
-      }),
-      hooks.addNode.registerHook({
-        name: 'get node config from backend api',
-        handler: async (args) => {
-          args.createNodeService = DagApi.addNode;
-        },
-      }),
-      hooks.delNode.registerHook({
-        name: 'get edge config from backend api',
-        handler: async (args) => {
-          args.deleteNodeService = DagApi.delNode;
-        },
-      }),
-      hooks.addEdge.registerHook({
-        name: 'get edge config from backend api',
-        handler: async (args) => {
-          args.createEdgeService = DagApi.addEdge;
-          args.edgeConfig = {
-            ...args.edgeConfig,
-            connector: { name: 'rounded' },
-            router: {
-              name: 'manhattan',
-            },
-          };
-        },
-      }),
-      hooks.delEdge.registerHook({
-        name: 'get edge config from backend api',
-        handler: async (args) => {
-          args.deleteEdgeService = DagApi.delEdge;
-        },
-      }),
     ];
     const toDispose = new DisposableCollection();
     toDispose.pushAll(list);
