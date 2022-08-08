@@ -112,6 +112,7 @@ export default {
   'pages.workflowList.trigger.manual': '手动调度',
   'pages.workflowList.trigger.cron': '定时调度',
   'pages.workflowList.scheduleNow': '立即调度',
+  'pages.workflowList.confirmSchedule': '确定是否立即调度？',
 
   'pages.codeList.form.newCode': '新建代码',
   'pages.codeList.form.codeConfig': '代码编辑',

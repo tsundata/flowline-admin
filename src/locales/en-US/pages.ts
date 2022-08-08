@@ -114,6 +114,7 @@ export default {
   'pages.workflowList.trigger.manual': 'Manual scheduling',
   'pages.workflowList.trigger.cron': 'Cron scheduling',
   'pages.workflowList.scheduleNow': 'Schedule now',
+  'pages.workflowList.confirmSchedule': 'Confirm schedule now?',
 
   'pages.codeList.form.newCode': 'New code',
   'pages.codeList.form.codeConfig': 'code editing',

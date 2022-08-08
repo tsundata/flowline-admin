@@ -271,7 +271,10 @@ const WorkflowList: React.FC = () => {
           key="run"
           onClick={() => {
             Modal.confirm({
-              title: 'Confirm schedule now?',
+              title: intl.formatMessage({
+                id: 'pages.workflowList.confirmSchedule',
+                defaultMessage: 'Confirm schedule now?',
+              }),
               onOk: () => {
                 console.log('schedule now', record);
                 message.info('已开始调度');
