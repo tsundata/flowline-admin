@@ -1,4 +1,5 @@
 import { userGetDashboard } from '@/services/flowline/user';
+import { useIntl } from '@@/exports';
 import type { LineConfig } from '@ant-design/plots';
 import { Line } from '@ant-design/plots';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
@@ -19,6 +20,12 @@ const Dashboard: React.FC = () => {
     },
     smooth: true,
   });
+
+  /**
+   * @en-US International configuration
+   * @zh-CN 国际化配置
+   * */
+  const intl = useIntl();
 
   React.useEffect(() => {
     const uid = initialState!.currentUser!.uid!;
@@ -42,9 +49,9 @@ const Dashboard: React.FC = () => {
       <Row style={{ marginBottom: 20 }}>
         <Col span={6}>
           <ProCard
-            title="工作流数量"
-            extra="全部"
-            tooltip="统计全部工作流数量"
+            title={intl.formatMessage({ id: 'pages.dashboard.count.workflow' })}
+            extra={intl.formatMessage({ id: 'pages.dashboard.all' })}
+            tooltip={intl.formatMessage({ id: 'pages.dashboard.count.workflow.tip' })}
             style={{ width: '95%' }}
           >
             <div className={styles.number}>{userDashBoardData?.workflowAmount}</div>
@@ -52,9 +59,9 @@ const Dashboard: React.FC = () => {
         </Col>
         <Col span={6}>
           <ProCard
-            title="代码数量"
-            extra="全部"
-            tooltip="统计全部代码数量"
+            title={intl.formatMessage({ id: 'pages.dashboard.count.code' })}
+            extra={intl.formatMessage({ id: 'pages.dashboard.all' })}
+            tooltip={intl.formatMessage({ id: 'pages.dashboard.count.code.tip' })}
             style={{ width: '95%' }}
           >
             <div className={styles.number}>{userDashBoardData?.codeAmount}</div>
@@ -62,9 +69,9 @@ const Dashboard: React.FC = () => {
         </Col>
         <Col span={6}>
           <ProCard
-            title="变量数量"
-            extra="全部"
-            tooltip="统计全部变量数量"
+            title={intl.formatMessage({ id: 'pages.dashboard.count.variable' })}
+            extra={intl.formatMessage({ id: 'pages.dashboard.all' })}
+            tooltip={intl.formatMessage({ id: 'pages.dashboard.count.variable.tip' })}
             style={{ width: '95%' }}
           >
             <div className={styles.number}>{userDashBoardData?.variableAmount}</div>
@@ -72,9 +79,9 @@ const Dashboard: React.FC = () => {
         </Col>
         <Col span={6}>
           <ProCard
-            title="节点数量"
-            extra="全部"
-            tooltip="统计全部节点数量"
+            title={intl.formatMessage({ id: 'pages.dashboard.count.worker' })}
+            extra={intl.formatMessage({ id: 'pages.dashboard.all' })}
+            tooltip={intl.formatMessage({ id: 'pages.dashboard.count.worker.tip' })}
             style={{ width: '95%' }}
           >
             <div className={styles.number}>{userDashBoardData?.workerAmount}</div>
@@ -82,7 +89,9 @@ const Dashboard: React.FC = () => {
         </Col>
       </Row>
 
-      <h2 className={styles.lineTitle}>调度次数</h2>
+      <h2 className={styles.lineTitle}>
+        {intl.formatMessage({ id: 'pages.dashboard.scheduleNumber' })}
+      </h2>
       <Line {...config} />
     </PageContainer>
   );

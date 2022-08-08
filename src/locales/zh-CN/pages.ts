@@ -74,6 +74,17 @@ export default {
   'pages.common.events': '事件',
   'pages.common.jobs': '任务',
 
+  'pages.dashboard.count.workflow': '工作流数量',
+  'pages.dashboard.count.workflow.tip': '统计全部工作流数量',
+  'pages.dashboard.count.code': '代码数量',
+  'pages.dashboard.count.code.tip': '统计全部代码数量',
+  'pages.dashboard.count.variable': '变量数量',
+  'pages.dashboard.count.variable.tip': '统计全部变量数量',
+  'pages.dashboard.count.worker': '节点数量',
+  'pages.dashboard.count.worker.tip': '统计全部节点数量',
+  'pages.dashboard.all': '全部',
+  'pages.dashboard.scheduleNumber': '调度次数',
+
   'pages.workflowList.form.newWorkflow': '新建工作流',
   'pages.workflowList.form.name': '工作流名称',
   'pages.workflowList.form.describe': '工作流描述',

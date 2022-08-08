@@ -76,6 +76,17 @@ export default {
   'pages.common.events': 'Events',
   'pages.common.jobs': 'Jobs',
 
+  'pages.dashboard.count.workflow': 'Number of workflows',
+  'pages.dashboard.count.workflow.tip': 'Count the number of all workflows',
+  'pages.dashboard.count.code': 'Number of codes',
+  'pages.dashboard.count.code.tip': 'Count the number of all codes',
+  'pages.dashboard.count.variable': 'Number of variables',
+  'pages.dashboard.count.variable.tip': 'Count the number of all variables',
+  'pages.dashboard.count.worker': 'Number of workers',
+  'pages.dashboard.count.worker.tip': 'Count the number of all workers',
+  'pages.dashboard.all': 'All',
+  'pages.dashboard.scheduleNumber': 'Scheduling times',
+
   'pages.workflowList.form.newWorkflow': 'New workflow',
   'pages.workflowList.form.name': 'Name',
   'pages.workflowList.form.describe': 'Describe',
