@@ -1,7 +1,7 @@
-import { SelectorShape } from '@/pages/WorkflowDag/form-controls/custom-selector';
+import { EditorShape } from '@/components/Dag/form-controls/custom-editor';
+import { SelectorShape } from '@/components/Dag/form-controls/custom-selector';
+import { LinkShape } from '@/components/Dag/form-controls/link';
 import type { NsJsonSchemaForm } from '@antv/xflow';
-import { EditorShape } from './custom-editor';
-import { LinkShape } from './link';
 
 /** 自定义form控件 */
 export enum ControlShapeEnum {

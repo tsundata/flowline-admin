@@ -33,12 +33,12 @@ import * as dndPanelConfig from './config-dnd-panel';
 /** 配置JsonConfigForm */
 import { controlMapService, formSchemaService, formValueUpdateService } from './config-form';
 
+import '@/components/Dag/index.less';
 import { useIntl } from '@@/exports';
 import { PageContainer } from '@ant-design/pro-components';
 import '@antv/xflow/dist/index.css';
 import { useNavigate, useParams } from '@umijs/max';
 import { Button } from 'antd';
-import './index.less';
 
 export interface IProps {
   meta: { flowId: any };

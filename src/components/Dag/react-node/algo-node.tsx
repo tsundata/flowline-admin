@@ -1,3 +1,4 @@
+import '@/components/Dag/react-node/algo-node.less';
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -9,7 +10,6 @@ import {
 import type { NsGraph } from '@antv/xflow';
 import { NsGraphStatusCommand } from '@antv/xflow';
 import React from 'react';
-import './algo-node.less';
 
 const fontStyle = { fontSize: '16px', color: '#3057e3' };
 interface IProps {

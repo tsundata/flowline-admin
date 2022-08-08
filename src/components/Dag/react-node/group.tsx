@@ -1,7 +1,7 @@
+import '@/components/Dag/react-node/group.less';
 import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import type { NsGraph } from '@antv/xflow';
 import { useXFlowApp, XFlowGroupCommands } from '@antv/xflow';
-import './group.less';
 
 export const GroupNode: NsGraph.INodeRender = (props) => {
   const { cell } = props;

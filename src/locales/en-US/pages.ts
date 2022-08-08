@@ -116,6 +116,7 @@ export default {
   'pages.workflowList.trigger.cron': 'Cron scheduling',
   'pages.workflowList.scheduleNow': 'Schedule now',
   'pages.workflowList.confirmSchedule': 'Confirm schedule now?',
+  'pages.workflowList.dagState': 'Dag state',
 
   'pages.codeList.form.newCode': 'New code',
   'pages.codeList.form.codeConfig': 'code editing',
