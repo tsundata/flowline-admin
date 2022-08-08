@@ -128,8 +128,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           })}
           width="md"
           valueEnum={{
-            manual: '手动',
-            cron: '定时',
+            manual: intl.formatMessage({ id: 'pages.workflowList.trigger.manual' }),
+            cron: intl.formatMessage({ id: 'pages.workflowList.trigger.cron' }),
           }}
           rules={[
             {
