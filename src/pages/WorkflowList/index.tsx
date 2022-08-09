@@ -161,54 +161,10 @@ const WorkflowList: React.FC = () => {
       valueType: 'textarea',
     },
     {
-      title: (
-        <FormattedMessage
-          id="pages.workflowList.titleRunNo"
-          defaultMessage="Number of service calls"
-        />
-      ),
-      dataIndex: 'callNo',
-      hideInForm: true,
-    },
-    {
       title: <FormattedMessage id="pages.workflowList.titleActive" defaultMessage="Is active" />,
       dataIndex: 'active',
       hideInForm: true,
       renderText: (val: boolean) => (val ? <CheckOutlined /> : <CloseOutlined />),
-    },
-    {
-      title: <FormattedMessage id="pages.workflowList.titleState" defaultMessage="Status" />,
-      dataIndex: 'state',
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage id="pages.workflowList.nameStatus.default" defaultMessage="Create" />
-          ),
-          status: 'Default',
-        },
-        1: {
-          text: (
-            <FormattedMessage id="pages.workflowList.nameStatus.running" defaultMessage="Running" />
-          ),
-          status: 'Processing',
-        },
-        2: {
-          text: (
-            <FormattedMessage id="pages.workflowList.nameStatus.online" defaultMessage="Online" />
-          ),
-          status: 'Success',
-        },
-        3: {
-          text: (
-            <FormattedMessage
-              id="pages.workflowList.nameStatus.abnormal"
-              defaultMessage="Abnormal"
-            />
-          ),
-          status: 'Error',
-        },
-      },
     },
     {
       title: <FormattedMessage id="pages.workflowList.trigger" defaultMessage="Trigger" />,
