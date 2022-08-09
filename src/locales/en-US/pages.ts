@@ -119,7 +119,7 @@ export default {
   'pages.workflowList.dagState': 'Dag state',
 
   'pages.codeList.form.newCode': 'New code',
-  'pages.codeList.form.codeConfig': 'code editing',
+  'pages.codeList.form.codeConfig': 'Code edit',
   'pages.codeList.form.name': 'Name',
   'pages.codeList.form.describe': 'Describe',
   'pages.codeList.form.runtime': 'Runtime',

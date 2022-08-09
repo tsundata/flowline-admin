@@ -36,7 +36,7 @@ const EventList: React.FC = () => {
     {
       title: <FormattedMessage id="pages.common.state" defaultMessage="Type" />,
       dataIndex: 'type',
-      renderText: (val: string) => <Tag color="blue">{val}</Tag>,
+      renderText: (val: string) => <Tag color={val == 'Warning' ? 'orange' : 'blue'}>{val}</Tag>,
     },
     {
       title: <FormattedMessage id="pages.eventList.reason" defaultMessage="Reason" />,

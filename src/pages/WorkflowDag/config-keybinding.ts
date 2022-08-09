@@ -48,7 +48,6 @@ export const useKeybindingConfig = createKeybindingConfig((config) => {
         keybinding: ['command+c', 'ctrl+c'],
         callback: async function (item, modelService, cmd, e) {
           e.preventDefault();
-          console.log(item);
           cmd.executeCommand<NsGraphCmd.GraphCopySelection.IArgs>(
             XFlowGraphCommands.GRAPH_COPY.id,
             {},

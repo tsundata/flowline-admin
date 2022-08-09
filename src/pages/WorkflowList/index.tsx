@@ -276,7 +276,6 @@ const WorkflowList: React.FC = () => {
                 defaultMessage: 'Confirm schedule now?',
               }),
               onOk: () => {
-                console.log('schedule now', record);
                 message.info('已开始调度');
               },
             });

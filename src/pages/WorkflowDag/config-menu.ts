@@ -14,6 +14,7 @@ import { Modal } from 'antd';
 import { DagApi } from './service';
 
 /** menuitem 配置 */
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace NsMenuItemConfig {
   /** 注册菜单依赖的icon */
   IconStore.set('DeleteOutlined', DeleteOutlined);
@@ -82,7 +83,6 @@ export const useMenuConfig = createCtxMenuConfig((config) => {
   config.setMenuModelService(async (target, model, modelService, toDispose) => {
     // @ts-ignore
     const { type, cell } = target;
-    console.log(type);
     switch (type) {
       /** 节点菜单 */
       case 'node':

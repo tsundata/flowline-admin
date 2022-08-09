@@ -6,6 +6,7 @@ import { workflowGetDag, workflowUpdateDag } from '@/services/flowline/workflow'
 import type { NsEdgeCmd, NsGraphCmd, NsNodeCmd } from '@antv/xflow';
 import { NsGraph, NsGraphStatusCommand, uuidv4 } from '@antv/xflow';
 /** 后端接口调用 */
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DagApi {
   export const NODE_COMMON_PROPS = {
     renderKey: DND_RENDER_ID,
@@ -15,7 +16,6 @@ export namespace DagApi {
 
   /** 查图的meta元信息 */
   export const queryGraphMeta: NsGraphCmd.GraphMeta.IArgs['graphMetaService'] = async (args) => {
-    console.log('queryMeta', args);
     // @ts-ignore
     return { ...args, flowId: args.meta.flowId };
   };
@@ -28,8 +28,6 @@ export namespace DagApi {
     meta: NsGraph.IGraphMeta,
     graphData: NsGraph.IGraphData,
   ) => {
-    console.log('保存数据 api', meta, graphData);
-
     const result = await workflowUpdateDag(
       { uid: meta.flowId },
       {
@@ -52,7 +50,6 @@ export namespace DagApi {
     meta: NsGraph.IGraphMeta,
     graphData: NsGraph.IGraphData,
   ) => {
-    console.log('deployService api', meta, graphData);
     return {
       success: true,
       data: graphData,
@@ -101,7 +98,6 @@ export namespace DagApi {
     node,
     graphMeta,
   ) => {
-    console.log('rename node', node, name, graphMeta);
     return { err: null, nodeName: name };
   };
 

@@ -8,7 +8,6 @@ export const onNodeDrop: NsNodeCollapsePanel.IOnNodeDrop = async (node, commands
   const args: NsNodeCmd.AddNode.IArgs = {
     nodeConfig: { ...node, id: uuidv4() },
   };
-  console.log('onNodeDrop', args);
   commands.executeCommand(XFlowNodeCommands.ADD_NODE.id, args);
 };
 
@@ -27,7 +26,6 @@ const NodeDescription = (props: { name: string }) => {
 };
 
 export const nodeDataService: NsNodeCollapsePanel.INodeDataService = async (meta, modelService) => {
-  console.log(meta, modelService);
   return [
     {
       id: 'data calculation',
