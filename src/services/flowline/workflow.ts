@@ -156,6 +156,18 @@ export async function workflowList(options?: { [key: string]: any }) {
   });
 }
 
+/** Create workflow resource to schedule subresource POST /api/apps/v1/workflow/schedule */
+export async function workflowCreateSchedule(body: API.Workflow, options?: { [key: string]: any }) {
+  return request<API.Job>('/api/apps/v1/workflow/schedule', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** Watch List workflow resource GET /api/apps/v1/workflow/watch */
 export async function workflowWatchList(options?: { [key: string]: any }) {
   return request<any>('/api/apps/v1/workflow/watch', {

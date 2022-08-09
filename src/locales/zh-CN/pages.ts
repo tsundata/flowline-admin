@@ -114,6 +114,8 @@ export default {
   'pages.workflowList.trigger.cron': '定时调度',
   'pages.workflowList.scheduleNow': '立即调度',
   'pages.workflowList.confirmSchedule': '确定是否立即调度？',
+  'pages.workflowList.scheduleSuccess': '立即调度成功',
+  'pages.workflowList.scheduleFailed': '立即调度失败',
   'pages.workflowList.dagState': 'Dag 状态图',
 
   'pages.codeList.form.newCode': '新建代码',

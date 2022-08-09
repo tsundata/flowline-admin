@@ -1,6 +1,7 @@
 import EventList from '@/components/Events';
 import {
   workflowCreate,
+  workflowCreateSchedule,
   workflowDelete,
   workflowList,
   workflowUpdate,
@@ -232,7 +233,21 @@ const WorkflowList: React.FC = () => {
                 defaultMessage: 'Confirm schedule now?',
               }),
               onOk: () => {
-                message.info('已开始调度');
+                workflowCreateSchedule({ uid: record.uid })
+                  .then(() => {
+                    message.info(
+                      intl.formatMessage({
+                        id: 'pages.workflowList.scheduleSuccess',
+                      }),
+                    );
+                  })
+                  .catch(() => {
+                    message.error(
+                      intl.formatMessage({
+                        id: 'pages.workflowList.scheduleFailed',
+                      }),
+                    );
+                  });
               },
             });
           }}
