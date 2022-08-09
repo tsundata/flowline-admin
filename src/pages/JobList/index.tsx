@@ -53,7 +53,9 @@ const JobList: React.FC = () => {
     {
       title: <FormattedMessage id="pages.common.state" defaultMessage="State" />,
       dataIndex: 'state',
-      renderText: (val: string) => <Tag color="blue">{val}</Tag>,
+      renderText: (val: string) => (
+        <Tag color={val == 'failed' ? 'orange' : val == 'success' ? 'green' : 'blue'}>{val}</Tag>
+      ),
     },
     {
       title: <FormattedMessage id="pages.jobList.workflowUID" defaultMessage="Workflow UID" />,

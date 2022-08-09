@@ -5,6 +5,7 @@ import { DND_RENDER_ID, NODE_HEIGHT, NODE_WIDTH } from '@/components/Dag/constan
 import { workflowGetDag, workflowUpdateDag } from '@/services/flowline/workflow';
 import type { NsEdgeCmd, NsGraphCmd, NsNodeCmd } from '@antv/xflow';
 import { NsGraph, NsGraphStatusCommand, uuidv4 } from '@antv/xflow';
+
 /** 后端接口调用 */
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DagApi {
@@ -28,6 +29,22 @@ export namespace DagApi {
     meta: NsGraph.IGraphMeta,
     graphData: NsGraph.IGraphData,
   ) => {
+    console.log(meta, graphData);
+
+    // filter duplicate ports
+    graphData.nodes.map((n, index) => {
+      const pm = {};
+      // @ts-ignore
+      graphData.nodes[index].ports = n.ports?.filter((p) => {
+        if (pm[p.id]) {
+          return false;
+        } else {
+          pm[p.id] = true;
+          return true;
+        }
+      });
+    });
+
     const result = await workflowUpdateDag(
       { uid: meta.flowId },
       {
@@ -42,6 +59,17 @@ export namespace DagApi {
 
     return {
       success: result.status,
+      data: graphData,
+    };
+  };
+  /** 检查图数据的api */
+  export const checkGraphData: NsGraphCmd.SaveGraphData.IArgs['saveGraphDataService'] = async (
+    meta: NsGraph.IGraphMeta,
+    graphData: NsGraph.IGraphData,
+  ) => {
+    console.log(meta, graphData);
+    return {
+      success: false,
       data: graphData,
     };
   };

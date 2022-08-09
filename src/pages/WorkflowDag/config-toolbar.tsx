@@ -78,7 +78,7 @@ export namespace NSToolbarConfig {
         commandService.executeCommand<NsGraphCmd.SaveGraphData.IArgs>(
           XFlowGraphCommands.SAVE_GRAPH_DATA.id,
           // @ts-ignore
-          { saveGraphDataService: (meta, graphData) => DagApi.saveGraphData(meta, graphData) },
+          { saveGraphDataService: (meta, graphData) => DagApi.checkGraphData(meta, graphData) },
         );
       },
     });

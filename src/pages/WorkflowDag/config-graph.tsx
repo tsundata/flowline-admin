@@ -1,7 +1,7 @@
 import { DND_RENDER_ID, GROUP_NODE_RENDER_ID } from '@/components/Dag/constant';
 import { AlgoNode } from '@/components/Dag/react-node/algo-node';
 import { GroupNode } from '@/components/Dag/react-node/group';
-import type { Node as X6Node } from '@antv/x6';
+import type { Graph, Node as X6Node } from '@antv/x6';
 import { ObjectExt } from '@antv/x6';
 import type { NsNodeCmd } from '@antv/xflow';
 import {
@@ -43,6 +43,38 @@ export const useGraphHookConfig = createHookConfig<IProps>((config) => {
           options.keyboard = {
             enabled: true,
           };
+          const graphOptions: Graph.Options = {
+            connecting: {
+              // 显示可用的链接桩
+              validateConnection({ sourceView, targetView, sourceMagnet, targetMagnet }) {
+                // 不允许连接到自己
+                if (sourceView === targetView) {
+                  return false;
+                }
+                // 只能从上游节点的输出链接桩创建连接
+                if (sourceMagnet?.getAttribute('port-group') === NsGraph.AnchorGroup.TOP) {
+                  return false;
+                }
+                // 只能连接到下游节点的输入桩
+                if (targetMagnet?.getAttribute('port-group') !== NsGraph.AnchorGroup.TOP) {
+                  return false;
+                }
+                // 没有起点的返回false
+                if (!sourceMagnet) {
+                  return false;
+                }
+                if (!targetMagnet) {
+                  return false;
+                }
+                const node = targetView!.cell as any;
+                // 判断目标链接桩是否可连接
+                const portId = targetMagnet.getAttribute('port')!;
+                const port = node.getPort(portId);
+                return !!port;
+              },
+            },
+          };
+          options.connecting = { ...options.connecting, ...graphOptions.connecting };
         },
       }),
       // 注册增加 graph event

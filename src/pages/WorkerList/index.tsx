@@ -53,7 +53,9 @@ const WorkerList: React.FC = () => {
     {
       title: <FormattedMessage id="pages.common.state" defaultMessage="State" />,
       dataIndex: 'state',
-      renderText: (val: string) => <Tag color="blue">{val}</Tag>,
+      renderText: (val: string) => (
+        <Tag color={val == 'no_ready' ? 'orange' : val == 'ready' ? 'green' : 'blue'}>{val}</Tag>
+      ),
     },
     {
       title: <FormattedMessage id="pages.workerList.hostname" defaultMessage="Hostname" />,

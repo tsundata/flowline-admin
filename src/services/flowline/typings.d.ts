@@ -788,7 +788,6 @@ declare namespace API {
     describe?: string;
     finalizers?: string[];
     generation?: number;
-    jobActive?: string[];
     kind?: string;
     labels?: Record<string, any>;
     lastTriggerTimestamp?: string;
