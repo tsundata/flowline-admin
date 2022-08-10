@@ -1,10 +1,12 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
+import type { RequestError } from '@@/plugin-request/request';
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
+import { message } from 'antd';
 import defaultSettings from '../config/defaultSettings';
 import { userGet as queryCurrentUser } from './services/flowline/user';
 
@@ -98,7 +100,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
   };
 };
 
-// https://v3.umijs.org/plugins/plugin-request
+// https://umijs.org/docs/max/request
 export const request: RequestConfig = {
   timeout: 60 * 1000,
   requestInterceptors: [
@@ -119,4 +121,10 @@ export const request: RequestConfig = {
       return { ...response };
     },
   ],
+  errorConfig: {
+    errorHandler: (error: RequestError) => {
+      // @ts-ignore
+      message.error(error.response.data);
+    },
+  },
 };
