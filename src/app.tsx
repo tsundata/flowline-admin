@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import type { RequestError } from '@@/plugin-request/request';
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
@@ -122,9 +121,21 @@ export const request: RequestConfig = {
     },
   ],
   errorConfig: {
-    errorHandler: (error: RequestError) => {
-      // @ts-ignore
-      message.error(error.response.data);
+    errorHandler: (error: any, opts: any) => {
+      if (opts?.skipErrorHandler) throw error;
+      if (error.response) {
+        // Axios 的错误
+        // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
+        message.error('Response status:' + error.response.status + ' ' + error.response.data);
+      } else if (error.request) {
+        // 请求已经成功发起，但没有收到响应
+        // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
+        // 而在node.js中是 http.ClientRequest 的实例
+        message.error('None response! Please retry.');
+      } else {
+        // 发送请求时出了点问题
+        message.error('Request error, please retry.');
+      }
     },
   },
 };

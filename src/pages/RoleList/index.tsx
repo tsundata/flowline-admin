@@ -1,12 +1,11 @@
-import { userCreate, userDelete, userList, userUpdate } from '@/services/flowline/user';
-import { CheckOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import { roleCreate, roleDelete, roleList, roleUpdate } from '@/services/flowline/role';
+import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
   FooterToolbar,
   ModalForm,
   PageContainer,
   ProDescriptions,
-  ProFormSwitch,
   ProFormText,
   ProTable,
 } from '@ant-design/pro-components';
@@ -16,16 +15,16 @@ import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 
 /**
- * @en-US Add user
- * @zh-CN 添加用户
+ * @en-US Add role
+ * @zh-CN 添加角色
  * @param fields
  */
-const handleAdd = async (fields: API.User) => {
+const handleAdd = async (fields: API.Role) => {
   const hide = message.loading('Adding');
   try {
-    const kind = 'user';
+    const kind = 'role';
     const apiVersion = 'v1';
-    await userCreate({ ...fields, kind, apiVersion });
+    await roleCreate({ ...fields, kind, apiVersion });
     hide();
     message.success('Added successfully');
     return true;
@@ -37,15 +36,15 @@ const handleAdd = async (fields: API.User) => {
 };
 
 /**
- * @en-US Update user
- * @zh-CN 更新用户
+ * @en-US Update role
+ * @zh-CN 更新角色
  *
  * @param fields
  */
-const handleUpdate = async (fields: API.User) => {
+const handleUpdate = async (fields: API.Role) => {
   const hide = message.loading('Updating');
   try {
-    await userUpdate({ uid: fields.uid! }, fields);
+    await roleUpdate({ uid: fields.uid! }, fields);
     hide();
 
     message.success('Update is successful');
@@ -58,16 +57,16 @@ const handleUpdate = async (fields: API.User) => {
 };
 
 /**
- *  Delete user
- * @zh-CN 删除用户
+ *  Delete role
+ * @zh-CN 删除角色
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: API.User[]) => {
+const handleRemove = async (selectedRows: API.Role[]) => {
   const hide = message.loading('deleting');
   if (!selectedRows) return true;
   try {
-    await userDelete({
+    await roleDelete({
       uid: '-',
     });
     hide();
@@ -80,7 +79,7 @@ const handleRemove = async (selectedRows: API.User[]) => {
   }
 };
 
-const UserList: React.FC = () => {
+const RoleList: React.FC = () => {
   /**
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
@@ -95,8 +94,8 @@ const UserList: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.User>();
-  const [selectedRowsState, setSelectedRows] = useState<API.User[]>([]);
+  const [currentRow, setCurrentRow] = useState<API.Role>();
+  const [selectedRowsState, setSelectedRows] = useState<API.Role[]>([]);
 
   /**
    * @en-US International configuration
@@ -104,7 +103,7 @@ const UserList: React.FC = () => {
    * */
   const intl = useIntl();
 
-  const columns: ProColumns<API.User>[] = [
+  const columns: ProColumns<API.Role>[] = [
     {
       title: <FormattedMessage id="pages.common.uid" defaultMessage="UID" />,
       dataIndex: 'uid',
@@ -124,31 +123,12 @@ const UserList: React.FC = () => {
     },
     {
       title: (
-        <FormattedMessage id="pages.userList.form.userName.nameLabel" defaultMessage="User name" />
+        <FormattedMessage id="pages.roleList.form.roleName.nameLabel" defaultMessage="Role name" />
       ),
       dataIndex: 'name',
     },
     {
-      title: <FormattedMessage id="pages.userList.form.roles" defaultMessage="roles" />,
-      dataIndex: 'roles',
-      renderText: (val: string[]) => val.join(', '),
-    },
-    {
-      title: <FormattedMessage id="pages.userList.form.email" defaultMessage="user email" />,
-      dataIndex: 'email',
-    },
-    {
-      title: <FormattedMessage id="pages.userList.form.active" defaultMessage="active" />,
-      dataIndex: 'active',
-      renderText: (val: boolean) => (val ? <CheckOutlined /> : <CloseOutlined />),
-    },
-    {
-      title: <FormattedMessage id="pages.userList.form.avatar" defaultMessage="avatar" />,
-      dataIndex: 'avatar',
-      valueType: 'image',
-    },
-    {
-      title: <FormattedMessage id="pages.userList.titleCreatedAt" defaultMessage="Created time" />,
+      title: <FormattedMessage id="pages.roleList.titleCreatedAt" defaultMessage="Created time" />,
       sorter: true,
       dataIndex: 'creationTimestamp',
       valueType: 'dateTime',
@@ -165,7 +145,7 @@ const UserList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          <FormattedMessage id="pages.userList.form.userConfig" defaultMessage="Configuration" />
+          <FormattedMessage id="pages.roleList.form.roleConfig" defaultMessage="Configuration" />
         </a>,
       ],
     },
@@ -173,7 +153,7 @@ const UserList: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.User, API.PageParams>
+      <ProTable<API.Role, API.PageParams>
         headerTitle={intl.formatMessage({
           id: 'pages.common.tableTitle',
           defaultMessage: 'Enquiry form',
@@ -195,7 +175,7 @@ const UserList: React.FC = () => {
           </Button>,
         ]}
         request={async () => {
-          const msg = await userList();
+          const msg = await roleList();
           return {
             data: msg.items,
             success: true,
@@ -231,14 +211,14 @@ const UserList: React.FC = () => {
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.userList.form.newUser',
-          defaultMessage: 'New user',
+          id: 'pages.roleList.form.newRole',
+          defaultMessage: 'New role',
         })}
         width="400px"
         visible={createModalVisible}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
-          const success = await handleAdd(value as API.User);
+          const success = await handleAdd(value as API.Role);
           if (success) {
             handleModalVisible(false);
             if (actionRef.current) {
@@ -253,8 +233,8 @@ const UserList: React.FC = () => {
               required: true,
               message: (
                 <FormattedMessage
-                  id="pages.userList.ruleName"
-                  defaultMessage="User name is required"
+                  id="pages.roleList.ruleName"
+                  defaultMessage="Role name is required"
                 />
               ),
             },
@@ -262,55 +242,8 @@ const UserList: React.FC = () => {
           width="md"
           name="name"
           placeholder={intl.formatMessage({
-            id: 'pages.userList.form.name',
-            defaultMessage: 'User name',
-          })}
-        />
-        <ProFormText
-          width="md"
-          name="email"
-          placeholder={intl.formatMessage({
-            id: 'pages.userList.form.email.placeholder',
-            defaultMessage: 'User email',
-          })}
-        />
-        <ProFormText.Password
-          rules={[
-            {
-              required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.userList.form.password.rule"
-                  defaultMessage="User password is required"
-                />
-              ),
-            },
-          ]}
-          width="md"
-          name="password"
-          placeholder={intl.formatMessage({
-            id: 'pages.userList.form.password.placeholder',
-            defaultMessage: 'User password',
-          })}
-        />
-        <ProFormSwitch
-          width="md"
-          name="active"
-          placeholder={intl.formatMessage({
-            id: 'pages.userList.form.active.placeholder',
-            defaultMessage: 'User active',
-          })}
-          label={intl.formatMessage({
-            id: 'pages.userList.form.active',
-            defaultMessage: 'Active',
-          })}
-        />
-        <ProFormText
-          width="md"
-          name="avatar"
-          placeholder={intl.formatMessage({
-            id: 'pages.userList.form.avatar.placeholder',
-            defaultMessage: 'User avatar',
+            id: 'pages.roleList.form.name',
+            defaultMessage: 'Role name',
           })}
         />
       </ModalForm>
@@ -345,7 +278,7 @@ const UserList: React.FC = () => {
         closable={false}
       >
         {currentRow?.uid && (
-          <ProDescriptions<API.User>
+          <ProDescriptions<API.Role>
             column={2}
             title={currentRow?.uid}
             request={async () => ({
@@ -354,7 +287,7 @@ const UserList: React.FC = () => {
             params={{
               id: currentRow?.uid,
             }}
-            columns={columns as ProDescriptionsItemProps<API.User>[]}
+            columns={columns as ProDescriptionsItemProps<API.Role>[]}
           />
         )}
       </Drawer>
@@ -362,4 +295,4 @@ const UserList: React.FC = () => {
   );
 };
 
-export default UserList;
+export default RoleList;

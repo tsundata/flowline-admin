@@ -605,6 +605,7 @@ declare namespace API {
     name?: string;
     password?: string;
     resourceVersion?: string;
+    roles?: string[];
     uid?: string;
     unreadCount?: number;
   };

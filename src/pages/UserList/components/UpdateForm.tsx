@@ -1,6 +1,7 @@
+import { roleList } from '@/services/flowline/role';
 import { ProForm, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
-import { Button, Modal } from 'antd';
+import { Button, Form, Modal, Select } from 'antd';
 import React from 'react';
 
 export type FormValueType = {
@@ -20,6 +21,19 @@ export type UpdateFormProps = {
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const intl = useIntl();
+  const [roles, setRoles] = React.useState<any[]>();
+
+  React.useEffect(() => {
+    roleList().then((res) => {
+      const r: React.SetStateAction<any[] | undefined> = [];
+      if (res != null && res.items != null) {
+        res.items.forEach((i) => {
+          r.push({ label: i.name, value: i.name });
+        });
+      }
+      setRoles(r);
+    });
+  }, []);
 
   return (
     <Modal
@@ -43,6 +57,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           password: props.values.password,
           active: props.values.active,
           avatar: props.values.avatar,
+          roles: props.values.roles,
         }}
         title={intl.formatMessage({
           id: 'pages.searchTable.updateForm.basicConfig',
@@ -146,6 +161,22 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             defaultMessage: 'User avatar',
           })}
         />
+        <Form.Item
+          name="roles"
+          label={intl.formatMessage({
+            id: 'pages.userList.form.roles',
+            defaultMessage: 'Roles',
+          })}
+        >
+          <Select
+            mode="multiple"
+            options={roles}
+            placeholder={intl.formatMessage({
+              id: 'pages.userList.form.roles.placeholder',
+              defaultMessage: 'Roles',
+            })}
+          />
+        </Form.Item>
       </ProForm>
     </Modal>
   );

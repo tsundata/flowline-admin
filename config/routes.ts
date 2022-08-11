@@ -45,27 +45,7 @@
       {
         path: '/security/roles',
         name: 'roles',
-        component: './TableList',
-      },
-      {
-        path: '/security/user-statistics',
-        name: 'user-statistics',
-        component: './TableList',
-      },
-      {
-        path: '/security/actions',
-        name: 'actions',
-        component: './TableList',
-      },
-      {
-        path: '/security/resources',
-        name: 'resources',
-        component: './TableList',
-      },
-      {
-        path: '/security/permissions',
-        name: 'permissions',
-        component: './TableList',
+        component: './RoleList',
       },
       {
         component: './404',
