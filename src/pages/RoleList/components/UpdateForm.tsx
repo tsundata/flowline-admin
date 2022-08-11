@@ -1,6 +1,6 @@
 import { ProForm, ProFormText } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
-import { Button, Modal } from 'antd';
+import { Button, Form, Modal, Select } from 'antd';
 import React from 'react';
 
 export type FormValueType = {
@@ -21,6 +21,26 @@ export type UpdateFormProps = {
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const intl = useIntl();
 
+  const verbs = [
+    { label: 'GET', value: 'GET' },
+    { label: 'LIST', value: 'LIST' },
+    { label: 'WATCH', value: 'WATCH' },
+    { label: 'POST', value: 'POST' },
+    { label: 'PATCH', value: 'PATCH' },
+    { label: 'PUT', value: 'PUT' },
+    { label: 'DELETE', value: 'DELETE' },
+  ];
+  const resources = [
+    { label: 'code', value: 'code' },
+    { label: 'connection', value: 'connection' },
+    { label: 'dag', value: 'dag' },
+    { label: 'job', value: 'job' },
+    { label: 'role', value: 'role' },
+    { label: 'user', value: 'user' },
+    { label: 'variable', value: 'variable' },
+    { label: 'workflow', value: 'workflow' },
+  ];
+
   return (
     <Modal
       width={800}
@@ -39,6 +59,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       <ProForm
         initialValues={{
           name: props.values.name,
+          verbs: props.values.verbs,
+          resources: props.values.resources,
         }}
         title={intl.formatMessage({
           id: 'pages.searchTable.updateForm.basicConfig',
@@ -87,6 +109,38 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             defaultMessage: 'Role name',
           })}
         />
+        <Form.Item
+          name="verbs"
+          label={intl.formatMessage({
+            id: 'pages.userList.form.verbs',
+            defaultMessage: 'verbs',
+          })}
+        >
+          <Select
+            mode="multiple"
+            options={verbs}
+            placeholder={intl.formatMessage({
+              id: 'pages.roleList.form.verbs.placeholder',
+              defaultMessage: 'verbs',
+            })}
+          />
+        </Form.Item>
+        <Form.Item
+          name="resources"
+          label={intl.formatMessage({
+            id: 'pages.roleList.form.resources',
+            defaultMessage: 'resources',
+          })}
+        >
+          <Select
+            mode="multiple"
+            options={resources}
+            placeholder={intl.formatMessage({
+              id: 'pages.roleList.form.resources.placeholder',
+              defaultMessage: 'resources',
+            })}
+          />
+        </Form.Item>
       </ProForm>
     </Modal>
   );

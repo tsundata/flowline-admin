@@ -376,8 +376,6 @@ declare namespace API {
 
   type output = Record<string, any>;
 
-  type permissions = Record<string, any>;
-
   type ports = {
     connected?: boolean;
     group?: string;
@@ -396,9 +394,10 @@ declare namespace API {
     kind?: string;
     labels?: Record<string, any>;
     name?: string;
-    permissions?: permissions[];
     resourceVersion?: string;
+    resources?: string[];
     uid?: string;
+    verbs?: string[];
   };
 
   type RoleBinding = {
@@ -600,6 +599,7 @@ declare namespace API {
     email?: string;
     finalizers?: string[];
     generation?: number;
+    groups?: string[];
     kind?: string;
     labels?: Record<string, any>;
     name?: string;

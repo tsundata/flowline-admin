@@ -128,6 +128,16 @@ const RoleList: React.FC = () => {
       dataIndex: 'name',
     },
     {
+      title: <FormattedMessage id="pages.roleList.form.verbs" defaultMessage="verbs" />,
+      dataIndex: 'verbs',
+      renderText: (val: string[]) => val && val.join(', '),
+    },
+    {
+      title: <FormattedMessage id="pages.roleList.form.resources" defaultMessage="resources" />,
+      dataIndex: 'resources',
+      renderText: (val: string[]) => val && val.join(', '),
+    },
+    {
       title: <FormattedMessage id="pages.roleList.titleCreatedAt" defaultMessage="Created time" />,
       sorter: true,
       dataIndex: 'creationTimestamp',

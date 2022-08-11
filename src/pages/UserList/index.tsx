@@ -131,7 +131,7 @@ const UserList: React.FC = () => {
     {
       title: <FormattedMessage id="pages.userList.form.roles" defaultMessage="roles" />,
       dataIndex: 'roles',
-      renderText: (val: string[]) => val.join(', '),
+      renderText: (val: string[]) => val && val.join(', '),
     },
     {
       title: <FormattedMessage id="pages.userList.form.email" defaultMessage="user email" />,

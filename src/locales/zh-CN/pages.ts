@@ -221,6 +221,12 @@ export default {
   'pages.roleList.form.role': '角色',
   'pages.roleList.form.role.placeholder': '请输入角色',
   'pages.roleList.form.role.rule': '请输入角色！',
+  'pages.roleList.form.verbs': '操作',
+  'pages.roleList.form.verbs.placeholder': '请选择操作',
+  'pages.roleList.form.verbs.rule': '请选择操作！',
+  'pages.roleList.form.resources': '资源',
+  'pages.roleList.form.resources.placeholder': '请选择资源',
+  'pages.roleList.form.resources.rule': '请选择资源！',
 
   'pages.eventList.name': '名称',
   'pages.eventList.reason': '原因',
