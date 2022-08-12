@@ -39,6 +39,9 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     { label: 'user', value: 'user' },
     { label: 'variable', value: 'variable' },
     { label: 'workflow', value: 'workflow' },
+    { label: 'event', value: 'event' },
+    { label: 'stage', value: 'stage' },
+    { label: 'worker', value: 'worker' },
   ];
 
   return (
