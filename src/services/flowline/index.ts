@@ -8,7 +8,6 @@ import * as dag from './dag';
 import * as event from './event';
 import * as job from './job';
 import * as role from './role';
-import * as rolebinding from './rolebinding';
 import * as stage from './stage';
 import * as user from './user';
 import * as variable from './variable';
@@ -21,7 +20,6 @@ export default {
   event,
   job,
   role,
-  rolebinding,
   stage,
   user,
   variable,

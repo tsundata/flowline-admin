@@ -400,56 +400,6 @@ declare namespace API {
     verbs?: string[];
   };
 
-  type RoleBinding = {
-    apiVersion?: string;
-    creationTimestamp?: string;
-    deletionGracePeriodSeconds?: number;
-    deletionTimestamp?: string;
-    finalizers?: string[];
-    generation?: number;
-    kind?: string;
-    labels?: Record<string, any>;
-    name?: string;
-    resourceVersion?: string;
-    roleUID?: string;
-    uid?: string;
-    userUID?: string;
-  };
-
-  type rolebindingDeleteParams = {
-    /** uid of the resource */
-    uid: string;
-  };
-
-  type rolebindingGetParams = {
-    /** uid of the resource */
-    uid: string;
-  };
-
-  type RoleBindingList = {
-    apiVersion?: string;
-    continue?: string;
-    items: RoleBinding[];
-    kind?: string;
-    remainingItemCount?: number;
-    resourceVersion?: string;
-  };
-
-  type rolebindingPatchParams = {
-    /** uid of the resource */
-    uid: string;
-  };
-
-  type rolebindingUpdateParams = {
-    /** uid of the resource */
-    uid: string;
-  };
-
-  type rolebindingWatchParams = {
-    /** uid of the resource */
-    uid: string;
-  };
-
   type roleDeleteParams = {
     /** uid of the resource */
     uid: string;

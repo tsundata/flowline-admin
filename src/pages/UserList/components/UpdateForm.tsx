@@ -97,6 +97,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             },
           ]}
           name="name"
+          disabled={true}
           placeholder={intl.formatMessage({
             id: 'pages.userList.form.name',
             defaultMessage: 'User name',
