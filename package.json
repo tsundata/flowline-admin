@@ -46,7 +46,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ant-design/plots": "^1.1.1",
-    "@ant-design/pro-components": "1.1.25",
+    "@ant-design/pro-components": "2.3.33",
     "@antv/xflow": "^1.0.55",
     "@antv/xflow-hook": "^1.0.55",
     "@codemirror/lang-javascript": "^6.0.2",
