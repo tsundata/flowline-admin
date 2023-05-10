@@ -155,7 +155,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             onChange={(value) => {
               props.values.code = value;
             }}
-            extensions={[javascript()]}
+            extensions={[javascript({jsx: true})]}
           />
         </Form.Item>
       </ProForm>
