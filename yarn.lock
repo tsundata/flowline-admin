@@ -634,10 +634,10 @@
   resolved "https://registry.yarnpkg.com/@antv/x6-react-shape/-/x6-react-shape-1.6.1.tgz#cf029ac6580300eaffa7539555cffa6723e8f199"
   integrity sha512-EkcDoIlfbQC69DGgwznFRsi78fW+apTO0OW5J6tnKpMW3r6zB5zr5QM06hzq5UEUgGheMUxNh3wrTd0jnCwR3A==
 
-"@antv/x6@1.32.12-beta":
-  version "1.32.12-beta"
-  resolved "https://registry.yarnpkg.com/@antv/x6/-/x6-1.32.12-beta.tgz#18c474fc3ced459cabb506651f6d2adb8a358ad3"
-  integrity sha512-Z1vfMCH0uurQ8wY47wM8FYuCJlB/HGeJBuLeYrN/d6xCJYWMEKMTv/AZPqR7Lov5JWX6tgHU/jMKcTyBKQFRHQ==
+"@antv/x6@^1.30.1":
+  version "1.34.13"
+  resolved "https://registry.yarnpkg.com/@antv/x6/-/x6-1.34.13.tgz#d87df19b24d2005433b8c18289f8556f256a5530"
+  integrity sha512-gYFxh9Sd1UXPO0aO9LHclASacT6HKkG7AP9XQqRuuCcJYWQiZVRmTN1mYQf3lTZDdybdI6IisZp6zFoGjmFxig==
   dependencies:
     csstype "^3.0.3"
     jquery "^3.5.1"
@@ -646,12 +646,12 @@
     mousetrap "^1.6.5"
     utility-types "^3.10.0"
 
-"@antv/xflow-core@1.0.49-beta1":
-  version "1.0.49-beta1"
-  resolved "https://registry.yarnpkg.com/@antv/xflow-core/-/xflow-core-1.0.49-beta1.tgz#109fddf718b40a794328e921940abccce8365cbf"
-  integrity sha512-dQVX8jpJScUh6+JVKBLTPZyNlk3//7z3QlL+BsYytJHKE9Z1QwA/+G0pi8dJ1uj/1hTBtyEp8P0tBpQLuw6JhQ==
+"@antv/xflow-core@1.0.55":
+  version "1.0.55"
+  resolved "https://registry.yarnpkg.com/@antv/xflow-core/-/xflow-core-1.0.55.tgz#8d8d6c299702890aed0b9b1581bb09ad4400917c"
+  integrity sha512-FhjTstp/ZdO6mj8ERARJ6M9PWgikXvOpWwMTLCjc+i8vS4O3t4XL/fIu16MqJNuNdqfETcjJluHd06c32MTB/w==
   dependencies:
-    "@antv/xflow-hook" "1.0.49-beta1"
+    "@antv/xflow-hook" "1.0.55"
     classnames "^2.3.1"
     immer "^9.0.7"
     mana-common "^0.3.1"
@@ -659,38 +659,38 @@
     reflect-metadata "^0.1.13"
     rxjs "^6.6.7"
 
-"@antv/xflow-extension@1.0.49-beta1":
-  version "1.0.49-beta1"
-  resolved "https://registry.yarnpkg.com/@antv/xflow-extension/-/xflow-extension-1.0.49-beta1.tgz#d907ae9b9190c5f44e907b997aac960196104d9a"
-  integrity sha512-5jeO7Fv4uhvQqDeEfX4oRVhDJAPufpKps7qNCU2+lEcxeFnHGo7ZzSIfeYCSCF3EYny88MPMsKJv66n2U7FhQA==
+"@antv/xflow-extension@1.0.55":
+  version "1.0.55"
+  resolved "https://registry.yarnpkg.com/@antv/xflow-extension/-/xflow-extension-1.0.55.tgz#ae022bac8167e6c460ad23e4b3f481d409a706fc"
+  integrity sha512-iHRfO/ae4/9xvC5xVFmA9eIFg813DQa06hTgTdxLlt0Aojnfa5VnsGrIrPQoDDQovCXG8SavMDlnLZUpa491GQ==
   dependencies:
-    "@antv/xflow-core" "1.0.49-beta1"
-    "@antv/xflow-hook" "1.0.49-beta1"
+    "@antv/xflow-core" "1.0.55"
+    "@antv/xflow-hook" "1.0.55"
     mana-syringe "^0.2.2"
     moment "^2.29.1"
     rc-field-form "^1.22.0"
     react-color "2.17.1"
     reflect-metadata "^0.1.13"
 
-"@antv/xflow-hook@1.0.49-beta1", "@antv/xflow-hook@^1.0.49-beta1":
-  version "1.0.49-beta1"
-  resolved "https://registry.yarnpkg.com/@antv/xflow-hook/-/xflow-hook-1.0.49-beta1.tgz#b183467c1e79824849fd52d7e6c50ede68995d34"
-  integrity sha512-q8yv7x8buOteTChDqk695LucSgIoSkXLCCxHy+EfPCn3X8bpUGdfhswsQggNMPibUPIdzbBnnLT1Lyn3p9+fXw==
+"@antv/xflow-hook@1.0.55", "@antv/xflow-hook@^1.0.55":
+  version "1.0.55"
+  resolved "https://registry.yarnpkg.com/@antv/xflow-hook/-/xflow-hook-1.0.55.tgz#d950df3727028cabd8c33afb7e55b9b4812d0e1a"
+  integrity sha512-NVBrezDue4wd32seaIx1OT5WONpZUhwEp+p86QRhPzO3mmb1qhVxbEqznXhtisxZeHitHFS33J7NqeH1sDFUtQ==
   dependencies:
     toposort "^2.0.2"
 
-"@antv/xflow@^1.0.49-beta1":
-  version "1.0.49-beta1"
-  resolved "https://registry.yarnpkg.com/@antv/xflow/-/xflow-1.0.49-beta1.tgz#67a4f541ea213aed4f4e5a91129596ad5bf3e3ea"
-  integrity sha512-5PdHLgiZ7nxr78udiUgLOnHINEtAJKJbwyZdPf0YmQr5zFjIjZIMZJXAkyYCfFWNJRK4G/hVGWCJ4XmTvVPBXg==
+"@antv/xflow@^1.0.55":
+  version "1.0.55"
+  resolved "https://registry.yarnpkg.com/@antv/xflow/-/xflow-1.0.55.tgz#4f37876046c6a1fed4ed9a242234bb5cce4be887"
+  integrity sha512-1LRFZsDZDVuRwEYD0xFt7SGCbHducgXQ4GgPOzmaCMA5FMbQfZVpXhsOG4o/a9X+gKfYdpOELCLqpz7iykyArQ==
   dependencies:
     "@antv/layout" "^0.1.22"
-    "@antv/x6" "1.32.12-beta"
+    "@antv/x6" "^1.30.1"
     "@antv/x6-react-components" "^1.1.15"
     "@antv/x6-react-shape" "^1.5.2"
-    "@antv/xflow-core" "1.0.49-beta1"
-    "@antv/xflow-extension" "1.0.49-beta1"
-    "@antv/xflow-hook" "1.0.49-beta1"
+    "@antv/xflow-core" "1.0.55"
+    "@antv/xflow-extension" "1.0.55"
+    "@antv/xflow-hook" "1.0.55"
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
@@ -2989,10 +2989,12 @@
   resolved "https://registry.yarnpkg.com/@types/hapi__joi/-/hapi__joi-17.1.8.tgz#78b3d22c4c9e62709894abd8c664508051f29e6b"
   integrity sha512-omVytnOAiAfzGUOQArujJr3heWxPrDHW7MF1ieqix1ngoGdhtJmSSDFVM+ZAOa7UmhlGJtltdgUAT03mfDu6kg==
 
-"@types/history@^4.7.0":
-  version "4.7.11"
-  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.11.tgz#56588b17ae8f50c53983a524fc3cc47437969d64"
-  integrity sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==
+"@types/history@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-5.0.0.tgz#29f919f0c8e302763798118f45b19cab4a886f14"
+  integrity sha512-hy8b7Y1J8OGe6LbAjj3xniQrj3v6lsivCcrmf4TzSgPzLkhIeKgc5IZnT7ReIqmEuodjfO8EYAuoFvIrHi/+jQ==
+  dependencies:
+    history "*"
 
 "@types/hoist-non-react-statics@^3.3.0", "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.1"
@@ -8243,7 +8245,7 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-history@5.3.0, history@^5.1.0, history@^5.2.0:
+history@*, history@5.3.0, history@^5.1.0, history@^5.2.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/history/-/history-5.3.0.tgz#1548abaa245ba47992f063a0783db91ef201c73b"
   integrity sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==
