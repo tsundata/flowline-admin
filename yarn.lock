@@ -5140,7 +5140,7 @@ antd-mobile-icons@^0.2.2:
   resolved "https://registry.yarnpkg.com/antd-mobile-icons/-/antd-mobile-icons-0.2.2.tgz#0e084d3ea5c642f60ab46e7ed3db74ad3dbacd52"
   integrity sha512-iquIc7EsQTndk5nMv9pQQv+/OY5YnjVIPhtCFo7W7JL+Gjqzq/YJ/HO2WxUxyCgYha2NsTTNAb2vPa/M4zAi2g==
 
-antd@^4.20.0, "antd@^4.20.0 ", antd@^4.20.6:
+"antd@^4.20.0 ", antd@^4.20.6, antd@^4.24.10:
   version "4.24.10"
   resolved "https://registry.yarnpkg.com/antd/-/antd-4.24.10.tgz#9bf371c3b351b881c5b56049a410d5cf16f077ac"
   integrity sha512-GihdwTGFW0dUaWjcvSIfejFcT63HjEp2EbYd+ojEXayldhey230KrHDJ+C53rkrkzLvymrPBfSxlLxJzyFIZsg==
