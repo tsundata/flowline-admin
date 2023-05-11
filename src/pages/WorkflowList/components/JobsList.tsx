@@ -111,7 +111,7 @@ const JobList: React.FC<IProps> = (props) => {
       <Modal
         title={<FormattedMessage id="pages.common.events" defaultMessage="Events" />}
         width={1500}
-        visible={isModalVisible}
+        open={isModalVisible}
         onOk={handleClose}
         onCancel={handleClose}
       >
@@ -120,7 +120,7 @@ const JobList: React.FC<IProps> = (props) => {
       <Modal
         title={<FormattedMessage id="pages.common.events" defaultMessage="Events" />}
         width={1500}
-        visible={isDagModalVisible}
+        open={isDagModalVisible}
         onOk={handleClose}
         onCancel={handleClose}
       >

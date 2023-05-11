@@ -35,7 +35,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               id: 'pages.workflowList.form.workflowConfig',
               defaultMessage: '工作流配置',
             })}
-            visible={props.updateModalVisible}
+            open={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
               props.onCancel();

@@ -444,7 +444,7 @@ const WorkflowList: React.FC = () => {
       <Modal
         title={<FormattedMessage id="pages.common.events" defaultMessage="Events" />}
         width={1500}
-        visible={isModalVisible}
+        open={isModalVisible}
         onOk={handleClose}
         onCancel={handleClose}
       >
@@ -453,7 +453,7 @@ const WorkflowList: React.FC = () => {
       <Modal
         title={<FormattedMessage id="pages.common.jobs" defaultMessage="Jobs" />}
         width={1500}
-        visible={isJobsModalVisible}
+        open={isJobsModalVisible}
         onOk={handleClose}
         onCancel={handleClose}
       >

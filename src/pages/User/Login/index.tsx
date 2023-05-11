@@ -89,15 +89,13 @@ const Login: React.FC = () => {
             await handleSubmit(values as API.LoginParams);
           }}
         >
-          <Tabs activeKey={type} onChange={setType}>
-            <Tabs.TabPane
-              key="account"
-              tab={intl.formatMessage({
-                id: 'pages.login.accountLogin.tab',
-                defaultMessage: '账户密码登录',
-              })}
-            />
-          </Tabs>
+          <Tabs activeKey={type} onChange={setType} items={[{
+            key: "account",
+            label: intl.formatMessage({
+              id: 'pages.login.accountLogin.tab',
+              defaultMessage: '账户密码登录',
+            })
+          }]}/>
 
           {status === 'error' && loginType === 'account' && (
             <LoginMessage

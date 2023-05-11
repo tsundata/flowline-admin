@@ -138,7 +138,7 @@ const WorkerList: React.FC = () => {
       <Modal
         title={<FormattedMessage id="pages.common.events" defaultMessage="Events" />}
         width={1500}
-        visible={isModalVisible}
+        open={isModalVisible}
         onOk={handleClose}
         onCancel={handleClose}
       >

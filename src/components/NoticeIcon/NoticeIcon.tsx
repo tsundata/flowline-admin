@@ -1,14 +1,13 @@
 import { BellOutlined } from '@ant-design/icons';
 import { Badge, Spin, Tabs } from 'antd';
 import classNames from 'classnames';
+import { Tab } from 'rc-tabs/lib/interface';
 import useMergedState from 'rc-util/es/hooks/useMergedState';
 import React from 'react';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
-import type { NoticeIconTabProps } from './NoticeList';
+import type {NoticeIconTabProps} from './NoticeList';
 import NoticeList from './NoticeList';
-
-const { TabPane } = Tabs;
 
 export type NoticeIconProps = {
   count?: number;
@@ -46,7 +45,7 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
     if (!children) {
       return null;
     }
-    const panes: React.ReactNode[] = [];
+    const panes: Tab[] = [];
     React.Children.forEach(children, (child: React.ReactElement<NoticeIconTabProps>): void => {
       if (!child) {
         return;
@@ -56,8 +55,10 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
       const msgCount = count || count === 0 ? count : len;
       const tabTitle: string = msgCount > 0 ? `${title} (${msgCount})` : title;
       panes.push(
-        <TabPane tab={tabTitle} key={tabKey}>
-          <NoticeList
+        {
+          label: tabTitle,
+          key: tabKey,
+          children: <NoticeList
             clearText={clearText}
             viewMoreText={viewMoreText}
             list={list}
@@ -69,15 +70,13 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
             showViewMore={showViewMore}
             title={title}
           />
-        </TabPane>,
+        }
       );
     });
     return (
       <>
         <Spin spinning={loading} delay={300}>
-          <Tabs className={styles.tabs} onChange={onTabChange}>
-            {panes}
-          </Tabs>
+          <Tabs className={styles.tabs} onChange={onTabChange} items={panes}/>
         </Spin>
       </>
     );
@@ -109,8 +108,8 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
       overlay={notificationBox}
       overlayClassName={styles.popover}
       trigger={['click']}
-      visible={visible}
-      onVisibleChange={setVisible}
+      open={visible}
+      onOpenChange={setVisible}
     >
       {trigger}
     </HeaderDropdown>

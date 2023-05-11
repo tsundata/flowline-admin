@@ -40,7 +40,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         id: 'pages.connectionList.form.connectionConfig',
         defaultMessage: '连接编辑',
       })}
-      visible={props.updateModalVisible}
+      open={props.updateModalVisible}
       onCancel={() => {
         props.onCancel();
       }}

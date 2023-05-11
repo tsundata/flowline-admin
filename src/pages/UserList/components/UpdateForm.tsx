@@ -44,7 +44,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         id: 'pages.userList.form.userConfig',
         defaultMessage: '用户编辑',
       })}
-      visible={props.updateModalVisible}
+      open={props.updateModalVisible}
       onCancel={() => {
         props.onCancel();
       }}
