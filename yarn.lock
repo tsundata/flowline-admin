@@ -203,7 +203,7 @@
     umi-utils "^1.5.1"
     yargs-parser "^20.0.0"
 
-"@ant-design/pro-components@1.1.25":
+"@ant-design/pro-components@^1.1.25":
   version "1.1.25"
   resolved "https://registry.yarnpkg.com/@ant-design/pro-components/-/pro-components-1.1.25.tgz#85967e5821067fe1c9901a803904617a76eb4553"
   integrity sha512-rw2suZuKRageJxzI74UXWYS4wqY1Msnl24fHT/xLdRKh7H15C6NUYOcZrUGPow4GfHf6Naco3gjuX7gJYfRcbg==
