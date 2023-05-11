@@ -44,8 +44,8 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
-    "@ant-design/plots": "^1.1.1",
+    "@ant-design/icons": "^4.8.0",
+    "@ant-design/plots": "^1.2.5",
     "@ant-design/pro-components": "1.1.25",
     "@antv/xflow": "^1.0.55",
     "@antv/xflow-hook": "^1.0.55",
