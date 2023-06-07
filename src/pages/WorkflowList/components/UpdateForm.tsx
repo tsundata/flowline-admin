@@ -117,14 +117,14 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         }}
         title={intl.formatMessage({
           id: 'pages.workflowList.form.trigger.title',
-          defaultMessage: '设定调度方式',
+          defaultMessage: '设定触发方式',
         })}
       >
         <ProFormSelect
           name="trigger"
           label={intl.formatMessage({
             id: 'pages.workflowList.form.trigger',
-            defaultMessage: '调度方式',
+            defaultMessage: '触发方式',
           })}
           width="md"
           valueEnum={{
@@ -137,7 +137,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               message: (
                 <FormattedMessage
                   id="pages.workflowList.form.trigger.rule"
-                  defaultMessage="请选择调度方式！"
+                  defaultMessage="请选择触发方式！"
                 />
               ),
             },
